@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Floppy Key</title>
+  <meta name="description" content="Floppy Key is a small indie studio making short games: incrementals, puzzles and escape rooms.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Figtree:wght@400;500;700;800&family=Gochi+Hand&family=VT323&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Night by default; the visitor's choice wins. Runs before the page draws, so it never flashes.
+    try { if (localStorage.getItem("theme") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#games" data-i18n="skip">Skip to the games</a>
+
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Floppy Key, home">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
+      <span class="brand-name">Floppy&nbsp;Key</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#games" data-i18n="nav.games">Games</a>
+      <a href="#studio" data-i18n="nav.studio">Studio</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <span class="toggles">
+        <button class="chip" id="theme" type="button">DAY</button>
+        <button class="chip" id="lang" type="button" aria-label="Cambiar a español">ES</button>
+      </span>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Hero: a disk drops into the drive and the drive light turns on. -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Indie studio · Argentina</p>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title1">Small games</span>
+          <span class="hl" data-i18n="hero.title2">that open</span>
+          <span data-i18n="hero.title3">something.</span>
+        </h1>
+        <p class="lead" data-i18n="hero.lead">Short, sharp games you can finish in one sitting: incrementals, puzzles and, someday, escape rooms. Insert disk. Turn key.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#strike" data-i18n="hero.cta">Play STRIKE!</a>
+          <a class="btn btn-ghost" href="#games" data-i18n="hero.cta2">See all disks</a>
+        </div>
+      </div>
+
+      <div class="drive-stage" aria-hidden="true">
+        <div class="disk disk-hero">
+          <svg viewBox="0 0 64 64"><use href="#floppy"/></svg>
+          <span class="disk-label">STRIKE!</span>
+        </div>
+        <div class="drive">
+          <div class="drive-slot"></div>
+          <div class="drive-face">
+            <span class="drive-led"></span>
+            <span class="drive-text">FK-1440</span>
+            <span class="drive-btn"></span>
+          </div>
+        </div>
+        <p class="drive-status"><span class="blink">▮</span> <span data-i18n="hero.loading">LOADING STRIKE!</span></p>
+      </div>
+    </section>
+
+    <!-- The disk box: one floppy per game. -->
+    <section class="games" id="games" aria-labelledby="games-title">
+      <div class="section-head">
+        <h2 id="games-title" data-i18n="games.title">The disk box</h2>
+        <p data-i18n="games.sub">Every game gets its own disk. Some are still blank.</p>
+      </div>
+
+      <ul class="box">
+        <li>
+          <a class="card" href="#strike" style="--body: var(--coral)">
+            <span class="card-disk">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
+              <span class="card-label">STRIKE!</span>
+            </span>
+            <span class="card-meta">
+              <span class="tag tag-live" data-i18n="tag.live">Playable</span>
+              <span class="card-title">STRIKE! Bowling for Severance</span>
+              <span class="card-genre" data-i18n="games.strike.genre">Incremental · 20–30 min</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <div class="card card-soon" style="--body: var(--teal)">
+            <span class="card-disk">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
+              <span class="card-label">puzzle?</span>
+            </span>
+            <span class="card-meta">
+              <span class="tag" data-i18n="tag.soon">In the drawer</span>
+              <span class="card-title" data-i18n="games.puzzle.title">Untitled puzzle game</span>
+              <span class="card-genre" data-i18n="games.puzzle.genre">Puzzle · being sketched</span>
+            </span>
+          </div>
+        </li>
+        <li>
+          <div class="card card-soon" style="--body: var(--violet)">
+            <span class="card-disk">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
+              <span class="card-label">???</span>
+            </span>
+            <span class="card-meta">
+              <span class="tag" data-i18n="tag.locked">Locked</span>
+              <span class="card-title" data-i18n="games.escape.title">An escape room</span>
+              <span class="card-genre" data-i18n="games.escape.genre">Escape room · find the key first</span>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Featured game. -->
+    <section class="feature" id="strike" aria-labelledby="strike-title">
+      <div class="crt">
+        <img src="assets/strike-orgchart.png" width="1094" height="534" alt="STRIKE! in English: the company org chart, with the 'Reply: I quit' node bought and Floor 1, Reception, up next.">
+      </div>
+      <div class="feature-copy">
+        <p class="eyebrow" data-i18n="strike.eyebrow">Disk 01 · Now playable in your browser</p>
+        <h2 id="strike-title">STRIKE!<span>Bowling for Severance</span></h2>
+        <p data-i18n="strike.p1">Eight years. Five denied vacation requests. Five copies of Form 27-B. You reply to HR with two words, tie your bowling ball to a network cable and take the office apart, floor by floor.</p>
+        <ul class="facts">
+          <li><b>10</b> <span data-i18n="strike.f1">floors, from Reception to the Boss's Office</span></li>
+          <li><b>13</b> <span data-i18n="strike.f2">nodes on the company org chart</span></li>
+          <li><b>104</b> <span data-i18n="strike.f3">things your coworkers say about it</span></li>
+        </ul>
+        <div class="actions">
+          <!-- Replace with the real page once it is published. -->
+          <a class="btn btn-primary" href="https://floppykey.itch.io/strike-bowling-for-severance" target="_blank" rel="noopener" data-i18n="strike.cta">Play free on itch.io</a>
+          <span class="note" data-i18n="strike.langs">English · Español · Mouse only</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Studio. -->
+    <section class="studio" id="studio" aria-labelledby="studio-title">
+      <h2 id="studio-title" data-i18n="studio.title">Why a floppy and a key</h2>
+      <div class="studio-grid">
+        <p data-i18n="studio.p1">A floppy disk held one small, complete thing. You put it in, it loaded, you played. A key opens something you weren't supposed to see yet. That's the kind of game we make: small, finished, and with something hidden inside.</p>
+        <dl class="specs">
+          <div><dt data-i18n="spec.capacity">Capacity</dt><dd data-i18n="spec.capacity.v">1.44 MB of ideas</dd></div>
+          <div><dt data-i18n="spec.team">Team</dt><dd data-i18n="spec.team.v">One person, plenty of coffee</dd></div>
+          <div><dt data-i18n="spec.formats">Formats</dt><dd data-i18n="spec.formats.v">Incrementals, puzzles, escape rooms</dd></div>
+          <div><dt data-i18n="spec.write">Write protect</dt><dd data-i18n="spec.write.v">Off. We listen to players.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Contact. -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="label-card">
+        <h2 id="contact-title" data-i18n="contact.title">Write on the label</h2>
+        <p data-i18n="contact.p">Played something? Found a bug? Want to know when the next disk is ready? Follow the studio on itch.io or drop a line.</p>
+        <div class="contact-row">
+          <a class="btn btn-primary" href="https://floppykey.itch.io" target="_blank" rel="noopener">floppykey.itch.io</a>
+          <!-- Replace with the real address once the domain is registered. -->
+          <span class="mail">hola@floppykey.com</span>
+          <button class="btn btn-ghost" id="copy" type="button" data-i18n="contact.copy">Copy email</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 Floppy Key</span>
+    <span data-i18n="foot">Insert disk. Turn key.</span>
+  </footer>
+
+  <!-- The floppy, drawn once and reused: body, shutter with a key cut out, label. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="floppy" viewBox="0 0 64 64">
+      <path d="M6 4h46l8 8v44a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4z" style="fill: var(--body, var(--disk-ink))"/>
+      <rect x="16" y="4" width="30" height="20" rx="1.5" style="fill: var(--metal)"/>
+      <!-- A key cut into the shutter. -->
+      <circle cx="25" cy="14" r="5" style="fill: var(--disk-ink)"/>
+      <path d="M29 12.5h12v3h-2v3h-3v-3h-2v2h-3v-2h-2z" style="fill: var(--disk-ink)"/>
+      <rect x="11" y="32" width="42" height="24" rx="2" style="fill: var(--label)"/>
+      <rect x="15" y="38" width="34" height="2" rx="1" style="fill: var(--disk-rule)"/>
+      <rect x="15" y="44" width="34" height="2" rx="1" style="fill: var(--disk-rule)"/>
+      <rect x="15" y="50" width="22" height="2" rx="1" style="fill: var(--disk-rule)"/>
+    </symbol>
+  </svg>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+/* Floppy Key — a 90s desk. Night by default: navy-black room, chalk outlines,
+   coral and teal disks with cream handwritten labels, one beige drive.
+   Day: lilac-grey plastic with navy ink. The disks themselves never change. */
+:root {
+  /* Theme tokens: night (default). */
+  --bg: #100E22;
+  --dot: #1D1A38;
+  --fg: #EEECF7;
+  --fg-soft: #A8A4CC;
+  --line: #CFC9F2;        /* outlines and hard shadows */
+  --surface: #1C1938;     /* cards, buttons, panels */
+  --tray: #07061A;        /* the disk box */
+  --tray-lip: #26224A;
+  --rule: #34305C;        /* ruled lines on panels */
+  --brand-disk: #FF6A55;
+  --focus: #FFD23F;
+
+  /* Fixed colors: the objects look the same day and night. */
+  --disk-ink: #1D1A3F;
+  --coral: #FF6A55;
+  --teal: #20B8A8;
+  --violet: #8E77FF;
+  --sun: #FFD23F;
+  --metal: #C9CCD8;
+  --label: #FFFDF6;
+  --disk-rule: #C9C3E3;
+  --beige: #DCD3BF;
+  --beige-dark: #BFB49C;
+  --led: #39E07A;
+
+  --f-pixel: "Silkscreen", "VT323", ui-monospace, monospace;
+  --f-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-hand: "Gochi Hand", "Comic Sans MS", cursive;
+  --f-mono: "VT323", ui-monospace, monospace;
+
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: clamp(2rem, 4vw, 2.6rem);
+  --step-4: clamp(2.6rem, 7vw, 4.8rem);
+
+  --gutter: clamp(16px, 4vw, 48px);
+  --radius: 14px;
+  --shadow: 4px 4px 0 var(--line);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #ECEAF4;
+  --dot: #E1DEEE;
+  --fg: #1D1A3F;
+  --fg-soft: #4A4670;
+  --line: #1D1A3F;
+  --surface: #FFFDF6;
+  --tray: #1D1A3F;
+  --tray-lip: #2A2660;
+  --rule: #C9C3E3;
+  --brand-disk: #1D1A3F;
+  --focus: #7B61F2;
+  --violet: #7B61F2;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 var(--step-0)/1.6 var(--f-body);
+  padding-inline: var(--gutter);
+  /* Faint dot grid, like a cutting mat. */
+  background-image: radial-gradient(var(--dot) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+  transition: background-color .25s ease, color .25s ease;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+h1, h2 { text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: var(--gutter); top: 8px; background: var(--sun); color: var(--disk-ink); padding: 6px 10px; z-index: 10; }
+
+/* ---------- Header ---------- */
+.top {
+  max-width: 1160px; margin-inline: auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-block: 22px;
+  flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand-mark { width: 44px; height: 44px; --body: var(--brand-disk); }
+.brand-name { font: 700 1.35rem var(--f-pixel); letter-spacing: 0.02em; }
+.nav { display: flex; align-items: center; gap: clamp(12px, 3vw, 28px); font-weight: 700; flex-wrap: wrap; }
+.nav a { text-decoration: none; }
+.nav a:hover { text-decoration: underline wavy var(--coral) 2px; text-underline-offset: 6px; }
+.toggles { display: flex; gap: 8px; }
+.chip {
+  font: 700 0.8rem var(--f-pixel); color: var(--fg);
+  background: var(--surface); border: 2px solid var(--line); border-radius: 8px;
+  padding: 4px 10px; cursor: pointer; box-shadow: 2px 2px 0 var(--line);
+}
+.chip:active { transform: translate(2px, 2px); box-shadow: none; }
+
+main { max-width: 1160px; margin-inline: auto; display: grid; gap: clamp(72px, 10vw, 128px); padding-block: 24px 96px; }
+
+.eyebrow { font: 400 1.2rem var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-soft); }
+
+/* ---------- Buttons ---------- */
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font: 800 1rem var(--f-body); text-decoration: none; cursor: pointer;
+  padding: 12px 20px; border-radius: 10px; border: 2px solid var(--line);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-primary { background: var(--coral); color: var(--disk-ink); box-shadow: var(--shadow); }
+.btn-ghost { background: var(--surface); color: var(--fg); box-shadow: 2px 2px 0 var(--line); }
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 var(--line); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--line); }
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 72px); align-items: center;
+}
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+.hero-title { font: 800 var(--step-4)/1.02 var(--f-body); letter-spacing: -0.02em; display: grid; }
+.hero-title .hl {
+  font-family: var(--f-pixel); font-weight: 700; letter-spacing: 0; font-size: 0.7em; white-space: nowrap;
+  color: var(--disk-ink); background: var(--sun); justify-self: start;
+  padding: 0 0.18em; margin-block: 0.08em; transform: rotate(-1.5deg);
+  box-shadow: var(--shadow); border: 2px solid var(--line);
+}
+.lead { font-size: var(--step-1); max-width: 34ch; color: var(--fg-soft); }
+
+.drive-stage { position: relative; display: grid; justify-items: center; padding-top: 150px; }
+.disk { position: absolute; width: 190px; filter: drop-shadow(6px 6px 0 var(--line)); }
+.disk svg { width: 100%; height: auto; }
+.disk-hero { --body: var(--coral); top: 0; animation: insert 2.6s cubic-bezier(.5,0,.2,1) .4s both; }
+.disk-label {
+  position: absolute; left: 22%; right: 22%; bottom: 25%;
+  font: 400 1.7rem/1 var(--f-hand); color: var(--disk-ink); text-align: center; transform: rotate(-3deg);
+}
+.drive {
+  position: relative; z-index: 2; width: min(100%, 360px);
+  background: var(--beige); border: 3px solid var(--line); border-radius: 12px;
+  box-shadow: 8px 8px 0 var(--line); padding: 18px 20px 16px;
+  display: grid; gap: 14px;
+}
+.drive-slot { height: 14px; background: var(--disk-ink); border-radius: 4px; box-shadow: inset 0 4px 0 #000; }
+.drive-face { display: flex; align-items: center; gap: 12px; }
+.drive-led {
+  width: 14px; height: 8px; border-radius: 2px; background: #6b6a5a; border: 1px solid var(--disk-ink);
+  animation: led 2.6s steps(1) .4s both;
+}
+.drive-text { font: 400 1.25rem var(--f-mono); color: #5C5848; letter-spacing: 0.08em; }
+.drive-btn { margin-left: auto; width: 30px; height: 12px; background: var(--beige-dark); border: 2px solid var(--disk-ink); border-radius: 3px; }
+.drive-status { margin-top: 22px; font: 400 1.35rem var(--f-mono); letter-spacing: 0.06em; opacity: 0; animation: show .1s linear 2.9s forwards; }
+.blink { color: var(--teal); animation: blink 1s steps(1) infinite; }
+
+/* The disk drops into the slot and stays there, its shutter peeking out. */
+@keyframes insert {
+  0%   { transform: translateY(-30px) rotate(-8deg); }
+  35%  { transform: translateY(0) rotate(0); }
+  55%  { transform: translateY(0) rotate(0); }
+  100% { transform: translateY(104px) rotate(0); }
+}
+@keyframes led { 0% { background: #6b6a5a; } 70% { background: var(--led); box-shadow: 0 0 10px var(--led); } 100% { background: var(--led); box-shadow: 0 0 10px var(--led); } }
+@keyframes show { to { opacity: 1; } }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- Disk box ---------- */
+.section-head { display: grid; gap: 8px; margin-bottom: 32px; }
+.section-head h2, .studio h2 { font: 800 var(--step-3)/1.1 var(--f-body); letter-spacing: -0.01em; }
+.section-head p { color: var(--fg-soft); font-size: var(--step-1); }
+
+.box {
+  list-style: none; margin: 0; padding: clamp(18px, 3vw, 32px);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 32px);
+  background: var(--tray); border-radius: 20px; border: 2px solid var(--tray-lip);
+  /* The disk box: a dark tray with a lid lip. */
+  box-shadow: inset 0 10px 0 var(--tray-lip);
+}
+.card {
+  height: 100%;
+  display: grid; gap: 16px; align-content: start;
+  background: var(--surface); border-radius: var(--radius); padding: 22px;
+  text-decoration: none; color: var(--fg);
+  transition: transform .18s ease;
+}
+:root[data-theme="light"] .card { background: var(--bg); }
+a.card:hover { transform: translateY(-8px) rotate(-1.5deg); }
+.card-disk { position: relative; width: min(100%, 180px); justify-self: center; filter: drop-shadow(5px 5px 0 #000); }
+:root[data-theme="light"] .card-disk { filter: drop-shadow(5px 5px 0 var(--disk-ink)); }
+.card-disk svg { width: 100%; height: auto; display: block; }
+.card-label {
+  position: absolute; left: 21%; right: 21%; bottom: 24%;
+  font: 400 1.5rem/1 var(--f-hand); color: var(--disk-ink); text-align: center; transform: rotate(-2deg);
+}
+.card-soon .card-disk { opacity: 0.85; }
+.card-meta { display: grid; gap: 6px; }
+.card-title { font: 800 1.15rem/1.25 var(--f-body); }
+.card-genre { color: var(--fg-soft); font-size: 0.95rem; }
+.tag {
+  justify-self: start; font: 700 0.72rem var(--f-pixel); letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 6px; border: 2px solid var(--line); background: var(--surface); color: var(--fg);
+}
+.tag-live { background: var(--led); color: var(--disk-ink); }
+
+/* ---------- Feature ---------- */
+.feature {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px); align-items: center;
+}
+.crt {
+  background: #0B0B0B; border: 3px solid var(--line); border-radius: 22px;
+  padding: clamp(10px, 2vw, 18px); box-shadow: 10px 10px 0 var(--teal), 10px 10px 0 2px var(--line);
+  min-width: 0;
+}
+.crt img { border-radius: 10px; }
+.feature-copy { display: grid; gap: 18px; min-width: 0; }
+.feature h2 { font: 700 var(--step-3)/1 var(--f-pixel); display: grid; gap: 6px; }
+.feature h2 span { font: 400 var(--step-2)/1.1 var(--f-hand); color: var(--coral); }
+.feature-copy > p { max-width: 46ch; }
+.facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.facts li { display: flex; gap: 12px; align-items: baseline; }
+.facts b { font: 700 1.3rem var(--f-pixel); min-width: 3.2ch; font-variant-numeric: tabular-nums; color: var(--violet); }
+.note { font: 400 1.2rem var(--f-mono); color: var(--fg-soft); }
+
+/* ---------- Studio ---------- */
+.studio { display: grid; gap: 28px; }
+.studio-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: start; }
+.studio-grid > p { font-size: var(--step-1); max-width: 40ch; }
+.specs {
+  margin: 0; background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 6px 20px;
+}
+.specs div { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 12px; padding-block: 12px; border-bottom: 2px dashed var(--rule); }
+.specs div:last-child { border-bottom: 0; }
+.specs dt { font: 400 1.2rem var(--f-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-soft); }
+.specs dd { margin: 0; font-weight: 700; }
+
+/* ---------- Contact: a giant disk label ---------- */
+.label-card {
+  background: var(--surface); border: 3px solid var(--line); border-radius: 18px;
+  padding: clamp(24px, 5vw, 48px); display: grid; gap: 16px; box-shadow: 10px 10px 0 var(--violet), 10px 10px 0 2px var(--line);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 46px, var(--rule) 46px 48px);
+  background-position: 0 30px;
+}
+.label-card h2 { font: 400 var(--step-4)/1 var(--f-hand); transform: rotate(-1.5deg); justify-self: start; }
+.label-card p { font-size: var(--step-1); max-width: 48ch; }
+.contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 6px; }
+.mail { font: 400 1.5rem var(--f-mono); user-select: all; background: var(--bg); padding: 4px 10px; border-radius: 6px; }
+
+/* ---------- Footer ---------- */
+.foot {
+  max-width: 1160px; margin-inline: auto; padding-block: 28px 40px;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+  font: 400 1.2rem var(--f-mono); color: var(--fg-soft); border-top: 2px solid var(--line);
+}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 860px) {
+  .hero, .feature, .studio-grid { grid-template-columns: minmax(0, 1fr); }
+  .drive-stage { order: -1; padding-top: 130px; }
+  .disk { width: 160px; }
+  .box { grid-template-columns: minmax(0, 1fr); }
+  .card { grid-template-columns: 120px minmax(0, 1fr); align-items: center; }
+  .card-disk { width: 120px; }
+  .card-label { font-size: 1.1rem; }
+}
+@media (max-width: 420px) {
+  .nav { gap: 12px; font-size: 0.95rem; }
+  .specs div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body { transition: none; }
+  .disk-hero { animation: none; transform: translateY(104px); }
+  .drive-led { animation: none; background: var(--led); }
+  .drive-status { animation: none; opacity: 1; }
+  .blink { animation: none; }
+  .btn, .card { transition: none; }
+}
