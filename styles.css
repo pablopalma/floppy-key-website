@@ -92,7 +92,10 @@ p { margin: 0; }
 }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand-mark { width: 44px; height: 44px; --body: var(--brand-disk); }
-.brand-name { font: 700 1.35rem var(--f-pixel); letter-spacing: 0.02em; }
+.brand-text { display: grid; line-height: 1; gap: 4px; }
+.brand-name { font: 700 1.35rem/1 var(--f-pixel); letter-spacing: 0.02em; }
+/* Part of the logo: always in English, like the name. */
+.brand-sub { font: 400 1.05rem/1 var(--f-mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-soft); }
 .nav { display: flex; align-items: center; gap: clamp(12px, 3vw, 28px); font-weight: 700; flex-wrap: wrap; }
 .nav a { text-decoration: none; }
 .nav a:hover { text-decoration: underline wavy var(--coral) 2px; text-underline-offset: 6px; }
