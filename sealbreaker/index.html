@@ -126,6 +126,10 @@
     .facts { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0; padding: 0; list-style: none; }
     .facts li { background: var(--panel); border: 2px solid var(--line); padding: 8px 14px; color: var(--dim); }
     .facts b { color: var(--gold-soft); font-weight: 600; }
+    .roadmap { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+    .roadmap li { background: var(--panel); border: 2px solid var(--gold); outline: 2px solid var(--panel); outline-offset: -6px; padding: 18px 20px; }
+    .roadmap h3 { margin: 0 0 6px; color: var(--gold-soft); font-size: 1.05rem; }
+    .roadmap p { margin: 0; color: var(--dim); }
     .status { text-align: center; }
     .status .actions { justify-content: center; }
 
@@ -330,6 +334,21 @@
       </div>
     </section>
 
+    <!-- What the full game adds -->
+    <section id="full" aria-labelledby="full-title">
+      <div class="wrap">
+        <h2 id="full-title" data-i18n="full.title">Coming in the full game</h2>
+        <p class="lead" data-i18n="full.lead">The demo is the first four seals. The full hunt goes much further.</p>
+        <ul class="roadmap">
+          <li><h3 data-i18n="full.epics.t">Many more epics</h3><p data-i18n="full.epics.p">New lands, each with its own epic, its own fight and the gear it leaves behind.</p></li>
+          <li><h3 data-i18n="full.heroes.t">Six heroes</h3><p data-i18n="full.heroes.p">Sister Edda the paladin, Brother Tobías the cleric and Nix the rogue join Arren, Isaura and Brannoc, each with their own talents and story.</p></li>
+          <li><h3 data-i18n="full.main.t">Choose your main</h3><p data-i18n="full.main.p">Pick which hero you aim for and build the company around them.</p></li>
+          <li><h3 data-i18n="full.skills.t">More skills to learn</h3><p data-i18n="full.skills.p">A bigger skill tree, with new ways to shoot, hit and hold the line.</p></li>
+          <li><h3 data-i18n="full.story.t">More story</h3><p data-i18n="full.story.p">What the seals were really holding back, and the way the hunt ends.</p></li>
+        </ul>
+      </div>
+    </section>
+
     <!-- Status -->
     <section class="status" aria-labelledby="status-title">
       <div class="wrap">
@@ -392,6 +411,13 @@
       "forge.g1": "<b>Nunca falla.</b> Nunca rompe. Nunca baja.",
       "forge.g2": "En <b>+4</b> empieza a brillar, en <b>+7</b> canta, en <b>+10</b> ya no es tuya.",
       "forge.cap": "La forja, con el Arco del Rey Zarza en +7.", "forge.cap2": "El cofre del primer épico.", "forge.cap3": "El Bosque Hondo, donde el bosque se pudre de adentro hacia afuera.",
+      "full.title": "En el juego completo",
+      "full.lead": "La demo son los primeros cuatro sellos. La cacería completa llega mucho más lejos.",
+      "full.epics.t": "Muchos más épicos", "full.epics.p": "Tierras nuevas, cada una con su épico, su pelea y el equipo que deja.",
+      "full.heroes.t": "Seis héroes", "full.heroes.p": "Sor Edda la paladina, el Hermano Tobías el clérigo y Nix la pícara se suman a Arren, Isaura y Brannoc, cada uno con sus talentos y su historia.",
+      "full.main.t": "Elige a tu héroe", "full.main.p": "Decide por qué héroe apuntas y arma la compañía a su alrededor.",
+      "full.skills.t": "Más habilidades", "full.skills.p": "Un árbol de habilidades más grande, con nuevas formas de disparar, golpear y aguantar la línea.",
+      "full.story.t": "Más historia", "full.story.p": "Qué guardaban de verdad los sellos, y cómo termina la cacería.",
       "status.title": "Pronto en itch.io",
       "status.lead": "Una demo gratis con los primeros cuatro épicos, una media hora de juego, en el navegador y en Windows. Hecho por una persona en Argentina. Después, la cacería completa.",
       "status.cta": "Seguir a Floppy Key en itch.io", "status.cta2": "Leer el devlog",
@@ -417,7 +443,8 @@
 
     let saved = null;
     try { saved = localStorage.getItem("lang"); } catch (e) { saved = null; }
-    let lang = saved || ((navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en");
+    // English by default; Spanish only when the visitor chose it.
+    let lang = saved === "es" ? "es" : "en";
     apply(lang);
     document.getElementById("lang").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; apply(lang); });
 

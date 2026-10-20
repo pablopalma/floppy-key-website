@@ -223,7 +223,12 @@ a.card:hover { transform: translateY(-8px) rotate(-1.5deg); }
   padding: clamp(10px, 2vw, 18px); box-shadow: 10px 10px 0 var(--teal), 10px 10px 0 2px var(--line);
   min-width: 0;
 }
-.crt img { border-radius: 10px; }
+.crt img { border-radius: 10px; display: block; width: 100%; height: auto; }
+/* The second feature: picture on the right, in the game's gold. */
+.feature-flip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+.feature-flip .crt { order: 2; }
+.crt-sun { box-shadow: 10px 10px 0 var(--sun), 10px 10px 0 2px var(--line); }
+.feature h2.title-sun span { color: var(--sun); }
 .feature-copy { display: grid; gap: 18px; min-width: 0; }
 .feature h2 { font: 700 var(--step-3)/1 var(--f-pixel); display: grid; gap: 6px; }
 .feature h2 span { font: 400 var(--step-2)/1.1 var(--f-hand); color: var(--coral); }
@@ -364,7 +369,8 @@ a.tag-game:hover { box-shadow: 2px 2px 0 var(--line); }
 
 /* ---------- Narrow screens ---------- */
 @media (max-width: 860px) {
-  .hero, .feature, .studio-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero, .feature, .feature-flip, .studio-grid { grid-template-columns: minmax(0, 1fr); }
+  .feature-flip .crt { order: 0; }
   .drive-stage { order: -1; padding-top: 130px; }
   .disk { width: 160px; }
   .box { grid-template-columns: minmax(0, 1fr); }

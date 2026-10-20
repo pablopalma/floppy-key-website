@@ -29,17 +29,11 @@ const ES = {
   "hero.cta2": "Ver todos los disquetes",
   "hero.loading": "CARGANDO STRIKE!",
   "games.title": "La caja de disquetes",
-  "games.sub": "Cada juego tiene su disquete. Algunos todavía están en blanco.",
+  "games.sub": "Cada juego tiene su disquete.",
   "tag.live": "Jugable",
-  "tag.soon": "En el cajón",
-  "tag.locked": "Bajo llave",
   "tag.dev": "En desarrollo",
   "games.strike.genre": "Incremental · 20–30 min",
   "games.sealbreaker.genre": "RPG incremental · caza a los épicos",
-  "games.puzzle.title": "Un juego de puzzles sin nombre",
-  "games.puzzle.genre": "Puzzle · en bocetos",
-  "games.escape.title": "Un escape room",
-  "games.escape.genre": "Escape room · primero encuentra la llave",
   "strike.eyebrow": "Disquete 01 · Ya se juega en el navegador",
   "strike.p1": "Ocho años. Cinco vacaciones rechazadas. Cinco copias del formulario 27-B. Le respondes a Recursos Humanos con una palabra, atas tu bola de bolos a un cable de red y desarmas la oficina, piso por piso.",
   "strike.f1": "pisos, de la Recepción al despacho del jefe",
@@ -47,6 +41,15 @@ const ES = {
   "strike.f3": "cosas que opinan tus compañeros",
   "strike.cta": "Jugar gratis en itch.io",
   "strike.langs": "Español · English · Solo mouse",
+  "seal.eyebrow": "Disquete 02 · En desarrollo",
+  "seal.tagline": "Cada épico que cazas despierta algo más grande",
+  "seal.p1": "Un RPG incremental de defensa. Aguanta el claro con tu compañía, apunta a lo que se acerque, gasta lo que ganas y vuelve por más. Caza a los épicos y viste lo que dejan.",
+  "seal.f1": "épicos para cazar en la demo gratis",
+  "seal.f2": "héroes peleando a tu lado",
+  "seal.f3": "encantamientos en la forja de Brunna, y nunca fallan",
+  "seal.cta": "Ver el juego",
+  "seal.soon": "Demo gratis pronto en itch.io",
+  "seal.alt": "SEALBREAKER: cayó el Rey Zarza, y su cofre de oro y su arco esperan en el claro.",
   "studio.title": "Por qué un disquete y una llave",
   "studio.p1": "Un disquete guardaba una cosa chica y completa. Lo metías, cargaba y jugabas. Una llave abre algo que todavía no tenías que ver. Así son nuestros juegos: chicos, terminados y con algo escondido adentro.",
   "spec.capacity": "Capacidad",
@@ -75,6 +78,10 @@ function apply(lang) {
   for (const node of nodes) {
     const key = node.dataset.i18n;
     node.textContent = (lang === "es" ? ES[key] : english.get(key)) ?? english.get(key);
+  }
+  for (const img of document.querySelectorAll("[data-i18n-alt]")) {
+    if (!img.dataset.alt) img.dataset.alt = img.alt;
+    img.alt = lang === "es" ? (ES[img.dataset.i18nAlt] ?? img.dataset.alt) : img.dataset.alt;
   }
   document.documentElement.lang = lang;
   langButton.textContent = lang === "es" ? "EN" : "ES";
@@ -105,7 +112,8 @@ themeButton.addEventListener("click", () => {
 
 let saved = null;
 try { saved = localStorage.getItem("lang"); } catch (e) { saved = null; }
-const initial = saved || ((navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en");
+// English by default; Spanish only when the visitor chose it.
+const initial = saved === "es" ? "es" : "en";
 if (initial === "es") apply("es");
 else { formatDates(); labelTheme(); }
 langButton.addEventListener("click", () => apply(current === "es" ? "en" : "es"));
