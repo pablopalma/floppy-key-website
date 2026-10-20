@@ -7,11 +7,11 @@
       "color": "var(--coral)",
       "url": "https://floppykey.itch.io/strike-bowling-for-severance"
     },
-    "sealbreaker": {
-      "name": "SEALBREAKER",
-      "short": "SEALBREAKER",
+    "seal-quest": {
+      "name": "The Seal Quest: Dreams of Ormaz",
+      "short": "THE SEAL QUEST",
       "color": "var(--sun)",
-      "page": "sealbreaker/index.html"
+      "page": "seal-quest/index.html"
     }
   }
 }

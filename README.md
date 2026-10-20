@@ -18,7 +18,7 @@ Web del estudio. HTML, CSS y JS sin dependencias ni compilación.
 
 Los HTML del devblog se generan: los cambios se hacen en `post.md`, en `styles.css` o en el script, nunca a mano en esas páginas. Las carpetas que empiezan con `_` no se publican como entradas.
 
-Para un juego nuevo, agregarlo en `devblog/games.json` con su nombre, su nombre corto (el de la etiqueta y el filtro), su color y el enlace para jugarlo (`url`). Si todavía no se puede jugar, en lugar de `url` va `page`, la página del juego dentro del sitio (por ejemplo `sealbreaker/index.html`), y el botón de las entradas dice "Ver el juego". `game` en `post.md` usa la clave de ese archivo. El filtro por juego aparece solo con los juegos que tienen entradas, y se puede compartir: `devblog/index.html?game=strike`.
+Para un juego nuevo, agregarlo en `devblog/games.json` con su nombre, su nombre corto (el de la etiqueta y el filtro), su color y el enlace para jugarlo (`url`). Si todavía no se puede jugar, en lugar de `url` va `page`, la página del juego dentro del sitio (por ejemplo `seal-quest/index.html`), y el botón de las entradas dice "Ver el juego". `game` en `post.md` usa la clave de ese archivo. El filtro por juego aparece solo con los juegos que tienen entradas, y se puede compartir: `devblog/index.html?game=strike`.
 
 `site` en `games.json` es la dirección pública del sitio. Se usa para las vistas previas al compartir un enlace y para el feed; hay que cambiarla si el dominio no termina siendo `floppykey.com`.
 

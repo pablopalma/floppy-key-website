@@ -1,14 +1,14 @@
 ---
-title: "Disk 02: SEALBREAKER"
+title: "Disk 02: The Seal Quest"
 date: 2026-10-20
-game: sealbreaker
+game: seal-quest
 cover: cover-630x500.png
 summary: "The second Floppy Key game: an incremental defense RPG where you hunt epic beasts for their loot. Every epic you hunt wakes something bigger."
 ---
 
 STRIKE! taught me what I like making: short games where every run pays for something, the screen fills up and you always want one more go. The second disk keeps all of that and adds what STRIKE! didn't have: a world, a company of heroes, and bosses worth hunting.
 
-It's called **SEALBREAKER**.
+It's called **The Seal Quest: Dreams of Ormaz**.
 
 ![The Caldera of Ormaz, wave 39: the company holds the clearing while the Ember Lord walks in](volcano-horde.webp)
 
@@ -48,4 +48,4 @@ The first time an epic falls it drops a chest and a piece nobody else in the Mar
 
 A free demo with the first four epics is coming to itch.io, in the browser and on Windows, in English and Spanish. It's about half an hour of play. Like STRIKE!, every number in it will be tuned with what players do, so it's going to change.
 
-There's a page with more about the game: [floppykey.com/sealbreaker](https://floppykey.com/sealbreaker/).
+There's a page with more about the game: [floppykey.com/seal-quest](https://floppykey.com/seal-quest/).

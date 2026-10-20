@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Seal Quest: Dreams of Ormaz · Floppy Key</title>
+  <meta name="description" content="The Seal Quest: Dreams of Ormaz is an incremental defense RPG: aim, upgrade, hunt epic beasts for their loot. Every epic you hunt wakes something bigger.">
+  <meta property="og:title" content="The Seal Quest: Dreams of Ormaz">
+  <meta property="og:description" content="Every epic you hunt wakes something bigger. An incremental defense RPG by Floppy Key.">
+  <meta property="og:image" content="https://floppykey.com/seal-quest/media/splash-ember.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    /* The game's own look, the one of its concept sheet: night violet, old gold, double frames. */
+    :root {
+      --bg: #120d18; --panel: #1d1526; --panel-2: #241a30; --ink: #efe4cc; --dim: #a89a86;
+      --gold: #e3b04b; --gold-soft: #f3d27a; --line: #3a2c46; --frame: #5a4020; --wine: #6e1f2c;
+      --meadow: #d8b04a; --forest: #9a6ad0; --graveyard: #7aa4d8; --volcano: #f08a3a;
+      --gutter: clamp(16px, 4vw, 40px);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 400 18px/1.5 "Pixelify Sans", ui-monospace, monospace; -webkit-font-smoothing: none; }
+    img, video { display: block; max-width: 100%; height: auto; }
+    .px { image-rendering: pixelated; }
+    a { color: var(--gold-soft); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 3px; }
+
+    /* Top bar */
+    .bar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 10px var(--gutter); background: rgba(18, 13, 24, .88); backdrop-filter: blur(6px); border-bottom: 2px solid var(--line); }
+    .bar a.back { color: var(--dim); text-decoration: none; font-size: 15px; }
+    .bar a.back:hover { color: var(--ink); }
+    .bar nav { display: flex; gap: 18px; align-items: center; font-size: 15px; }
+    .bar nav a { color: var(--dim); text-decoration: none; }
+    .bar nav a:hover { color: var(--gold-soft); }
+    .chip { font: 600 14px "Pixelify Sans", monospace; color: var(--gold); background: var(--panel); border: 2px solid var(--frame);
+      box-shadow: 0 0 0 2px #000; padding: 4px 10px; cursor: pointer; }
+    .chip:hover { color: var(--gold-soft); }
+    @media (max-width: 640px) { .bar nav a { display: none; } }
+
+    /* Hero: the horde, then the epic's presentation, in a loop */
+    .hero { position: relative; min-height: min(92vh, 860px); display: grid; align-items: end; overflow: hidden; }
+    .hero video, .hero .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
+    .hero::after { content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(18,13,24,.88) 0%, rgba(18,13,24,.6) 45%, rgba(18,13,24,.1) 80%),
+                  linear-gradient(180deg, rgba(18,13,24,.2) 0%, transparent 40%, var(--bg) 100%); }
+    .hero-copy { position: relative; z-index: 1; padding: 0 var(--gutter) clamp(28px, 6vw, 64px); max-width: 1120px; margin: 0 auto; width: 100%; }
+    .eyebrow { color: var(--gold); letter-spacing: 2px; font-size: 14px; text-transform: uppercase; margin: 0 0 8px; }
+    .logo { margin: 0; font-weight: 700; font-size: clamp(48px, 11vw, 132px); line-height: .9; letter-spacing: 2px; color: var(--gold-soft);
+      text-shadow: 0 4px 0 #6b4515, 0 8px 0 #000, 0 0 40px rgba(240, 160, 60, .35); }
+    .logo-sub { display: block; margin-top: 10px; font-size: .36em; letter-spacing: 1px; color: var(--ink); text-shadow: 0 3px 0 #000; }
+    .tagline { margin: 18px 0 6px; font-size: clamp(20px, 3vw, 30px); color: var(--ink); text-shadow: 0 2px 0 #000; max-width: 24ch; }
+    .sub { margin: 0 0 22px; color: var(--dim); max-width: 56ch; text-shadow: 0 2px 0 #000; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn { display: inline-block; font: 600 17px "Pixelify Sans", monospace; text-decoration: none; padding: 10px 18px; border: 3px solid var(--gold);
+      box-shadow: 0 0 0 3px #000, inset 0 0 0 2px var(--frame); color: var(--gold-soft); background: var(--wine); }
+    .btn:hover { background: #8a2738; color: #fff2c8; }
+    .btn.ghost { background: var(--panel); }
+    .btn.ghost:hover { background: var(--panel-2); }
+    .soon { color: var(--dim); font-size: 15px; }
+
+    /* Sections */
+    main section { padding: clamp(48px, 8vw, 96px) var(--gutter); }
+    .wrap { max-width: 1120px; margin: 0 auto; }
+    h2 { color: var(--gold); font-size: clamp(26px, 4vw, 38px); margin: 0 0 6px; letter-spacing: 1px; }
+    .lead { color: var(--dim); margin: 0 0 28px; max-width: 64ch; }
+    p { margin: 0 0 14px; }
+    .frame { border: 3px solid var(--gold); box-shadow: 0 0 0 3px #000, inset 0 0 0 2px var(--frame); background: #000; }
+    .panel { background: linear-gradient(var(--panel-2), var(--panel)); border: 3px solid var(--gold); box-shadow: 0 0 0 3px #000, inset 0 0 0 2px var(--frame); padding: 18px; }
+
+    /* The loop: three panels */
+    .loop { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .loop h3 { margin: 0 0 6px; color: var(--gold-soft); font-size: 22px; }
+    .loop p { color: var(--dim); margin: 0; }
+    .loop .n { color: var(--gold); font-size: 14px; letter-spacing: 2px; }
+
+    /* Split rows: image and text */
+    .split { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(20px, 4vw, 48px); align-items: center; }
+    .split.flip { grid-template-columns: 1fr 1.25fr; }
+    .split.flip > :first-child { order: 2; }
+    @media (max-width: 820px) { .split, .split.flip { grid-template-columns: 1fr; } .split.flip > :first-child { order: 0; } }
+    .quote { border-left: 4px solid var(--gold); padding: 4px 0 4px 14px; color: var(--ink); font-size: 20px; margin: 18px 0; }
+    .quote small { display: block; color: var(--dim); font-size: 15px; margin-top: 4px; }
+
+    /* The epics */
+    .epics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    @media (max-width: 720px) { .epics { grid-template-columns: 1fr; } }
+    .epic { position: relative; }
+    .epic figcaption { padding: 10px 2px 0; }
+    .epic .ch { font-size: 13px; letter-spacing: 2px; color: var(--dim); }
+    .epic .nm { font-size: 22px; font-weight: 700; }
+    .epic[data-stage="meadow"] .nm { color: var(--meadow); }
+    .epic[data-stage="forest"] .nm { color: var(--forest); }
+    .epic[data-stage="graveyard"] .nm { color: var(--graveyard); }
+    .epic[data-stage="volcano"] .nm { color: var(--volcano); }
+    .more { margin-top: 20px; display: flex; gap: 18px; align-items: center; }
+    .more .lock { flex: none; width: 64px; height: 64px; display: grid; place-items: center; font-size: 34px; color: var(--dim);
+      border: 3px dashed var(--line); background: var(--panel); }
+    .more p { margin: 0; color: var(--dim); }
+
+    /* The company */
+    .company { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+    .member { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: start; }
+    .member .face { width: 96px; height: 96px; background: radial-gradient(circle at 40% 35%, #2c3d78, #121a38 70%); border: 3px solid var(--frame); box-shadow: 0 0 0 2px #000; }
+    .member .face img { width: 100%; height: 100%; }
+    .member h3 { margin: 0; color: var(--gold-soft); font-size: 20px; }
+    .member .role { color: var(--dim); font-size: 14px; margin: 2px 0 8px; }
+    .member q { color: var(--ink); font-size: 16px; }
+
+    /* Media rows */
+    .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 720px) { .duo { grid-template-columns: 1fr; } }
+    figure { margin: 0; }
+    figure figcaption.cap { color: var(--dim); font-size: 14px; padding-top: 8px; }
+    .loot { display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0 6px; }
+    .loot img { width: 72px; height: 72px; background: var(--panel); border: 2px solid var(--frame); box-shadow: 0 0 0 2px #000; padding: 6px; }
+    .glow { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 6px; }
+    .glow li { color: var(--dim); }
+    .glow b { color: var(--gold-soft); font-weight: 600; }
+
+    /* Facts and status */
+    .facts { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0; padding: 0; list-style: none; }
+    .facts li { background: var(--panel); border: 2px solid var(--line); padding: 8px 14px; color: var(--dim); }
+    .facts b { color: var(--gold-soft); font-weight: 600; }
+    .roadmap { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .roadmap li { background: var(--panel); border: 2px solid var(--gold); outline: 2px solid var(--panel); outline-offset: -6px; padding: 18px 20px; }
+    .roadmap h3 { margin: 0 0 6px; color: var(--gold-soft); font-size: 1.05rem; }
+    .roadmap p { margin: 0; color: var(--dim); }
+    .status { text-align: center; }
+    .status .actions { justify-content: center; }
+
+    footer { border-top: 2px solid var(--line); padding: 24px var(--gutter) 40px; color: var(--dim); font-size: 15px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    footer a { color: var(--dim); }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <a class="back" href="../index.html" data-i18n="back">← Floppy Key</a>
+    <nav aria-label="The Seal Quest">
+      <a href="#world" data-i18n="nav.world">World</a>
+      <a href="#epics" data-i18n="nav.epics">Epics</a>
+      <a href="#company" data-i18n="nav.company">Company</a>
+      <a href="#forge" data-i18n="nav.forge">Forge</a>
+      <a href="../devblog/index.html?game=seal-quest" data-i18n="nav.devlog">Devlog</a>
+      <button class="chip" id="lang" type="button" aria-label="Cambiar a español">ES</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="title" style="padding: 0;">
+      <img class="poster" src="media/volcano-horde.webp" alt="" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="metadata" poster="media/volcano-horde.webp" aria-hidden="true">
+        <source src="media/horde.mp4" type="video/mp4">
+      </video>
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Floppy Key · Disk 02 · In development</p>
+        <h1 class="logo" id="title">THE SEAL QUEST<span class="logo-sub">Dreams of Ormaz</span></h1>
+        <p class="tagline" data-i18n="hero.tagline">Every epic you hunt wakes something bigger.</p>
+        <p class="sub" data-i18n="hero.sub">An incremental defense RPG. Hold the clearing, aim at whatever gets close, spend what you earn and go back for more. Hunt the epics. Wear what they leave behind.</p>
+        <div class="actions">
+          <a class="btn" href="https://floppykey.itch.io" target="_blank" rel="noopener" data-i18n="hero.cta">Follow on itch.io</a>
+          <a class="btn ghost" href="../devblog/index.html?game=seal-quest" data-i18n="hero.cta2">Read the devlog</a>
+          <span class="soon" data-i18n="hero.soon">Free browser demo coming soon</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- The loop -->
+    <section aria-labelledby="loop-title">
+      <div class="wrap">
+        <h2 id="loop-title" data-i18n="loop.title">Aim. Upgrade. Hunt.</h2>
+        <p class="lead" data-i18n="loop.lead">At first the waves walk right over you. That's the deal: every run you die a little further, and every run pays for something new.</p>
+        <div class="loop">
+          <div class="panel">
+            <span class="n">I</span>
+            <h3 data-i18n="loop.1.t">Just aim</h3>
+            <p data-i18n="loop.1.p">Mouse only, no clicking. Arren shoots whatever is under the reticle, so your hand never gets tired and you never miss for the wrong reasons.</p>
+          </div>
+          <div class="panel">
+            <span class="n">II</span>
+            <h3 data-i18n="loop.2.t">Grow stronger</h3>
+            <p data-i18n="loop.2.p">A skill tree with four branches, companions with their own talents and a forge. Each run starts back at the wall, stronger than the last.</p>
+          </div>
+          <div class="panel">
+            <span class="n">III</span>
+            <h3 data-i18n="loop.3.t">Hunt the epics</h3>
+            <p data-i18n="loop.3.p">At the end of every land waits an epic: a huge beast with its own presentation, its own fight and a unique piece of loot you can only get from it.</p>
+          </div>
+        </div>
+        <ul class="facts">
+          <li><b>60+</b> <span data-i18n="fact.1">enemies on screen</span></li>
+          <li><b data-i18n="fact.2b">Mouse</b> <span data-i18n="fact.2">only, no clicking</span></li>
+          <li><b>EN · ES</b> <span data-i18n="fact.3">fully translated</span></li>
+          <li><b data-i18n="fact.4b">Pixel art</b> <span data-i18n="fact.4">drawn by code, pixel by pixel</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- The world -->
+    <section id="world" aria-labelledby="world-title" style="background: linear-gradient(transparent, rgba(0,0,0,.25), transparent);">
+      <div class="wrap split">
+        <figure>
+          <img class="frame px" src="media/arena-graveyard.webp" width="1920" height="1080" loading="lazy"
+               alt="The Field of the Thousand: Arren, Isaura and Brannoc in a graveyard clearing, surrounded by skeletons and ghost knights." data-i18n-alt="world.alt">
+        </figure>
+        <div>
+          <h2 id="world-title" data-i18n="world.title">A world asleep on a dragon</h2>
+          <p data-i18n="world.p1">The March of Vael rests on Ormaz, the Ember Mother, a dragon who curled up to sleep before the world began. She dreams. A thousand years ago her nightmares crawled out of the ground as beasts: the epics.</p>
+          <p data-i18n="world.p2">The Order of the Fifth Seal locked them away with oaths that would hold for a thousand years. Nobody thought the Order would last less than its promise. The thousand years are up, and the seals are breaking.</p>
+          <p data-i18n="world.p3">Arren is no hero. He's a village archer who was far away the day the thorns took Grayford. Now he has a bow, a reason and a company that keeps growing.</p>
+          <p class="quote" data-i18n="world.quote">“Look at the cut. It didn't break with age. Someone opened it with a key. From outside.”<small>— after the first epic falls</small></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The epics -->
+    <section id="epics" aria-labelledby="epics-title">
+      <div class="wrap">
+        <h2 id="epics-title" data-i18n="epics.title">The epics</h2>
+        <p class="lead" data-i18n="epics.lead">Each one is a dream of the dragon wearing the shape of something the March once knew. Each one gets a presentation of its own before the fight, and leaves a unique piece behind when it falls.</p>
+        <div class="epics">
+          <figure class="epic" data-stage="meadow">
+            <img class="frame px" src="media/splash-meadow.webp" width="1920" height="1080" loading="lazy" alt="The Bramble King, a crowned skull wrapped in thorns.">
+            <figcaption><div class="ch" data-i18n="epic.1.ch">CHAPTER I · HUNGER · The Oldgold Meadow</div><div class="nm" data-i18n="epic.1.nm">The Bramble King</div></figcaption>
+          </figure>
+          <figure class="epic" data-stage="forest">
+            <img class="frame px" src="media/splash-forest.webp" width="1920" height="1080" loading="lazy" alt="Rotroot, a rotting tree with a pale face and violet flowers.">
+            <figcaption><div class="ch" data-i18n="epic.2.ch">CHAPTER II · ROT · The Deepwood</div><div class="nm" data-i18n="epic.2.nm">Rotroot</div></figcaption>
+          </figure>
+          <figure class="epic" data-stage="graveyard">
+            <img class="frame px" src="media/splash-graveyard.webp" width="1920" height="1080" loading="lazy" alt="The Bone Warden, an armored knight of bone holding a sword point down.">
+            <figcaption><div class="ch" data-i18n="epic.3.ch">CHAPTER III · MEMORY · The Field of the Thousand</div><div class="nm" data-i18n="epic.3.nm">The Bone Warden</div></figcaption>
+          </figure>
+          <figure class="epic" data-stage="volcano">
+            <img class="frame px" src="media/splash-ember.webp" width="1920" height="1080" loading="lazy" alt="The Ember Lord, a giant of black rock with a burning heart.">
+            <figcaption><div class="ch" data-i18n="epic.4.ch">CHAPTER IV · FURY · The Caldera of Ormaz</div><div class="nm" data-i18n="epic.4.nm">The Ember Lord</div></figcaption>
+          </figure>
+        </div>
+        <div class="more">
+          <span class="lock" aria-hidden="true">?</span>
+          <p data-i18n="epics.more">The demo covers the first four lands of the March. The full game goes much further: more lands, more epics and more of what's sleeping underneath.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The fight -->
+    <section aria-labelledby="fight-title" style="background: linear-gradient(transparent, rgba(0,0,0,.25), transparent);">
+      <div class="wrap">
+        <h2 id="fight-title" data-i18n="fight.title">When an epic walks in</h2>
+        <p class="lead" data-i18n="fight.lead">The common waves don't stop for it. The crowd keeps coming while you chip at its health bar, and when it falls, it falls loud.</p>
+        <div class="duo">
+          <figure>
+            <video class="frame px" autoplay muted loop playsinline preload="metadata" poster="media/ember-fight.webp" width="1280" height="720" aria-label="The Ember Lord fights the company in the Caldera of Ormaz.">
+              <source src="media/ember-fight.mp4" type="video/mp4">
+            </video>
+            <figcaption class="cap" data-i18n="fight.cap1">The Ember Lord, in the Caldera of Ormaz.</figcaption>
+          </figure>
+          <figure>
+            <video class="frame px" autoplay muted loop playsinline preload="metadata" poster="media/victory-ember.webp" width="1280" height="720" aria-label="An epic falls in a burst of light and leaves its chest.">
+              <source src="media/epic-death.mp4" type="video/mp4">
+            </video>
+            <figcaption class="cap" data-i18n="fight.cap2">And when it falls.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- The company -->
+    <section id="company" aria-labelledby="company-title">
+      <div class="wrap">
+        <h2 id="company-title" data-i18n="company.title">Your company</h2>
+        <p class="lead" data-i18n="company.lead">You aim for Arren. The others join along the way, fight on their own, level up, learn talents and take their place in the formation around him.</p>
+        <div class="company">
+          <div class="member">
+            <div class="face"><img class="px" src="media/art/portrait-arren.png" alt="Arren's portrait: a young archer in a green hood with a red feather."></div>
+            <div><h3>Arren</h3><div class="role" data-i18n="who.arren.role">Archer · you aim for him</div><q data-i18n="who.arren.q">I'm no hero. I'm the one who was far away that day.</q></div>
+          </div>
+          <div class="member">
+            <div class="face"><img class="px" src="media/art/portrait-isaura.png" alt="Isaura Kell's portrait: a mage with long brown hair and a quill."></div>
+            <div><h3>Isaura Kell</h3><div class="role" data-i18n="who.isaura.role">Mage · throws fire where you aim</div><q data-i18n="who.isaura.q">Technically, this is my fault. Partly. A small part.</q></div>
+          </div>
+          <div class="member">
+            <div class="face"><img class="px" src="media/art/portrait-brannoc.png" alt="Brannoc's portrait: a bearded mercenary with a scar and pauldrons."></div>
+            <div><h3 data-i18n="who.brannoc.name">Brannoc Half-Gold</h3><div class="role" data-i18n="who.brannoc.role">Warrior · runs out, cuts and comes back</div><q data-i18n="who.brannoc.q">How much does it pay? No, really, how much?</q></div>
+          </div>
+          <div class="member">
+            <div class="face"><img class="px" src="media/art/portrait-brunna.png" alt="Brunna's portrait: a smith with braids and a hammer."></div>
+            <div><h3 data-i18n="who.brunna.name">Brunna, the smith</h3><div class="role" data-i18n="who.brunna.role">The forge of Piedralta</div><q data-i18n="who.brunna.q">See it? Odrun's spark. Don't you dare bring it back like that.</q></div>
+          </div>
+        </div>
+        <figure style="margin-top: 32px;">
+          <img class="frame px" src="media/dialogue-isaura.webp" width="1920" height="1080" loading="lazy" alt="A dialogue window: Isaura Kell says 'Technically, this is my fault. Partly. A small part. I'll explain on the way.'">
+          <figcaption class="cap" data-i18n="company.cap">The story is told between runs, in short scenes with every character.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Loot and forge -->
+    <section id="forge" aria-labelledby="forge-title" style="background: linear-gradient(transparent, rgba(0,0,0,.25), transparent);">
+      <div class="wrap split flip">
+        <div>
+          <h2 id="forge-title" data-i18n="forge.title">Loot that feels earned</h2>
+          <p data-i18n="forge.p1">Every epic leaves a chest the first time it falls, and a piece of gear nobody else in the March has. You see it on Arren's sheet the moment you take it.</p>
+          <div class="loot">
+            <img class="px" src="media/art/item-bramble_bow.png" alt="Bow of the Bramble King" title="Bow of the Bramble King">
+            <img class="px" src="media/art/item-root_heart.png" alt="Heart of the Root" title="Heart of the Root">
+            <img class="px" src="media/art/item-warden_cloak.png" alt="Cloak of the Warden" title="Cloak of the Warden">
+            <img class="px" src="media/art/item-ember_ring.png" alt="Ring of Embers" title="Ring of Embers">
+          </div>
+          <p data-i18n="forge.p2">Then you take it to Brunna. She crafts helmets, breastplates, gauntlets and boots from the metal the epics drop, and enchants anything from +1 to +10.</p>
+          <ul class="glow">
+            <li data-i18n-html="forge.g1"><b>Never fails.</b> Never breaks. Never goes down.</li>
+            <li data-i18n-html="forge.g2"><b>+4</b> it starts to glow, <b>+7</b> it sings, <b>+10</b> it's not yours anymore.</li>
+          </ul>
+        </div>
+        <figure>
+          <img class="frame px" src="media/tab-forge.webp" width="1920" height="1080" loading="lazy" alt="The forge: Arren's equipment with the Bow of the Bramble King at +7, and Brunna the smith.">
+          <figcaption class="cap" data-i18n="forge.cap">The forge, with the Bow of the Bramble King at +7.</figcaption>
+        </figure>
+      </div>
+      <div class="wrap duo" style="margin-top: 28px;">
+        <figure>
+          <img class="frame px" src="media/epic-victory.webp" width="1920" height="1080" loading="lazy" alt="The Bramble King has fallen: a chest of gold and the Bow of the Bramble King.">
+          <figcaption class="cap" data-i18n="forge.cap2">The first epic's chest.</figcaption>
+        </figure>
+        <figure>
+          <img class="frame px" src="media/arena-forest.webp" width="1920" height="1080" loading="lazy" alt="The Deepwood: the company surrounded by rotten stumps and violet mushrooms.">
+          <figcaption class="cap" data-i18n="forge.cap3">The Deepwood, where the forest rots from the inside.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- What the full game adds -->
+    <section id="full" aria-labelledby="full-title">
+      <div class="wrap">
+        <h2 id="full-title" data-i18n="full.title">Coming in the full game</h2>
+        <p class="lead" data-i18n="full.lead">The demo is the first four seals. The full hunt goes much further.</p>
+        <ul class="roadmap">
+          <li><h3 data-i18n="full.epics.t">Many more epics</h3><p data-i18n="full.epics.p">New lands, each with its own epic, its own fight and the gear it leaves behind.</p></li>
+          <li><h3 data-i18n="full.heroes.t">Six heroes</h3><p data-i18n="full.heroes.p">Sister Edda the paladin, Brother Tobías the cleric and Nix the rogue join Arren, Isaura and Brannoc, each with their own talents and story.</p></li>
+          <li><h3 data-i18n="full.main.t">Choose your main</h3><p data-i18n="full.main.p">Pick which hero you aim for and build the company around them.</p></li>
+          <li><h3 data-i18n="full.skills.t">More skills to learn</h3><p data-i18n="full.skills.p">A bigger skill tree, with new ways to shoot, hit and hold the line.</p></li>
+          <li><h3 data-i18n="full.dungeons.t">Dungeons</h3><p data-i18n="full.dungeons.p">Go down below the March: dungeons with their own rooms, traps and treasure, far from the clearing.</p></li>
+          <li><h3 data-i18n="full.story.t">More story</h3><p data-i18n="full.story.p">What the seals were really holding back, and the way the hunt ends.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Status -->
+    <section class="status" aria-labelledby="status-title">
+      <div class="wrap">
+        <h2 id="status-title" data-i18n="status.title">Coming to itch.io</h2>
+        <p class="lead" style="margin-left: auto; margin-right: auto;" data-i18n="status.lead">A free demo with the first four epics, about half an hour of play, in your browser and on Windows. Made by one person in Argentina. Then, the full hunt.</p>
+        <div class="actions">
+          <a class="btn" href="https://floppykey.itch.io" target="_blank" rel="noopener" data-i18n="status.cta">Follow Floppy Key on itch.io</a>
+          <a class="btn ghost" href="../devblog/index.html?game=seal-quest" data-i18n="status.cta2">Read the devlog</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Floppy Key</span>
+    <a href="../index.html" data-i18n="foot">Insert disk. Turn key.</a>
+  </footer>
+
+  <script>
+    // English is in the HTML; these are the Spanish texts. The language is shared with the rest of the site.
+    const ES = {
+      "back": "← Floppy Key",
+      "nav.world": "Mundo", "nav.epics": "Épicos", "nav.company": "Compañía", "nav.forge": "Forja", "nav.devlog": "Devlog",
+      "hero.eyebrow": "Floppy Key · Disquete 02 · En desarrollo",
+      "hero.tagline": "Cada épico que cazas despierta algo más grande.",
+      "hero.sub": "Un RPG incremental de defensa. Aguanta en el claro, apunta a lo que se acerca, gasta lo que ganas y vuelve por más. Caza a los épicos. Ponte lo que dejan.",
+      "hero.cta": "Seguir en itch.io", "hero.cta2": "Leer el devlog", "hero.soon": "Pronto, demo gratis en el navegador",
+      "loop.title": "Apunta. Mejora. Caza.",
+      "loop.lead": "Al principio las oleadas te pasan por encima. Ese es el trato: en cada partida mueres un poco más lejos, y cada partida paga algo nuevo.",
+      "loop.1.t": "Solo apunta", "loop.1.p": "Solo mouse, sin clic. Arren le dispara a lo que esté bajo la mira: la mano no se cansa y nunca fallas por lo que no tiene que ver.",
+      "loop.2.t": "Hazte más fuerte", "loop.2.p": "Un árbol de habilidades de cuatro ramas, compañeros con sus propios talentos y una forja. Cada partida empieza en el muro, más fuerte que la anterior.",
+      "loop.3.t": "Caza a los épicos", "loop.3.p": "Al final de cada tierra espera un épico: una bestia enorme con su presentación, su pelea y una pieza única que solo se consigue de ella.",
+      "fact.1": "enemigos en pantalla", "fact.2b": "Solo", "fact.2": "mouse, sin clic", "fact.3": "traducido entero", "fact.4b": "Pixel art", "fact.4": "dibujado por código, píxel por píxel",
+      "world.title": "Un mundo dormido sobre una dragona",
+      "world.p1": "La Marca de Vael descansa sobre Ormaz, la Madre Brasa, una dragona que se enroscó a dormir antes de que existiera el mundo. Sueña. Hace mil años sus pesadillas salieron de la tierra con forma de bestia: los épicos.",
+      "world.p2": "La Orden del Quinto Sello las encerró con juramentos que iban a durar mil años. Nadie pensó que la Orden iba a durar menos que su promesa. Los mil años se cumplieron, y los sellos se rompen.",
+      "world.p3": "Arren no es un héroe. Es un arquero de pueblo que estaba lejos el día que las espinas se llevaron Vado Gris. Ahora tiene un arco, un motivo y una compañía que no deja de crecer.",
+      "world.quote": "«Mira el corte. No se rompió con los años. Lo abrieron con una llave. Desde afuera.»<small>— después de que cae el primer épico</small>",
+      "world.alt": "El Campo de los Mil: Arren, Isaura y Brannoc en el claro de un cementerio, rodeados de esqueletos y caballeros fantasma.",
+      "epics.title": "Los épicos",
+      "epics.lead": "Cada uno es un sueño de la dragona con la forma de algo que la Marca conoció. Cada uno tiene su propia presentación antes de la pelea y deja una pieza única al caer.",
+      "epic.1.ch": "CAPÍTULO I · EL HAMBRE · Pradera de Oro Viejo", "epic.1.nm": "El Rey Zarza",
+      "epic.2.ch": "CAPÍTULO II · LA PODREDUMBRE · Bosque Hondo", "epic.2.nm": "Raíz Podrida",
+      "epic.3.ch": "CAPÍTULO III · LA MEMORIA · Campo de los Mil", "epic.3.nm": "El Guardián de Huesos",
+      "epic.4.ch": "CAPÍTULO IV · LA FURIA · Caldera de Ormaz", "epic.4.nm": "El Señor de las Brasas",
+      "epics.more": "La demo recorre las primeras cuatro tierras de la Marca. El juego completo llega mucho más lejos: más tierras, más épicos y más de lo que duerme debajo.",
+      "fight.title": "Cuando entra un épico",
+      "fight.lead": "Las oleadas comunes no se detienen por él. La multitud sigue llegando mientras le bajas la barra de vida, y cuando cae, cae fuerte.",
+      "fight.cap1": "El Señor de las Brasas, en la Caldera de Ormaz.", "fight.cap2": "Y cuando cae.",
+      "company.title": "Tu compañía",
+      "company.lead": "Tú apuntas por Arren. Los demás se suman en el camino, pelean por su cuenta, suben de nivel, aprenden talentos y toman su lugar en la formación a su alrededor.",
+      "who.arren.role": "Arquero · lo controlas tú con la mira", "who.arren.q": "No soy un héroe. Soy el que estaba lejos ese día.",
+      "who.isaura.role": "Maga · lanza fuego donde apuntas", "who.isaura.q": "Técnicamente, esto es culpa mía. En parte. Una parte pequeña.",
+      "who.brannoc.name": "Brannoc Medio Oro", "who.brannoc.role": "Guerrero · sale, corta y vuelve", "who.brannoc.q": "¿Cuánto paga? No, en serio, ¿cuánto paga?",
+      "who.brunna.name": "Brunna, la herrera", "who.brunna.role": "La fragua de Piedralta", "who.brunna.q": "¿Lo ves? La chispa de Odrun. Ya no me lo devuelvas así nomás.",
+      "company.cap": "La historia se cuenta entre partidas, en escenas cortas con cada personaje.",
+      "forge.title": "Un botín que se siente ganado",
+      "forge.p1": "Cada épico deja un cofre la primera vez que cae, y una pieza que nadie más en la Marca tiene. La ves en la hoja de Arren apenas la tomas.",
+      "forge.p2": "Después se la llevas a Brunna. Forja cascos, petos, guanteletes y botas con el metal que sueltan los épicos, y encanta cualquier pieza del +1 al +10.",
+      "forge.g1": "<b>Nunca falla.</b> Nunca rompe. Nunca baja.",
+      "forge.g2": "En <b>+4</b> empieza a brillar, en <b>+7</b> canta, en <b>+10</b> ya no es tuya.",
+      "forge.cap": "La forja, con el Arco del Rey Zarza en +7.", "forge.cap2": "El cofre del primer épico.", "forge.cap3": "El Bosque Hondo, donde el bosque se pudre de adentro hacia afuera.",
+      "full.title": "En el juego completo",
+      "full.lead": "La demo son los primeros cuatro sellos. La cacería completa llega mucho más lejos.",
+      "full.epics.t": "Muchos más épicos", "full.epics.p": "Tierras nuevas, cada una con su épico, su pelea y el equipo que deja.",
+      "full.heroes.t": "Seis héroes", "full.heroes.p": "Sor Edda la paladina, el Hermano Tobías el clérigo y Nix la pícara se suman a Arren, Isaura y Brannoc, cada uno con sus talentos y su historia.",
+      "full.main.t": "Elige a tu héroe", "full.main.p": "Decide por qué héroe apuntas y arma la compañía a su alrededor.",
+      "full.skills.t": "Más habilidades", "full.skills.p": "Un árbol de habilidades más grande, con nuevas formas de disparar, golpear y aguantar la línea.",
+      "full.dungeons.t": "Mazmorras", "full.dungeons.p": "Baja bajo la Marca: mazmorras con sus propias salas, trampas y tesoros, lejos del claro.",
+      "full.story.t": "Más historia", "full.story.p": "Qué guardaban de verdad los sellos, y cómo termina la cacería.",
+      "status.title": "Pronto en itch.io",
+      "status.lead": "Una demo gratis con los primeros cuatro épicos, una media hora de juego, en el navegador y en Windows. Hecho por una persona en Argentina. Después, la cacería completa.",
+      "status.cta": "Seguir a Floppy Key en itch.io", "status.cta2": "Leer el devlog",
+      "foot": "Inserta el disquete. Gira la llave."
+    };
+
+    const EN = {};
+    document.querySelectorAll("[data-i18n]").forEach(el => EN[el.dataset.i18n] = el.innerHTML);
+    document.querySelectorAll("[data-i18n-html]").forEach(el => EN[el.dataset.i18nHtml] = el.innerHTML);
+    document.querySelectorAll("[data-i18n-alt]").forEach(el => EN[el.dataset.i18nAlt] = el.alt);
+
+    function apply(lang) {
+      const t = lang === "es" ? ES : EN;
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(el => { const v = t[el.dataset.i18n]; if (v) el.innerHTML = v; });
+      document.querySelectorAll("[data-i18n-html]").forEach(el => { const v = t[el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
+      document.querySelectorAll("[data-i18n-alt]").forEach(el => { const v = t[el.dataset.i18nAlt]; if (v) el.alt = v; });
+      const chip = document.getElementById("lang");
+      chip.textContent = lang === "es" ? "EN" : "ES";
+      chip.setAttribute("aria-label", lang === "es" ? "Switch to English" : "Cambiar a español");
+      try { localStorage.setItem("lang", lang); } catch (e) { /* not remembered */ }
+    }
+
+    let saved = null;
+    try { saved = localStorage.getItem("lang"); } catch (e) { saved = null; }
+    // English by default; Spanish only when the visitor chose it.
+    let lang = saved === "es" ? "es" : "en";
+    apply(lang);
+    document.getElementById("lang").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; apply(lang); });
+
+    // Videos only play when the visitor can see them, and never for those who asked for less motion.
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll("video").forEach(v => {
+      if (still) { v.removeAttribute("autoplay"); v.pause(); return; }
+      new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); }).observe(v);
+    });
+  </script>
+</body>
+</html>
