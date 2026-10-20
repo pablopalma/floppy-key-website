@@ -50,15 +50,15 @@
         </h1>
         <p class="lead" data-i18n="hero.lead">Made for big moments: the click when a puzzle finally gives, the joy of breaking everything, the itch to play just one more round. Insert disk. Turn key.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="#strike" data-i18n="hero.cta">Play STRIKE!</a>
+          <a class="btn btn-primary" href="#seal-quest" data-i18n="hero.cta">Meet The Seal Quest</a>
           <a class="btn btn-ghost" href="#games" data-i18n="hero.cta2">See all disks</a>
         </div>
       </div>
 
       <div class="drive-stage" aria-hidden="true">
-        <div class="disk disk-hero">
+        <div class="disk disk-hero" style="--body: var(--sun)">
           <svg viewBox="0 0 64 64"><use href="#floppy"/></svg>
-          <span class="disk-label">STRIKE!</span>
+          <span class="disk-label">SEAL</span>
         </div>
         <div class="drive">
           <div class="drive-slot"></div>
@@ -68,7 +68,7 @@
             <span class="drive-btn"></span>
           </div>
         </div>
-        <p class="drive-status"><span class="blink">▮</span> <span data-i18n="hero.loading">LOADING STRIKE!</span></p>
+        <p class="drive-status"><span class="blink">▮</span> <span data-i18n="hero.loading">LOADING THE SEAL QUEST</span></p>
       </div>
     </section>
 
@@ -80,19 +80,6 @@
       </div>
 
       <ul class="box">
-        <li>
-          <a class="card" href="#strike" style="--body: var(--coral)">
-            <span class="card-disk">
-              <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
-              <span class="card-label">STRIKE!</span>
-            </span>
-            <span class="card-meta">
-              <span class="tag tag-live" data-i18n="tag.live">Playable</span>
-              <span class="card-title">STRIKE! Bowling for Severance</span>
-              <span class="card-genre" data-i18n="games.strike.genre">Incremental · 20–30 min</span>
-            </span>
-          </a>
-        </li>
         <li>
           <a class="card" href="#seal-quest" style="--body: var(--sun)">
             <span class="card-disk">
@@ -106,33 +93,24 @@
             </span>
           </a>
         </li>
+        <li>
+          <a class="card" href="#strike" style="--body: var(--coral)">
+            <span class="card-disk">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
+              <span class="card-label">STRIKE!</span>
+            </span>
+            <span class="card-meta">
+              <span class="tag tag-live" data-i18n="tag.live">Playable</span>
+              <span class="card-title">STRIKE! Bowling for Severance</span>
+              <span class="card-genre" data-i18n="games.strike.genre">Incremental · 20–30 min</span>
+            </span>
+          </a>
+        </li>
       </ul>
     </section>
 
-    <!-- Featured game. -->
-    <section class="feature" id="strike" aria-labelledby="strike-title">
-      <div class="crt">
-        <img src="assets/strike-orgchart.png" width="1094" height="534" alt="STRIKE! in English: the company org chart, with the 'Reply: I quit' node bought and Floor 1, Reception, up next.">
-      </div>
-      <div class="feature-copy">
-        <p class="eyebrow" data-i18n="strike.eyebrow">Disk 01 · Now playable in your browser</p>
-        <h2 id="strike-title">STRIKE!<span>Bowling for Severance</span></h2>
-        <p data-i18n="strike.p1">Eight years. Five denied vacation requests. Five copies of Form 27-B. You reply to HR with two words, tie your bowling ball to a network cable and take the office apart, floor by floor.</p>
-        <ul class="facts">
-          <li><b>10</b> <span data-i18n="strike.f1">floors, from Reception to the Boss's Office</span></li>
-          <li><b>13</b> <span data-i18n="strike.f2">nodes on the company org chart</span></li>
-          <li><b>104</b> <span data-i18n="strike.f3">things your coworkers say about it</span></li>
-        </ul>
-        <div class="actions">
-          <!-- Replace with the real page once it is published. -->
-          <a class="btn btn-primary" href="https://floppykey.itch.io/strike-bowling-for-severance" target="_blank" rel="noopener" data-i18n="strike.cta">Play free on itch.io</a>
-          <span class="note" data-i18n="strike.langs">English · Español · Mouse only</span>
-        </div>
-      </div>
-    </section>
-
     <!-- The game in development. -->
-    <section class="feature feature-flip" id="seal-quest" aria-labelledby="seal-quest-title">
+    <section class="feature" id="seal-quest" aria-labelledby="seal-quest-title">
       <div class="crt crt-sun">
         <img src="seal-quest/media/epic-victory.webp" width="1920" height="1080" loading="lazy" data-i18n-alt="seal.alt" alt="The Seal Quest: the Bramble King has fallen, and his chest of gold and his bow wait in the clearing.">
       </div>
@@ -149,6 +127,28 @@
         <div class="actions">
           <a class="btn btn-primary" href="seal-quest/index.html" data-i18n="seal.cta">See the game</a>
           <span class="note" data-i18n="seal.soon">Free demo coming to itch.io</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured game. -->
+    <section class="feature feature-flip" id="strike" aria-labelledby="strike-title">
+      <div class="crt">
+        <img src="assets/strike-orgchart.png" width="1094" height="534" alt="STRIKE! in English: the company org chart, with the 'Reply: I quit' node bought and Floor 1, Reception, up next.">
+      </div>
+      <div class="feature-copy">
+        <p class="eyebrow" data-i18n="strike.eyebrow">Disk 01 · Now playable in your browser</p>
+        <h2 id="strike-title">STRIKE!<span>Bowling for Severance</span></h2>
+        <p data-i18n="strike.p1">Eight years. Five denied vacation requests. Five copies of Form 27-B. You reply to HR with two words, tie your bowling ball to a network cable and take the office apart, floor by floor.</p>
+        <ul class="facts">
+          <li><b>10</b> <span data-i18n="strike.f1">floors, from Reception to the Boss's Office</span></li>
+          <li><b>13</b> <span data-i18n="strike.f2">nodes on the company org chart</span></li>
+          <li><b>104</b> <span data-i18n="strike.f3">things your coworkers say about it</span></li>
+        </ul>
+        <div class="actions">
+          <!-- Replace with the real page once it is published. -->
+          <a class="btn btn-primary" href="https://floppykey.itch.io/strike-bowling-for-severance" target="_blank" rel="noopener" data-i18n="strike.cta">Play free on itch.io</a>
+          <span class="note" data-i18n="strike.langs">English · Español · Mouse only</span>
         </div>
       </div>
     </section>
