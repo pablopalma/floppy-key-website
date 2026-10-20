@@ -1,0 +1,17 @@
+{
+  "site": "https://floppykey.com",
+  "games": {
+    "strike": {
+      "name": "STRIKE! Bowling for Severance",
+      "short": "STRIKE!",
+      "color": "var(--coral)",
+      "url": "https://floppykey.itch.io/strike-bowling-for-severance"
+    },
+    "sealbreaker": {
+      "name": "SEALBREAKER",
+      "short": "SEALBREAKER",
+      "color": "var(--sun)",
+      "page": "sealbreaker/index.html"
+    }
+  }
+}

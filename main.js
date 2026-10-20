@@ -4,6 +4,22 @@ const ES = {
   "nav.games": "Juegos",
   "nav.studio": "Estudio",
   "nav.contact": "Contacto",
+  "nav.devblog": "Devblog",
+  "skip.posts": "Ir a las entradas",
+  "skip.post": "Ir a la entrada",
+  "devblog.eyebrow": "Notas desde el taller",
+  "devblog.sub": "Qué cambió en cada actualización, por qué cambió y qué viene. Lo más nuevo primero.",
+  "devblog.all": "Todos los juegos",
+  "devblog.read": "Leer la entrada",
+  "devblog.empty": "Todavía no hay entradas de este juego.",
+  "devblog.back": "← Todas las entradas",
+  "devblog.inEnglish": "Esta entrada está escrita en inglés.",
+  "devblog.inSpanish": "Esta entrada está escrita en español.",
+  "devblog.play": "Jugar gratis en itch.io",
+  "devblog.see": "Ver el juego",
+  "devblog.more": "Más entradas de este juego",
+  "devblog.newer": "Más reciente",
+  "devblog.older": "Anterior",
   "hero.eyebrow": "Hecho en Argentina",
   "hero.title1": "Juegos chicos",
   "hero.title2": "que abren",
@@ -17,7 +33,9 @@ const ES = {
   "tag.live": "Jugable",
   "tag.soon": "En el cajón",
   "tag.locked": "Bajo llave",
+  "tag.dev": "En desarrollo",
   "games.strike.genre": "Incremental · 20–30 min",
+  "games.sealbreaker.genre": "RPG incremental · caza a los épicos",
   "games.puzzle.title": "Un juego de puzzles sin nombre",
   "games.puzzle.genre": "Puzzle · en bocetos",
   "games.escape.title": "Un escape room",
@@ -61,6 +79,7 @@ function apply(lang) {
   document.documentElement.lang = lang;
   langButton.textContent = lang === "es" ? "EN" : "ES";
   langButton.setAttribute("aria-label", lang === "es" ? "Switch to English" : "Cambiar a español");
+  formatDates();
   labelTheme();
   try { localStorage.setItem("lang", lang); } catch (e) { /* private mode: not remembered */ }
 }
@@ -88,13 +107,52 @@ let saved = null;
 try { saved = localStorage.getItem("lang"); } catch (e) { saved = null; }
 const initial = saved || ((navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en");
 if (initial === "es") apply("es");
-else labelTheme();
+else { formatDates(); labelTheme(); }
 langButton.addEventListener("click", () => apply(current === "es" ? "en" : "es"));
 
-// Copy the email, falling back to selecting it.
+// Devblog dates are written in English; show them in the visitor's language.
+function formatDates() {
+  for (const time of document.querySelectorAll("time[data-date]")) {
+    const [y, m, d] = time.dateTime.split("-").map(Number);
+    time.textContent = new Date(y, m - 1, d).toLocaleDateString(current === "es" ? "es-AR" : "en-US",
+      { year: "numeric", month: "long", day: "numeric" });
+  }
+}
+
+// Devblog index: filter by game with ?game=<id>, so a filtered list can be shared.
+const filters = document.querySelectorAll(".filter[data-filter]");
+if (filters.length) {
+  const posts = document.querySelectorAll(".posts > li[data-game]");
+  const empty = document.querySelector(".posts-empty");
+  const show = game => {
+    let visible = 0;
+    for (const post of posts) {
+      post.hidden = game !== "" && post.dataset.game !== game;
+      if (!post.hidden) visible++;
+    }
+    for (const filter of filters) {
+      if (filter.dataset.filter === game) filter.setAttribute("aria-current", "true");
+      else filter.removeAttribute("aria-current");
+    }
+    if (empty) empty.hidden = visible > 0;
+  };
+  for (const filter of filters) {
+    filter.addEventListener("click", event => {
+      event.preventDefault();
+      show(filter.dataset.filter);
+      const url = new URL(location.href);
+      if (filter.dataset.filter) url.searchParams.set("game", filter.dataset.filter);
+      else url.searchParams.delete("game");
+      history.replaceState(null, "", url);
+    });
+  }
+  show(new URLSearchParams(location.search).get("game") || "");
+}
+
+// Copy the email, falling back to selecting it. Only the home page has it.
 const copyButton = document.getElementById("copy");
 const mail = document.querySelector(".mail");
-copyButton.addEventListener("click", async () => {
+copyButton?.addEventListener("click", async () => {
   try {
     await navigator.clipboard.writeText(mail.textContent.trim());
     const key = "contact.copied";

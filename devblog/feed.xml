@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+<channel>
+  <title>Floppy Key devblog</title>
+  <link>https://floppykey.com/devblog/index.html</link>
+  <description>What changed in every update of Floppy Key's games, and why.</description>
+  <language>en</language>
+  <item>
+    <title>SEALBREAKER : Disk 02: SEALBREAKER</title>
+    <link>https://floppykey.com/devblog/sealbreaker-announce/index.html</link>
+    <guid>https://floppykey.com/devblog/sealbreaker-announce/index.html</guid>
+    <pubDate>Tue, 20 Oct 2026 12:00:00 +0000</pubDate>
+    <category>SEALBREAKER</category>
+    <description>The second Floppy Key game: an incremental defense RPG where you hunt epic beasts for their loot. Every epic you hunt wakes something bigger.</description>
+  </item>
+  <item>
+    <title>STRIKE! v1.2.2: Milestones, the Strike Fund and critical hits</title>
+    <link>https://floppykey.com/devblog/strike-1-2-2/index.html</link>
+    <guid>https://floppykey.com/devblog/strike-1-2-2/index.html</guid>
+    <pubDate>Sat, 17 Oct 2026 12:00:00 +0000</pubDate>
+    <category>STRIKE! Bowling for Severance</category>
+    <description>New things to chase between floors: milestones, the Strike Fund and a destruction level. Bigger critical hits, floors that shatter when you wreck them, and floor 7 is no longer a wall.</description>
+  </item>
+  <item>
+    <title>STRIKE! v1.2.0: Headquarters: Act 2 is here</title>
+    <link>https://floppykey.com/devblog/strike-1-2-0/index.html</link>
+    <guid>https://floppykey.com/devblog/strike-1-2-0/index.html</guid>
+    <pubDate>Fri, 16 Oct 2026 12:00:00 +0000</pubDate>
+    <category>STRIKE! Bowling for Severance</category>
+    <description>A whole second act: ten new floors at headquarters, glass partitions and armored servers, surprise boxes, twelve new upgrades and an org chart you can drag and zoom.</description>
+  </item>
+</channel>
+</rss>
