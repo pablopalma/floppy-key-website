@@ -131,6 +131,7 @@
     .roadmap li { background: var(--panel); border: 2px solid var(--gold); outline: 2px solid var(--panel); outline-offset: -6px; padding: 18px 20px; }
     .roadmap h3 { margin: 0 0 6px; color: var(--gold-soft); font-size: 1.05rem; }
     .roadmap p { margin: 0; color: var(--dim); }
+    .trailer { display: block; width: 100%; height: auto; background: #000; }
     .status { text-align: center; }
     .status .actions { justify-content: center; }
 
@@ -167,6 +168,18 @@
           <a class="btn ghost" href="../devblog/index.html?game=seal-quest" data-i18n="hero.cta2">Read the devlog</a>
           <span class="soon" data-i18n="hero.soon">Free demo · in your browser and on Windows · about 30 min</span>
         </div>
+      </div>
+    </section>
+
+    <!-- Trailer: it only downloads when someone presses play. -->
+    <section id="trailer" aria-labelledby="trailer-title">
+      <div class="wrap">
+        <h2 id="trailer-title" data-i18n="trailer.title">The trailer</h2>
+        <figure>
+          <video class="frame trailer" controls preload="none" playsinline poster="media/trailer-poster.jpg" width="1920" height="1080" aria-label="Trailer of The Seal Quest: Dreams of Ormaz">
+            <source src="media/trailer.mp4" type="video/mp4">
+          </video>
+        </figure>
       </div>
     </section>
 
@@ -421,6 +434,7 @@
       "full.skills.t": "Más habilidades", "full.skills.p": "Un árbol de habilidades más grande, con nuevas formas de disparar, golpear y aguantar la línea.",
       "full.dungeons.t": "Mazmorras", "full.dungeons.p": "Baja bajo la Marca: mazmorras con sus propias salas, trampas y tesoros, lejos del claro.",
       "full.story.t": "Más historia", "full.story.p": "Qué guardaban de verdad los sellos, y cómo termina la cacería.",
+      "trailer.title": "El tráiler",
       "status.title": "Juega la demo ya",
       "status.lead": "Una demo gratis con los primeros cuatro épicos, una media hora de juego, en el navegador y en Windows. Hecho por una persona en Argentina. La cacería completa llegará a Steam.",
       "status.cta": "Jugar gratis en itch.io", "status.cta2": "Leer el devlog",
@@ -453,7 +467,8 @@
 
     // Videos only play when the visitor can see them, and never for those who asked for less motion.
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    document.querySelectorAll("video").forEach(v => {
+    // Only the silent background loops; the trailer waits for its play button.
+    document.querySelectorAll("video[autoplay]").forEach(v => {
       if (still) { v.removeAttribute("autoplay"); v.pause(); return; }
       new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); }).observe(v);
     });
