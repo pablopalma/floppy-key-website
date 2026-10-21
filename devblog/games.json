@@ -11,7 +11,8 @@
       "name": "The Seal Quest: Dreams of Ormaz",
       "short": "THE SEAL QUEST",
       "color": "var(--sun)",
-      "page": "seal-quest/index.html"
+      "page": "seal-quest/index.html",
+      "url": "https://floppykey.itch.io/the-seal-quest-dreams-of-ormaz"
     }
   }
 }
