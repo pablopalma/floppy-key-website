@@ -1,6 +1,8 @@
 """Builds the devblog: one static page per entry, the index and the RSS feed.
 
 Each entry is a folder in devblog/ with a post.md (front matter + Markdown) and its images.
+A translation may sit beside it as post.es.md (or post.en.md for an entry written in Spanish):
+its own title, summary and text, shown when the visitor picks that language.
 Folders starting with "_" are skipped (the template lives there). Python standard library only.
 
     python tools/build_devblog.py
@@ -227,7 +229,47 @@ def read_entry(folder, games):
     meta["slug"] = folder.name
     meta["lang"] = meta.get("lang", "en")
     meta["html"] = Renderer(folder, where).render(body)
+    meta["alt"] = read_translation(folder, "es" if meta["lang"] == "en" else "en")
     return meta
+
+
+def read_translation(folder, lang):
+    """The entry in its other language (post.es.md or post.en.md): title, summary and text, or None."""
+    path = folder / f"post.{lang}.md"
+    if not path.exists():
+        return None
+    where = f"devblog/{folder.name}/{path.name}"
+    text = path.read_text(encoding="utf-8").replace("\r\n", "\n")
+    m = re.match(r"^---\n(.*?)\n---\n?(.*)$", text, re.S)
+    if not m:
+        errors.append(f"{where}: falta el bloque de datos entre --- al principio")
+        return None
+    meta = {}
+    for line in m.group(1).splitlines():
+        if ":" in line and not line.lstrip().startswith("#"):
+            key, value = line.split(":", 1)
+            value = value.strip()
+            if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+                value = value[1:-1]
+            meta[key.strip().lower()] = value
+    missing = [k for k in ("title", "summary") if not meta.get(k)]
+    if missing:
+        errors.append(f"{where}: faltan datos: {', '.join(missing)}")
+        return None
+    body = m.group(2).strip().splitlines()
+    if body and body[0].startswith("# "):
+        body = body[1:]
+    return {"lang": lang, "title": meta["title"], "summary": meta["summary"], "html": Renderer(folder, where).render(body)}
+
+
+def both(entry, key, tag, cls):
+    """The entry's title or summary, plus its translation when there is one: each shows in its language."""
+    first = f'<{tag} class="{cls}" lang="{entry["lang"]}"'
+    alt = entry.get("alt")
+    if not alt:
+        return f'{first}>{esc(entry[key])}</{tag}>'
+    return (f'{first} data-only="{entry["lang"]}">{esc(entry[key])}</{tag}>'
+            f'<{tag} class="{cls}" lang="{alt["lang"]}" data-only="{alt["lang"]}">{esc(alt[key])}</{tag}>')
 
 
 # ---------- Pages ----------
@@ -323,6 +365,8 @@ def og_tags(site, title, description, url, image, kind):
 
 
 def lang_note(entry):
+    if entry.get("alt"):
+        return ""
     if entry["lang"] == "es":
         return '<p class="lang-note" data-for="en" data-i18n="devblog.inSpanish">This entry is written in Spanish.</p>'
     return '<p class="lang-note" data-for="es" data-i18n="devblog.inEnglish">Esta entrada está escrita en inglés.</p>'
@@ -351,8 +395,8 @@ def build_index(entries, games, site):
           {cover}
           <span class="post-card-body">
             {meta_line(e, game, None).replace('<p ', '<span ', 1).replace('</p>', '</span>')}
-            <span class="post-card-title" lang="{e['lang']}">{esc(e['title'])}</span>
-            <span class="post-card-summary" lang="{e['lang']}">{esc(e['summary'])}</span>
+            {both(e, 'title', 'span', 'post-card-title')}
+            {both(e, 'summary', 'span', 'post-card-summary')}
             <span class="post-card-read" data-i18n="devblog.read">Read entry</span>
           </span>
         </a>
@@ -380,17 +424,25 @@ def build_index(entries, games, site):
     return page("../", "Devblog · Floppy Key", description, main, skip, og)
 
 
+def prose(entry):
+    alt = entry.get("alt")
+    if not alt:
+        return f'<div class="prose" lang="{entry["lang"]}">\n{entry["html"]}\n      </div>'
+    return (f'<div class="prose" lang="{entry["lang"]}" data-only="{entry["lang"]}">\n{entry["html"]}\n      </div>\n'
+            f'      <div class="prose" lang="{alt["lang"]}" data-only="{alt["lang"]}">\n{alt["html"]}\n      </div>')
+
+
 def build_entry(entry, newer, older, games, site):
     game = games[entry["game"]]
     nav = []
     if newer:
         nav.append(f'<a class="post-nav-link newer" href="../{newer["slug"]}/index.html">'
                    f'<span class="post-nav-dir" data-i18n="devblog.newer">Newer</span>'
-                   f'<span class="post-nav-title" lang="{newer["lang"]}">{esc(newer["title"])}</span></a>')
+                   f'{both(newer, "title", "span", "post-nav-title")}</a>')
     if older:
         nav.append(f'<a class="post-nav-link older" href="../{older["slug"]}/index.html">'
                    f'<span class="post-nav-dir" data-i18n="devblog.older">Older</span>'
-                   f'<span class="post-nav-title" lang="{older["lang"]}">{esc(older["title"])}</span></a>')
+                   f'{both(older, "title", "span", "post-nav-title")}</a>')
     nav_html = f'\n      <nav class="post-nav" aria-label="More entries">{"".join(nav)}</nav>' if nav else ""
     # A game that isn't out yet links to its own page on the site instead of to itch.io.
     if game.get("page"):
@@ -404,12 +456,10 @@ def build_entry(entry, newer, older, games, site):
       <a class="back" href="../index.html" data-i18n="devblog.back">← All entries</a>
       <header class="post-head">
         {meta_line(entry, game, f"../index.html?game={entry['game']}")}
-        <h1 class="post-title" lang="{entry['lang']}">{esc(entry['title'])}</h1>
+        {both(entry, 'title', 'h1', 'post-title')}
         {lang_note(entry)}
       </header>
-      <div class="prose" lang="{entry['lang']}">
-{entry['html']}
-      </div>
+      {prose(entry)}
       <aside class="post-cta">
         <svg class="post-cta-disk" viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
         <div class="post-cta-copy">

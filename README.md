@@ -13,6 +13,7 @@ Web del estudio. HTML, CSS y JS sin dependencias ni compilación.
 1. Copiar `devblog/_plantilla/` a una carpeta nueva dentro de `devblog/`. El nombre de la carpeta es la dirección de la entrada: por ejemplo `strike-1-3-0`, sin espacios ni puntos.
 2. Poner en esa carpeta las imágenes, los GIF y la portada de 630×500.
 3. Completar `post.md`. Arriba, entre las líneas `---`, van los datos: `title`, `date` (AAAA-MM-DD), `game`, `cover` (el nombre del archivo de la portada) y `summary` (el resumen de la lista). `version` es opcional, y `lang: es` marca una entrada escrita en español (por defecto se asume inglés). Debajo va el texto en Markdown, el mismo del devlog de itch.io; las imágenes se nombran sin carpeta: `![Pie de foto](mi-gif.gif)`.
+   - **Traducción (opcional):** un `post.es.md` en la misma carpeta (o `post.en.md` si la entrada está escrita en español), con `title` y `summary` arriba y el texto traducido debajo. Usa las mismas imágenes. Con traducción, el botón de idioma cambia el título, el resumen y el texto, y desaparece el aviso "Esta entrada está escrita en inglés".
 4. Correr `python tools/build_devblog.py`. Genera la página de cada entrada, el índice `devblog/index.html` y el feed `devblog/feed.xml`. Si falta un dato o una imagen, avisa qué y no escribe nada.
 5. Revisarlo en local (abajo) y subir todo, incluidos los HTML generados: el sitio no se compila al publicar.
 
