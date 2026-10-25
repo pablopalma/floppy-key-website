@@ -49,6 +49,7 @@ const ES = {
   "seal.f3": "encantamientos en la forja de Brunna, y nunca fallan",
   "seal.cta": "Jugar gratis en itch.io",
   "seal.more": "Ver el juego",
+  "seal.steam": "Ayúdalo a llegar a Steam",
   "seal.alt": "The Seal Quest: cayó el Rey Zarza, y su cofre de oro y su arco esperan en el claro.",
   "studio.title": "Por qué un disquete y una llave",
   "studio.p1": "Un disquete guardaba una cosa chica y completa. Lo metías, cargaba y jugabas. Una llave abre algo que todavía no tenías que ver. Así son nuestros juegos: chicos, terminados y con algo escondido adentro.",
