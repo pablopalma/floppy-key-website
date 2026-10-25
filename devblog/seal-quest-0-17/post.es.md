@@ -33,6 +33,35 @@ En la segunda fase lanza brasas lentas hacia Arren que pegan fuerte al llegar, y
 
 Cada victoria paga oro y material de brasa. La primera vez, además, puede caer el **Corazón de Kalderys**, una joya con +20 % de daño y flechas que queman, en una ranura nueva que nada más puede ocupar. Cae segura antes de la octava victoria, así que la mala suerte nunca dura.
 
+## Tu compañía, tu decisión
+
+Cada compañero tiene ahora un **modo de ataque**, que se cambia en su tarjeta de la pestaña de Héroes:
+
+- **Asistirme:** ataca lo que estás apuntando, así toda la compañía concentra el fuego.
+- **Su zona:** pelea por su cuenta en el área alrededor de su lugar, y la formación muestra cada zona que cuida. Pon a Brannoc adelante para que salga al encuentro de la multitud, o atrás para que cuide a Arren.
+
+Isaura empieza asistiendo y Brannoc cuidando su zona, como peleaban antes.
+
+![La pestaña de Héroes: la tarjeta de Isaura con su modo de ataque, sus talentos y sus hitos](companion-modes.webp)
+
+## Oleadas que se pueden leer
+
+Las tierras ganaron personalidad, y tu puntería, información:
+
+- **Lados calientes:** los enemigos siguen llegando de todos lados, pero cada tierra empuja más fuerte desde dos a cuatro direcciones propias (en la Pradera, norte y este).
+- **Oleadas que se aprenden:** cada partida de una tierra trae los mismos enemigos en el mismo orden, así que decide tu build y tu puntería, no la suerte. El punto exacto por donde entran sigue cambiando.
+- **Los épicos te dan tiempo:** cada uno entra siempre por la misma puerta, desde más lejos, con una flecha en el borde de la pantalla que marca por dónde viene.
+
+## Rebalanceo con sus partidas
+
+La demo manda estadísticas anónimas de juego, y mostraron dónde se trababa la gente y dónde pasaba de largo. Así que los números cambiaron:
+
+- **El enjambre llega en grupos de 4**, no de 6: la oleada 7 ya no duplica de golpe los enemigos.
+- **La Pradera es más amable:** sus enemigos tienen un 15 % menos de vida y el Rey Zarza un 13 % menos.
+- **Las tierras siguientes piden ganarse el camino:** el Bosque Hondo, el Campo de los Mil y la Caldera piden algunas salidas antes de su épico, en lugar de cruzarse de una, y sus épicos se ajustaron para repartir el muro.
+- **La campaña es un poco más larga:** el árbol cuesta un 13 % más y los enemigos ganan algo más de vida por oleada, con algo más de oro.
+- **El segundo ciclo tiene su propia curva.** Quien termina el primer ciclo tiene el poder de la oleada 40, así que multiplicar los números lo volvía un paseo o un muro. El Sueño inquieto crece más plano desde un punto de partida mucho más alto, y se ajustó para que cada épico vuelva a pedir algunos intentos.
+
 ## Ranking de héroes
 
 La primera vez que abres el juego puedes elegir un nick (o jugar anónimo) y entrar al ranking público. Primero cuentan las insignias, después la oleada más alta, después el nivel y después los enemigos que derrotaste. Cada partida, raid y ciclo actualiza tu fila. Puedes ver a los mejores héroes desde el menú principal y en la [página del juego](https://floppykey.com/seal-quest/#ranking).

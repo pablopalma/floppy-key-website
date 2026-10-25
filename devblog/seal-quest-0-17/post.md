@@ -37,6 +37,35 @@ In the second phase he throws slow embers at Arren that hit hard when they land,
 
 Every victory pays gold and ember material. The first time, it may also drop the **Heart of Kalderys**, a jewel with +20 % damage and arrows that burn, in a new slot nothing else can fill. It's certain within eight victories, so bad luck never lasts.
 
+## Your company, your call
+
+Each companion now has an **attack mode**, switched on their card in the Heroes tab:
+
+- **Assist me:** they hit whatever you're aiming at, so the whole company focuses fire.
+- **Their zone:** they fight on their own in the area around their spot, and the formation shows each guarded area. Put Brannoc in front to meet the crowd early, or behind to guard Arren.
+
+Isaura starts out assisting and Brannoc guarding his zone, the way they fought before.
+
+![The Heroes tab: Isaura's card with her attack mode, talents and milestones](companion-modes.webp)
+
+## Waves you can read
+
+The lands got more personality, and your aim got more information:
+
+- **Hot sides:** enemies still come from everywhere, but each land pushes hardest from two to four directions of its own (north and east in the Meadow).
+- **Learnable waves:** every run of a land brings the same enemies in the same order, so your build and your aim decide the result, not luck. Where exactly they enter still changes.
+- **Epics give you time:** each one always comes through the same entrance, from farther away, with an arrow on the edge of the screen showing where it's coming from.
+
+## Rebalanced from your runs
+
+The demo sends anonymous play stats, and they showed where people got stuck and where they walked straight through. So the numbers changed:
+
+- **Swarms come in groups of 4** instead of 6, so wave 7 no longer doubles the crowd out of nowhere.
+- **The Meadow is gentler:** its enemies have 15 % less health and the Bramble King 13 % less.
+- **The later lands make you earn the path:** the Deep Wood, the Field of the Thousand and the Caldera ask for a few runs before their epic instead of letting you walk straight to it, and their epics were tuned to share the wall.
+- **The campaign is a little longer:** the skill tree costs 13 % more, and enemies gain a bit more health per wave, with a bit more gold.
+- **The second cycle has its own curve.** Whoever finishes the first cycle has the power of wave 40, so simply multiplying the numbers made it a stroll or a wall. The Restless Sleep grows flatter from a much higher start, and it was tuned so every epic takes a few tries again.
+
 ## Heroes' ranking
 
 The first time you open the game you can pick a nick (or stay anonymous) and enter the public ranking. Insignias first, then the highest wave, then level, then the enemies you've beaten. Every run, raid and cycle updates your row. You can see the top heroes from the main menu and on the [game's page](https://floppykey.com/seal-quest/#ranking).
