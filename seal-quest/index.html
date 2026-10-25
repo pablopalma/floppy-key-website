@@ -227,12 +227,12 @@
   <header class="bar">
     <a class="back" href="../index.html" data-i18n="back">← Floppy Key</a>
     <nav aria-label="The Seal Quest">
+      <a href="#support" data-i18n="nav.support">Steam</a>
+      <a href="#ranking" data-i18n="nav.ranking">Ranking</a>
       <a href="#world" data-i18n="nav.world">World</a>
       <a href="#epics" data-i18n="nav.epics">Epics</a>
       <a href="#company" data-i18n="nav.company">Company</a>
       <a href="#forge" data-i18n="nav.forge">Forge</a>
-      <a href="#ranking" data-i18n="nav.ranking">Ranking</a>
-      <a href="#support" data-i18n="nav.support">Steam</a>
       <a href="../devblog/index.html?game=seal-quest" data-i18n="nav.devlog">Devlog</a>
       <button class="chip" id="lang" type="button" aria-label="Cambiar a español">ES</button>
     </nav>
@@ -251,8 +251,61 @@
         <p class="sub" data-i18n="hero.sub">An incremental defense RPG. Hold the clearing, aim at whatever gets close, spend what you earn and go back for more. Hunt the epics. Wear what they leave behind.</p>
         <div class="actions">
           <a class="btn" href="https://floppykey.itch.io/the-seal-quest-dreams-of-ormaz" target="_blank" rel="noopener" data-i18n="hero.cta">Play free on itch.io</a>
+          <a class="btn ghost" href="#support" data-i18n="hero.cta3">Help it reach Steam</a>
           <a class="btn ghost" href="../devblog/index.html?game=seal-quest" data-i18n="hero.cta2">Read the devlog</a>
           <span class="soon" data-i18n="hero.soon">Free demo · in your browser and on Windows · about 30 min</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support: the road to Steam -->
+    <section id="support" class="support" aria-labelledby="support-title">
+      <div class="wrap">
+        <p class="eyebrow" data-i18n="support.eyebrow">Help the hunt reach Steam</p>
+        <h2 id="support-title" data-i18n="support.title">Let's take the game to Steam</h2>
+        <p class="lead" data-i18n="support.lead">Publishing on Steam costs 100 USD. If the demo made you smile, you can help pay for it on Ko-fi: every coffee brings the full game a little closer, and your name goes on the Wall of Noble Heroes.</p>
+        <div class="goal" id="goal">
+          <div class="goal-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="support-title">
+            <div class="goal-fill" id="goal-fill"></div>
+            <div class="goal-ticks"></div>
+            <span class="goal-steam">STEAM</span>
+          </div>
+          <div class="goal-text"><span id="goal-amount"></span><span id="goal-percent"></span></div>
+          <p class="goal-cheer" id="goal-cheer" hidden data-i18n="support.done">Goal reached! See you on Steam.</p>
+        </div>
+        <div class="actions">
+          <a class="btn kofi" id="kofi" target="_blank" rel="noopener" data-i18n="support.cta">Support on Ko-fi</a>
+        </div>
+        <div class="panel wall">
+          <h3 data-i18n="wall.title">Wall of Noble Heroes</h3>
+          <p class="sub" data-i18n="wall.lead">The ones who helped carry the hunt to Steam.</p>
+          <div class="podium" id="podium"></div>
+          <ul class="heroes" id="heroes"></ul>
+          <p class="note" id="wall-note" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ranking: read from the same sheet as the game. -->
+    <section id="ranking" aria-labelledby="ranking-title" style="background: linear-gradient(transparent, rgba(0,0,0,.25), transparent);">
+      <div class="wrap">
+        <h2 id="ranking-title" data-i18n="ranking.title">Top heroes</h2>
+        <p class="lead" data-i18n="ranking.lead">Pick a nick when you start the demo and your hunt shows up here: insignias first, then the highest wave, then level.</p>
+        <div class="panel board">
+          <table>
+            <thead>
+              <tr>
+                <th class="n">#</th>
+                <th data-i18n="ranking.hero">Hero</th>
+                <th class="n" data-i18n="ranking.level">Level</th>
+                <th class="n" data-i18n="ranking.wave">Wave</th>
+                <th data-i18n="ranking.insignias">Insignias</th>
+                <th class="n" data-i18n="ranking.kills">Enemies</th>
+              </tr>
+            </thead>
+            <tbody id="ranking-rows"></tbody>
+          </table>
+          <p class="note" id="ranking-note" aria-live="polite"></p>
         </div>
       </div>
     </section>
@@ -490,58 +543,6 @@
       </div>
     </section>
 
-    <!-- Ranking: read from the same sheet as the game. -->
-    <section id="ranking" aria-labelledby="ranking-title" style="background: linear-gradient(transparent, rgba(0,0,0,.25), transparent);">
-      <div class="wrap">
-        <h2 id="ranking-title" data-i18n="ranking.title">Top heroes</h2>
-        <p class="lead" data-i18n="ranking.lead">Pick a nick when you start the demo and your hunt shows up here: insignias first, then the highest wave, then level.</p>
-        <div class="panel board">
-          <table>
-            <thead>
-              <tr>
-                <th class="n">#</th>
-                <th data-i18n="ranking.hero">Hero</th>
-                <th class="n" data-i18n="ranking.level">Level</th>
-                <th class="n" data-i18n="ranking.wave">Wave</th>
-                <th data-i18n="ranking.insignias">Insignias</th>
-                <th class="n" data-i18n="ranking.kills">Enemies</th>
-              </tr>
-            </thead>
-            <tbody id="ranking-rows"></tbody>
-          </table>
-          <p class="note" id="ranking-note" aria-live="polite"></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Support: the road to Steam -->
-    <section id="support" class="support" aria-labelledby="support-title">
-      <div class="wrap">
-        <p class="eyebrow" data-i18n="support.eyebrow">Help the hunt reach Steam</p>
-        <h2 id="support-title" data-i18n="support.title">Let's take the game to Steam</h2>
-        <p class="lead" data-i18n="support.lead">Publishing on Steam costs 100 USD. If the demo made you smile, you can help pay for it on Ko-fi: every coffee brings the full game a little closer, and your name goes on the Wall of Noble Heroes.</p>
-        <div class="goal" id="goal">
-          <div class="goal-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="support-title">
-            <div class="goal-fill" id="goal-fill"></div>
-            <div class="goal-ticks"></div>
-            <span class="goal-steam">STEAM</span>
-          </div>
-          <div class="goal-text"><span id="goal-amount"></span><span id="goal-percent"></span></div>
-          <p class="goal-cheer" id="goal-cheer" hidden data-i18n="support.done">Goal reached! See you on Steam.</p>
-        </div>
-        <div class="actions">
-          <a class="btn kofi" id="kofi" target="_blank" rel="noopener" data-i18n="support.cta">Support on Ko-fi</a>
-        </div>
-        <div class="panel wall">
-          <h3 data-i18n="wall.title">Wall of Noble Heroes</h3>
-          <p class="sub" data-i18n="wall.lead">The ones who helped carry the hunt to Steam.</p>
-          <div class="podium" id="podium"></div>
-          <ul class="heroes" id="heroes"></ul>
-          <p class="note" id="wall-note" aria-live="polite"></p>
-        </div>
-      </div>
-    </section>
-
     <!-- Status -->
     <section class="status" aria-labelledby="status-title">
       <div class="wrap">
@@ -568,7 +569,7 @@
       "hero.eyebrow": "Floppy Key · Disquete 02 · Demo gratis ya disponible",
       "hero.tagline": "Cada épico que cazas despierta algo más grande.",
       "hero.sub": "Un RPG incremental de defensa. Aguanta en el claro, apunta a lo que se acerca, gasta lo que ganas y vuelve por más. Caza a los épicos. Ponte lo que dejan.",
-      "hero.cta": "Jugar gratis en itch.io", "hero.cta2": "Leer el devlog", "hero.soon": "Demo gratis · en el navegador y en Windows · unos 30 min",
+      "hero.cta": "Jugar gratis en itch.io", "hero.cta2": "Leer el devlog", "hero.cta3": "Ayúdalo a llegar a Steam", "hero.soon": "Demo gratis · en el navegador y en Windows · unos 30 min",
       "loop.title": "Apunta. Mejora. Caza.",
       "loop.lead": "Al principio las oleadas te pasan por encima. Ese es el trato: en cada partida mueres un poco más lejos, y cada partida paga algo nuevo.",
       "loop.1.t": "Solo apunta", "loop.1.p": "Solo mouse, sin clic. Arren le dispara a lo que esté bajo la mira: la mano no se cansa y nunca fallas por lo que no tiene que ver.",
