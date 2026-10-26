@@ -33,7 +33,7 @@ El apoyo hacia Steam (meta, Ko-fi y Wall of Noble Heroes) se quitó el 26 de oct
 
 ## Libro de la mitología (The Seal Quest)
 
-`seal-quest/mitologia/index.html` es el libro *Los sueños de Ormaz*, solo en español, con las láminas adentro del archivo. Se enlaza desde el menú de `seal-quest/index.html` ("Lore book (ES)" / "Mitología") y desde un botón al final de la sección World. Sale de `docs/web/los-suenos-de-ormaz.html` del repositorio del juego, que se arma desde `docs/mitologia.md`; esta copia suma el enlace de vuelta "← The Seal Quest" y el ícono. Si cambia la mitología, se rehace allá y se vuelve a copiar.
+`seal-quest/mitologia/index.html` es el libro *Los sueños de Ormaz* / *The Dreams of Ormaz*, en inglés y en español, con las láminas adentro del archivo. Usa el mismo idioma que el resto del sitio (`lang` en `localStorage`, inglés por defecto) y tiene su propio botón ES/EN. Se enlaza desde el menú de `seal-quest/index.html` ("Lore" / "Mitología") y desde un botón al final de la sección World. Sale de `docs/web/los-suenos-de-ormaz.html` del repositorio del juego, que se arma desde `docs/mitologia.md`; esta copia suma el enlace de vuelta "← The Seal Quest" y el ícono. Si cambia la mitología, se rehace allá y se vuelve a copiar.
 
 ## Antes de publicar
 
