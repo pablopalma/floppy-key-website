@@ -23,20 +23,13 @@ Para un juego nuevo, agregarlo en `devblog/games.json` con su nombre, su nombre 
 
 `site` en `games.json` es la dirección pública del sitio. Se usa para las vistas previas al compartir un enlace y para el feed; hay que cambiarla si el dominio no termina siendo `floppykey.com`.
 
-## Ranking y apoyo hacia Steam (The Seal Quest)
+## Ranking (The Seal Quest)
 
-`seal-quest/index.html` tiene tres secciones que leen la planilla del ranking del juego (`tools/ranking-sheet/Ranking.gs` en el repositorio del juego):
+`seal-quest/index.html` muestra en **Top heroes** los 20 primeros del ranking del juego (`?action=top`), leídos de su planilla (`tools/ranking-sheet/Ranking.gs` en el repositorio del juego). Los raids elementales, dentro de "Coming in the full game", son texto fijo.
 
-- **Los raids elementales**, dentro de "Coming in the full game". Es texto fijo.
-- **Top heroes**: los 20 primeros del ranking (`?action=top`).
-- **Let's take the game to Steam**: la barra hacia la meta, el botón de Ko-fi y el Wall of Noble Heroes (`?action=support`). Los tres primeros van en naranja, amarillo y gris con aura, y el resto en blanco.
+La dirección está en `data-endpoint`, en la etiqueta `<body>` de `seal-quest/index.html`: la URL de la aplicación web de la planilla, la misma que `rankingEndpoint` en el `GameConfig` del juego. Si está vacía, el ranking dice que abre pronto; si la planilla no responde, lo dice.
 
-La configuración está en la etiqueta `<body>` de `seal-quest/index.html`:
-
-- `data-endpoint`: la URL de la aplicación web de la planilla, la misma que `rankingEndpoint` en el `GameConfig` del juego.
-- `data-kofi`: la página de Ko-fi del proyecto, por ejemplo `https://ko-fi.com/floppykey`.
-
-Si están vacíos, las secciones dicen que abren pronto y el botón de Ko-fi aparece desactivado. Si la planilla no responde, lo dicen y el botón sigue funcionando.
+El apoyo hacia Steam (meta, Ko-fi y Wall of Noble Heroes) se quitó el 26 de octubre de 2026: no se piden donaciones.
 
 ## Antes de publicar
 
@@ -44,7 +37,7 @@ Si están vacíos, las secciones dicen que abren pronto y el botón de Ko-fi apa
 - Revisar los enlaces a itch.io cuando la página de STRIKE! esté publicada.
 - Reemplazar la captura de `assets/strike-orgchart.png` por una mejor o por un GIF.
 - Confirmar la dirección de `site` en `devblog/games.json`.
-- Completar `data-endpoint` y `data-kofi` en `seal-quest/index.html` cuando la planilla del ranking y la página de Ko-fi estén publicadas.
+- Completar `data-endpoint` en `seal-quest/index.html` cuando la planilla del ranking esté publicada.
 
 ## Publicar gratis
 

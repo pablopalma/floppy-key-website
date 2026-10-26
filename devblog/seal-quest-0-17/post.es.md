@@ -1,9 +1,9 @@
 ---
-title: "The Seal Quest: raids, ciclos y el camino a Steam"
-summary: "Sueña la cacería de nuevo en un ciclo más difícil, enfrenta a Kalderys en el primer raid elemental, sube en el ranking de héroes y ayuda a que el juego llegue a Steam."
+title: "The Seal Quest: raids, ciclos y el ranking de héroes"
+summary: "Sueña la cacería de nuevo en un ciclo más difícil, enfrenta a Kalderys en el primer raid elemental y sube en el ranking de héroes."
 ---
 
-Cuando salió la demo, el final del Señor de las Brasas era el final del juego. Noventa y dos de ustedes llegaron y siguieron jugando sin nada más que perseguir. Esta actualización trata de lo que viene después: un ciclo más difícil para soñar de nuevo, un jefe de raid que cambia de forma, un ranking para escalar y una meta que podemos alcanzar entre todos.
+Cuando salió la demo, el final del Señor de las Brasas era el final del juego. Noventa y dos de ustedes llegaron y siguieron jugando sin nada más que perseguir. Esta actualización trata de lo que viene después: un ciclo más difícil para soñar de nuevo, un jefe de raid que cambia de forma y un ranking para escalar.
 
 ![Kalderys, la Llama que Sueña, detrás de su escudo de llamas](kalderys-phase-3.webp)
 
@@ -68,21 +68,13 @@ La primera vez que abres el juego puedes elegir un nick (o jugar anónimo) y ent
 
 ## Un menú principal de verdad, y la ficha de Arren
 
-El juego ahora abre en un menú principal con Continuar, Ranking, Apoyar, Opciones y Salir. Entre cacerías, el campamento está más ordenado: las pestañas al centro y una columna de accesos a la izquierda.
+El juego ahora abre en un menú principal con Continuar, Ranking, Opciones y Salir. Entre cacerías, el campamento está más ordenado: las pestañas al centro y una columna de accesos a la izquierda.
 
 ![El menú principal nuevo](title-screen.webp)
 
 **STATS** abre la ficha de Arren: todos sus números, una barra que muestra cuánto pone la base, el árbol, el equipo y los hitos, su daño por segundo y su vida efectiva, sus habilidades activas y las tres compras que más poder de pelea dan por tu oro.
 
 ![La ficha de Arren](arren-sheet.webp)
-
-## Ayuda a que la cacería llegue a Steam
-
-Publicar en Steam cuesta **100 USD**. Si la demo te sacó una sonrisa, puedes ayudar a pagarlo en [Ko-fi](https://ko-fi.com/floppykey). Cada café acerca un poco el juego completo, y tu nombre queda en el **Muro de los Héroes Nobles**, en el juego y en el sitio. Los tres que más aportan se destacan con un aura: naranja, amarilla y gris.
-
-![El camino a Steam, hoy: cero de cien, y un muro esperando su primer nombre](road-to-steam.webp)
-
-Apoyar no desbloquea nada en el juego: la demo es gratis e igual para todos.
 
 ## Lo que viene
 
@@ -99,4 +91,4 @@ Lo que ya está decidido:
 2. Si enfrentaste a Kalderys: ¿el escudo y las flechas heladas se entendieron la primera vez?
 3. ¿Preferirías jugar los otros tres raids antes del juego completo, o tener más épicos primero?
 
-[Jugar la demo en itch.io](https://floppykey.itch.io/the-seal-quest-dreams-of-ormaz) · [Apoyar en Ko-fi](https://ko-fi.com/floppykey) · [La página del juego](https://floppykey.com/seal-quest/)
+[Jugar la demo en itch.io](https://floppykey.itch.io/the-seal-quest-dreams-of-ormaz) · [La página del juego](https://floppykey.com/seal-quest/)

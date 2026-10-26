@@ -170,48 +170,7 @@
     @media (max-width: 640px) { .board { padding: 10px; } .board table { font-size: 14px; } .board th, .board td { padding: 6px 5px; } .board th { font-size: 12px; } }
     .note { color: var(--dim); margin: 14px 0 0; }
 
-    /* Support: the road to Steam */
-    .support { text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(227, 176, 75, .14), transparent 60%); }
-    .support .lead { margin-left: auto; margin-right: auto; }
-    .goal { max-width: 760px; margin: 0 auto 10px; }
-    .goal-bar { position: relative; height: 40px; background: #0b0810; border: 3px solid var(--gold); box-shadow: 0 0 0 3px #000, inset 0 0 0 2px var(--frame); overflow: hidden; }
-    .goal-fill { position: absolute; inset: 3px auto 3px 3px; width: 0; max-width: calc(100% - 6px); transition: width 1.6s cubic-bezier(.2, .8, .2, 1);
-      background: repeating-linear-gradient(90deg, transparent 0 14px, rgba(0, 0, 0, .18) 14px 16px), linear-gradient(#ffe39a, #e3b04b 55%, #b07a22); }
-    .goal-fill::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .55) 50%, transparent 70%);
-      background-size: 220% 100%; animation: shine 2.6s linear infinite; }
-    .goal.done .goal-fill { background: repeating-linear-gradient(90deg, transparent 0 14px, rgba(0, 0, 0, .12) 14px 16px), linear-gradient(#fff4c4, #ffd25a 55%, #e39a2a);
-      box-shadow: 0 0 24px rgba(255, 210, 90, .8); }
-    .goal-ticks { position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(90deg, transparent calc(25% - 1px), rgba(0,0,0,.6) 0 calc(25% + 1px), transparent 0 calc(50% - 1px), rgba(0,0,0,.6) 0 calc(50% + 1px), transparent 0 calc(75% - 1px), rgba(0,0,0,.6) 0 calc(75% + 1px), transparent 0); }
-    .goal-steam { position: absolute; z-index: 1; right: 8px; top: 50%; transform: translateY(-50%); color: var(--dim); font-size: 14px; letter-spacing: 2px; }
-    .goal.done .goal-steam { color: #3a2208; font-weight: 700; }
-    .goal-text { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; font-size: 18px; color: var(--dim); }
-    .goal-text b { color: var(--gold-soft); font-size: 26px; }
-    .goal-cheer { color: var(--gold-soft); font-size: 22px; margin: 6px 0 0; text-shadow: 0 0 14px rgba(255, 210, 90, .7); }
-    @keyframes shine { from { background-position: 120% 0; } to { background-position: -120% 0; } }
-    .support .actions { justify-content: center; margin: 22px 0 8px; }
-    .btn.kofi { background: #b5332e; font-size: 20px; padding: 12px 26px; }
-    .btn.kofi:hover { background: #d0423b; }
-    .btn[aria-disabled="true"] { opacity: .55; pointer-events: none; }
-
-    .wall { margin: 40px auto 0; max-width: 900px; padding: clamp(18px, 3vw, 30px); }
-    .wall h3 { margin: 0 0 4px; color: var(--gold); font-size: clamp(22px, 3vw, 30px); letter-spacing: 1px; }
-    .wall .sub { margin: 0 0 22px; text-shadow: none; max-width: none; }
-    .podium { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
-    @media (max-width: 640px) { .podium { grid-template-columns: 1fr; } }
-    .noble { position: relative; isolation: isolate; padding: 20px 8px 16px; font-size: clamp(22px, 3vw, 28px); font-weight: 700; overflow-wrap: anywhere; }
-    .noble small { display: block; font-size: 13px; font-weight: 400; letter-spacing: 2px; color: var(--dim); margin-bottom: 4px; }
-    .noble::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 50%;
-      background: radial-gradient(closest-side, var(--aura), transparent); opacity: .45; animation: aura 2.4s ease-in-out infinite; }
-    .noble[data-tier="1"] { --aura: #ff9a3a; color: #ff9a3a; text-shadow: 0 0 10px #ff9a3a, 0 0 22px rgba(255, 154, 58, .7), 0 2px 0 #000; }
-    .noble[data-tier="2"] { --aura: #ffe07a; color: #ffe07a; text-shadow: 0 0 10px #ffe07a, 0 0 20px rgba(255, 224, 122, .6), 0 2px 0 #000; }
-    .noble[data-tier="3"] { --aura: #c8ccd4; color: #c8ccd4; text-shadow: 0 0 10px #c8ccd4, 0 0 18px rgba(200, 204, 212, .5), 0 2px 0 #000; }
-    .noble[data-tier="2"]::before { animation-delay: -.8s; }
-    .noble[data-tier="3"]::before { animation-delay: -1.6s; }
-    @keyframes aura { 50% { opacity: .8; transform: scale(1.08); } }
-    .heroes { list-style: none; margin: 0; padding: 0; columns: 3 160px; column-gap: 24px; color: #fff; font-size: 18px; }
-    .heroes li { break-inside: avoid; padding: 3px 0; overflow-wrap: anywhere; }
-    @media (prefers-reduced-motion: reduce) { .goal-fill { transition: none; } .goal-fill::after, .noble::before, .raid .rune { animation: none !important; } }
+    @media (prefers-reduced-motion: reduce) { .raid .rune { animation: none !important; } }
 
     .trailer { display: block; width: 100%; height: auto; background: #000; }
     .status { text-align: center; }
@@ -222,12 +181,11 @@
   </style>
 </head>
 <!-- data-endpoint: the ranking sheet's web app URL (the same as the game's rankingEndpoint).
-     data-kofi: the Ko-fi page. Left empty, the sections say they are coming soon. -->
-<body data-endpoint="https://script.google.com/macros/s/AKfycbxeA1vndjT1Mjf-91JMyDt1GnIXp7vSP2L3pWDAhMUSeJiG8TQKs6oVvk9GK6AxtoaP/exec" data-kofi="https://ko-fi.com/floppykey">
+     Left empty, the ranking says it is coming soon. -->
+<body data-endpoint="https://script.google.com/macros/s/AKfycbxeA1vndjT1Mjf-91JMyDt1GnIXp7vSP2L3pWDAhMUSeJiG8TQKs6oVvk9GK6AxtoaP/exec">
   <header class="bar">
     <a class="back" href="../index.html" data-i18n="back">← Floppy Key</a>
     <nav aria-label="The Seal Quest">
-      <a href="#support" data-i18n="nav.support">Steam</a>
       <a href="#ranking" data-i18n="nav.ranking">Ranking</a>
       <a href="#world" data-i18n="nav.world">World</a>
       <a href="#epics" data-i18n="nav.epics">Epics</a>
@@ -251,37 +209,8 @@
         <p class="sub" data-i18n="hero.sub">An incremental defense RPG. Hold the clearing, aim at whatever gets close, spend what you earn and go back for more. Hunt the epics. Wear what they leave behind.</p>
         <div class="actions">
           <a class="btn" href="https://floppykey.itch.io/the-seal-quest-dreams-of-ormaz" target="_blank" rel="noopener" data-i18n="hero.cta">Play free on itch.io</a>
-          <a class="btn ghost" href="#support" data-i18n="hero.cta3">Help it reach Steam</a>
           <a class="btn ghost" href="../devblog/index.html?game=seal-quest" data-i18n="hero.cta2">Read the devlog</a>
           <span class="soon" data-i18n="hero.soon">Free demo · in your browser and on Windows · about 30 min</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Support: the road to Steam -->
-    <section id="support" class="support" aria-labelledby="support-title">
-      <div class="wrap">
-        <p class="eyebrow" data-i18n="support.eyebrow">Help the hunt reach Steam</p>
-        <h2 id="support-title" data-i18n="support.title">Let's take the game to Steam</h2>
-        <p class="lead" data-i18n="support.lead">Publishing on Steam costs 100 USD. If the demo made you smile, you can help pay for it on Ko-fi: every coffee brings the full game a little closer, and your name goes on the Wall of Noble Heroes.</p>
-        <div class="goal" id="goal">
-          <div class="goal-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="support-title">
-            <div class="goal-fill" id="goal-fill"></div>
-            <div class="goal-ticks"></div>
-            <span class="goal-steam">STEAM</span>
-          </div>
-          <div class="goal-text"><span id="goal-amount"></span><span id="goal-percent"></span></div>
-          <p class="goal-cheer" id="goal-cheer" hidden data-i18n="support.done">Goal reached! See you on Steam.</p>
-        </div>
-        <div class="actions">
-          <a class="btn kofi" id="kofi" target="_blank" rel="noopener" data-i18n="support.cta">Support on Ko-fi</a>
-        </div>
-        <div class="panel wall">
-          <h3 data-i18n="wall.title">Wall of Noble Heroes</h3>
-          <p class="sub" data-i18n="wall.lead">The ones who helped carry the hunt to Steam.</p>
-          <div class="podium" id="podium"></div>
-          <ul class="heroes" id="heroes"></ul>
-          <p class="note" id="wall-note" aria-live="polite"></p>
         </div>
       </div>
     </section>
@@ -569,7 +498,7 @@
       "hero.eyebrow": "Floppy Key · Disquete 02 · Demo gratis ya disponible",
       "hero.tagline": "Cada épico que cazas despierta algo más grande.",
       "hero.sub": "Un RPG incremental de defensa. Aguanta en el claro, apunta a lo que se acerca, gasta lo que ganas y vuelve por más. Caza a los épicos. Ponte lo que dejan.",
-      "hero.cta": "Jugar gratis en itch.io", "hero.cta2": "Leer el devlog", "hero.cta3": "Ayúdalo a llegar a Steam", "hero.soon": "Demo gratis · en el navegador y en Windows · unos 30 min",
+      "hero.cta": "Jugar gratis en itch.io", "hero.cta2": "Leer el devlog", "hero.soon": "Demo gratis · en el navegador y en Windows · unos 30 min",
       "loop.title": "Apunta. Mejora. Caza.",
       "loop.lead": "Al principio las oleadas te pasan por encima. Ese es el trato: en cada partida mueres un poco más lejos, y cada partida paga algo nuevo.",
       "loop.1.t": "Solo apunta", "loop.1.p": "Solo mouse, sin clic. Arren le dispara a lo que esté bajo la mira: la mano no se cansa y nunca fallas por lo que no tiene que ver.",
@@ -624,17 +553,10 @@
       "raids.f2": "<b>Guardias que vuelven.</b> Son cuatro, y cada vez que uno cae vuelve un poco más rápido.",
       "raids.f3": "<b>Una llave para cada cerradura.</b> Kalderys se esconde tras un escudo de llamas que solo apaga el frío de la Orden.",
       "raids.f4": "<b>Una joya propia.</b> El Corazón de Kalderys: +20 % de daño y flechas que queman, en una ranura que nada más puede ocupar.",
-      "nav.ranking": "Ranking", "nav.support": "Steam",
+      "nav.ranking": "Ranking",
       "ranking.title": "Los mejores héroes",
       "ranking.lead": "Elige un nick al empezar la demo y tu cacería aparece aquí: primero las insignias, después la oleada más alta y después el nivel.",
       "ranking.hero": "Héroe", "ranking.level": "Nivel", "ranking.wave": "Oleada", "ranking.insignias": "Insignias", "ranking.kills": "Enemigos",
-      "support.eyebrow": "Ayuda a que la cacería llegue a Steam",
-      "support.title": "Llevemos el juego a Steam",
-      "support.lead": "Publicar en Steam cuesta 100 USD. Si la demo te sacó una sonrisa, puedes ayudar a pagarlo en Ko-fi: cada café acerca un poco el juego completo, y tu nombre queda en el Muro de los Héroes Nobles.",
-      "support.done": "¡Meta cumplida! Nos vemos en Steam.",
-      "support.cta": "Apoyar en Ko-fi",
-      "wall.title": "Muro de los Héroes Nobles",
-      "wall.lead": "Quienes ayudaron a llevar la cacería hasta Steam.",
       "trailer.title": "El tráiler",
       "status.title": "Juega la demo ya",
       "status.lead": "Una demo gratis con los primeros cuatro épicos, una media hora de juego, en el navegador y en Windows. Hecho por una persona en Argentina. La cacería completa llegará a Steam.",
@@ -647,27 +569,19 @@
     document.querySelectorAll("[data-i18n-html]").forEach(el => EN[el.dataset.i18nHtml] = el.innerHTML);
     document.querySelectorAll("[data-i18n-alt]").forEach(el => EN[el.dataset.i18nAlt] = el.alt);
 
-    // Texts built by the script for the ranking and the wall.
+    // Texts built by the script for the ranking.
     const LIVE = {
       en: {
         loading: "Loading…", offline: "Couldn't reach the ranking. Try again later.", soon: "The ranking opens with the next demo update.",
-        empty: "Nobody has entered the ranking yet. Pick a nick in the demo and be the first.", count: n => `${n} heroes in the ranking.`,
-        amount: (r, g) => `<b>${r}</b> of ${g} USD`, goalOffline: "Couldn't load the progress right now.", goalSoon: "The goal opens soon.",
-        anon: "Anonymous hero", wallEmpty: "No noble heroes yet. Be the first!", wallOffline: "Couldn't load the wall right now.",
-        kofiSoon: "Ko-fi coming soon", places: ["1st", "2nd", "3rd"]
+        empty: "Nobody has entered the ranking yet. Pick a nick in the demo and be the first.", count: n => `${n} heroes in the ranking.`
       },
       es: {
         loading: "Cargando…", offline: "No se pudo cargar el ranking. Prueba más tarde.", soon: "El ranking abre con la próxima actualización de la demo.",
-        empty: "Todavía nadie entró al ranking. Elige un nick en la demo y sé el primero.", count: n => `${n} héroes en el ranking.`,
-        amount: (r, g) => `<b>${r}</b> de ${g} USD`, goalOffline: "No se pudo cargar el progreso ahora.", goalSoon: "La meta abre pronto.",
-        anon: "Héroe anónimo", wallEmpty: "Todavía no hay héroes nobles. ¡Sé el primero!", wallOffline: "No se pudo cargar el muro ahora.",
-        kofiSoon: "Ko-fi muy pronto", places: ["1.º", "2.º", "3.º"]
+        empty: "Todavía nadie entró al ranking. Elige un nick en la demo y sé el primero.", count: n => `${n} héroes en el ranking.`
       }
     };
     const endpoint = document.body.dataset.endpoint.trim();
-    const kofi = document.body.dataset.kofi.trim();
     const ranking = { state: endpoint ? "loading" : "soon", data: null };
-    const support = { state: endpoint ? "loading" : "soon", data: null };
     const RANKING_SHOWN = 20;
 
     function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]); }
@@ -682,34 +596,9 @@
       document.getElementById("ranking-note").textContent = note;
     }
 
-    function renderSupport(lang) {
-      const t = LIVE[lang], d = support.data;
-      const goal = d && d.goal > 0 ? d.goal : 100, raised = d ? Math.max(0, d.raised || 0) : 0;
-      const part = Math.min(raised / goal, 1), percent = Math.floor(part * 100), done = raised >= goal;
-      const money = n => Number(n).toLocaleString(lang, { maximumFractionDigits: 2 });
-      document.getElementById("goal").classList.toggle("done", support.state === "ok" && done);
-      document.getElementById("goal-fill").style.width = `calc(${part * 100}% - ${part * 6}px)`;
-      document.querySelector(".goal-bar").setAttribute("aria-valuenow", String(percent));
-      document.getElementById("goal-amount").innerHTML = support.state === "ok" ? t.amount(money(raised), money(goal))
-        : support.state === "loading" ? t.loading : support.state === "soon" ? t.goalSoon : t.goalOffline;
-      document.getElementById("goal-percent").textContent = support.state === "ok" ? `${percent} %` : "";
-      document.getElementById("goal-cheer").hidden = !(support.state === "ok" && done);
+    function renderLive(lang) { renderRanking(lang); }
 
-      const heroes = support.state === "ok" ? (d.heroes || []).map(h => (h || "").trim() || t.anon) : [];
-      document.getElementById("podium").innerHTML = heroes.slice(0, 3)
-        .map((h, i) => `<div class="noble" data-tier="${i + 1}"><small>${t.places[i]}</small>${esc(h)}</div>`).join("");
-      document.getElementById("heroes").innerHTML = heroes.slice(3).map(h => `<li>${esc(h)}</li>`).join("");
-      document.getElementById("wall-note").textContent = support.state === "ok" ? (heroes.length ? "" : t.wallEmpty)
-        : support.state === "offline" ? t.wallOffline : support.state === "loading" ? t.loading : "";
-
-      const button = document.getElementById("kofi");
-      if (kofi) { button.href = kofi; button.removeAttribute("aria-disabled"); }
-      else { button.removeAttribute("href"); button.setAttribute("aria-disabled", "true"); button.textContent = t.kofiSoon; }
-    }
-
-    function renderLive(lang) { renderRanking(lang); renderSupport(lang); }
-
-    // Both reads go to the ranking sheet; a slow sheet never blocks the page.
+    // The ranking is read from its sheet; a slow sheet never blocks the page.
     function load(action, target) {
       if (!endpoint) return;
       const stop = new AbortController();
@@ -741,7 +630,6 @@
     apply(lang);
     document.getElementById("lang").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; apply(lang); });
     load("top", ranking);
-    load("support", support);
 
     // Videos only play when the visitor can see them, and never for those who asked for less motion.
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

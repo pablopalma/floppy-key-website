@@ -1,13 +1,13 @@
 ---
-title: "The Seal Quest: raids, cycles and the road to Steam"
+title: "The Seal Quest: raids, cycles and the heroes' ranking"
 date: 2026-10-25
 game: seal-quest
 version: v0.17.0
 cover: cover-630x500.png
-summary: "Dream the hunt again in a harder cycle, face Kalderys in the first elemental raid, climb the heroes' ranking and help the game reach Steam."
+summary: "Dream the hunt again in a harder cycle, face Kalderys in the first elemental raid and climb the heroes' ranking."
 ---
 
-When the demo came out, the end of the Ember Lord was the end of the game. Ninety-two of you reached it and kept playing with nothing left to chase. This update is about what comes after: a harder cycle to dream through, a raid boss that changes shape, a ranking to climb and a goal we can reach together.
+When the demo came out, the end of the Ember Lord was the end of the game. Ninety-two of you reached it and kept playing with nothing left to chase. This update is about what comes after: a harder cycle to dream through, a raid boss that changes shape and a ranking to climb.
 
 ![Kalderys, the Flame that Dreams, behind his flame shield](kalderys-phase-3.webp)
 
@@ -72,21 +72,13 @@ The first time you open the game you can pick a nick (or stay anonymous) and ent
 
 ## A proper title screen, and Arren's sheet
 
-The game now opens on a title screen with Continue, Ranking, Support, Options and Quit. Between hunts, the camp is tidier: the tabs in the middle, and a column of shortcuts on the left.
+The game now opens on a title screen with Continue, Ranking, Options and Quit. Between hunts, the camp is tidier: the tabs in the middle, and a column of shortcuts on the left.
 
 ![The new title screen](title-screen.webp)
 
 **STATS** opens Arren's sheet: every number he has, a bar that shows how much comes from the base, the tree, the gear and the milestones, his damage per second and effective health, his active abilities, and the three buys that give the most fighting power for your gold.
 
 ![Arren's sheet](arren-sheet.webp)
-
-## Help the hunt reach Steam
-
-Publishing on Steam costs **100 USD**. If the demo made you smile, you can help pay for it on [Ko-fi](https://ko-fi.com/floppykey). Every coffee brings the full game a little closer, and your name goes on the **Wall of Noble Heroes**, in the game and on the website. The three who give the most stand out with an aura: orange, yellow and grey.
-
-![The road to Steam, today: zero of one hundred, and a wall waiting for its first name](road-to-steam.webp)
-
-Supporting doesn't unlock anything in the game: the demo is free and the same for everyone.
 
 ## What's coming
 
@@ -103,4 +95,4 @@ What's decided so far:
 2. If you faced Kalderys: did the shield and the frozen arrows make sense the first time?
 3. Would you play the other three raids before the full game, or would you rather have more epics first?
 
-[Play the demo on itch.io](https://floppykey.itch.io/the-seal-quest-dreams-of-ormaz) · [Support on Ko-fi](https://ko-fi.com/floppykey) · [The game's page](https://floppykey.com/seal-quest/)
+[Play the demo on itch.io](https://floppykey.itch.io/the-seal-quest-dreams-of-ormaz) · [The game's page](https://floppykey.com/seal-quest/)
