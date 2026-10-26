@@ -31,6 +31,10 @@ La dirección está en `data-endpoint`, en la etiqueta `<body>` de `seal-quest/i
 
 El apoyo hacia Steam (meta, Ko-fi y Wall of Noble Heroes) se quitó el 26 de octubre de 2026: no se piden donaciones.
 
+## Libro de la mitología (The Seal Quest)
+
+`seal-quest/mitologia/index.html` es el libro *Los sueños de Ormaz*, solo en español, con las láminas adentro del archivo. Se enlaza desde el menú de `seal-quest/index.html` ("Lore book (ES)" / "Mitología") y desde un botón al final de la sección World. Sale de `docs/web/los-suenos-de-ormaz.html` del repositorio del juego, que se arma desde `docs/mitologia.md`; esta copia suma el enlace de vuelta "← The Seal Quest" y el ícono. Si cambia la mitología, se rehace allá y se vuelve a copiar.
+
 ## Antes de publicar
 
 - Cambiar `hola@floppykey.com` por el correo real (está en `index.html`).
