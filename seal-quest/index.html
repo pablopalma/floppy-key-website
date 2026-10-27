@@ -171,6 +171,39 @@
     @media (max-width: 640px) { .board { padding: 10px; } .board table { font-size: 14px; } .board th, .board td { padding: 6px 5px; } .board th { font-size: 12px; } }
     .note { color: var(--dim); margin: 14px 0 0; }
 
+    /* Where each thing stands: in the demo today, or in the full game. */
+    .tag { justify-self: center; font-size: 11px; letter-spacing: 2px; padding: 2px 8px; border: 2px solid currentColor; color: var(--dim); background: #0b0810; }
+    .tag.now { color: #9ad06a; }
+    .raid .tag { margin-top: 6px; }
+
+    /* The instances of a raid: Kalderys comes back stronger and the Heart climbs a tier. */
+    .ladder-wrap { margin-top: 28px; padding-top: 24px; border-top: 2px dashed var(--line); }
+    .ladder-wrap .tag { display: inline-block; margin-bottom: 8px; }
+    .ladder-title { margin: 0 0 6px; color: #ffd2a0; font-size: clamp(20px, 2.6vw, 26px); text-shadow: 0 0 12px rgba(255, 122, 46, .55), 0 2px 0 #000; }
+    .ladder { list-style: none; padding: 0; margin: 20px 0 6px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; counter-reset: step; }
+    .step { --heat: .2; position: relative; display: grid; gap: 6px; align-content: start; justify-items: center; text-align: center; padding: 16px 12px 14px;
+      background: radial-gradient(circle at 50% 28%, rgba(255, 122, 46, var(--heat)), #140e1c 72%); border: 3px solid #7a3a1c; box-shadow: 0 0 0 2px #000; }
+    .step:nth-child(2) { --heat: .32; border-color: #c4561e; }
+    .step:nth-child(3) { --heat: .46; border-color: #ff7a2e; box-shadow: 0 0 0 2px #000, 0 0 26px rgba(255, 122, 46, .45); }
+    .step + .step::before { content: "▶"; position: absolute; left: -27px; top: 42%; color: #ff7a2e; font-size: 18px; text-shadow: 0 0 8px rgba(255, 122, 46, .8); }
+    .step .inst { color: var(--fire); font-size: 13px; letter-spacing: 2px; }
+    .step .lv { color: var(--ink); font-size: 22px; letter-spacing: 1px; }
+    .step .boss-art { height: 120px; display: grid; align-items: end; }
+    .step .boss-art img { width: auto; image-rendering: pixelated; filter: drop-shadow(0 4px 0 #000); }
+    .step:nth-child(1) .boss-art img { height: 84px; }
+    .step:nth-child(2) .boss-art img { height: 102px; }
+    .step:nth-child(3) .boss-art img { height: 120px; }
+    .step .tough { color: var(--dim); font-size: 14px; }
+    .step .reward { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center; text-align: left; width: 100%; margin-top: 4px; padding: 8px 10px; background: #0b0810; border: 2px solid var(--frame); }
+    .step .reward img { width: 40px; height: 40px; image-rendering: pixelated; }
+    .step .reward b { color: var(--gold-soft); display: block; font-size: 16px; }
+    .step .reward span { color: var(--dim); font-size: 14px; }
+    .step .pips { color: var(--gold); letter-spacing: 3px; font-size: 14px; }
+    @media (max-width: 820px) {
+      .ladder { grid-template-columns: 1fr; gap: 30px; }
+      .step + .step::before { content: "▼"; left: 50%; top: -27px; transform: translateX(-50%); }
+    }
+
     @media (prefers-reduced-motion: reduce) { .raid .rune { animation: none !important; } }
 
     .trailer { display: block; width: 100%; height: auto; background: #000; }
@@ -436,32 +469,72 @@
               <span class="el" data-i18n="raids.fire.el">FIRE · after Cycle II</span>
               <b class="boss">KALDERYS</b>
               <span class="who" data-i18n="raids.fire.who">The Flame that Dreams · The Deep Caldera</span>
+              <span class="tag now" data-i18n="tag.demo">IN THE DEMO</span>
             </div>
             <div class="raid" data-el="ice">
               <span class="rune" aria-hidden="true"></span>
               <span class="el" data-i18n="raids.ice.el">ICE · after Cycle III</span>
               <b class="boss">???</b>
               <span class="who" data-i18n="raids.ice.who">The Mute Glacier</span>
+              <span class="tag" data-i18n="tag.full">FULL GAME</span>
             </div>
             <div class="raid" data-el="wind">
               <span class="rune" aria-hidden="true"></span>
               <span class="el" data-i18n="raids.wind.el">WIND · after Cycle IV</span>
               <b class="boss">???</b>
               <span class="who" data-i18n="raids.wind.who">The Howling Cliffs</span>
+              <span class="tag" data-i18n="tag.full">FULL GAME</span>
             </div>
             <div class="raid" data-el="earth">
               <span class="rune" aria-hidden="true"></span>
               <span class="el" data-i18n="raids.earth.el">EARTH · after Cycle V</span>
               <b class="boss">???</b>
               <span class="who" data-i18n="raids.earth.who">The Stone Gate</span>
+              <span class="tag" data-i18n="tag.full">FULL GAME</span>
             </div>
           </div>
           <ul class="glow raid-facts">
             <li data-i18n-html="raids.f1"><b>Three phases.</b> Between each one the boss mutates: it flashes, shakes, grows and comes back angrier.</li>
             <li data-i18n-html="raids.f2"><b>Guards that return.</b> Four of them, and every time one falls it comes back a little faster.</li>
             <li data-i18n-html="raids.f3"><b>A key for every lock.</b> Kalderys hides behind a flame shield that only the frost of the Order can put out.</li>
-            <li data-i18n-html="raids.f4"><b>A jewel of its own.</b> The Heart of Kalderys: +20 % damage and arrows that burn, in a slot nothing else can fill.</li>
+            <li data-i18n-html="raids.f4"><b>A jewel of its own.</b> The Heart of Kalderys: more damage and arrows that burn, in a slot nothing else can fill. And it grows.</li>
           </ul>
+
+          <!-- The instances: every victory brings the boss back stronger and raises its jewel a tier. -->
+          <div class="ladder-wrap">
+            <span class="tag now" data-i18n="tag.demo">IN THE DEMO</span>
+            <h3 class="ladder-title" data-i18n="ladder.title">Kalderys comes back stronger</h3>
+            <p class="raids-lead" data-i18n="ladder.lead">Beat him and the Caldera opens a harder instance. Go back to the cycles, farm, grow, and come back for him: every new instance you beat raises the Heart of Kalderys one tier.</p>
+            <ol class="ladder">
+              <li class="step">
+                <span class="inst" data-i18n="ladder.1.inst">INSTANCE 1</span>
+                <b class="lv" data-i18n="ladder.1.lv">LV 33</b>
+                <div class="boss-art"><img src="media/art/kalderys-1.png" alt="Kalderys, the Flame that Dreams, in his first form." data-i18n-alt="ladder.1.alt"></div>
+                <span class="tough" data-i18n="ladder.1.tough">His own strength. For whoever just finished Cycle II.</span>
+                <div class="reward"><img src="media/art/item-kalderys_heart.png" alt=""><div><span class="pips">◆</span><b data-i18n="ladder.1.t">Heart of Kalderys · Tier 1</b><span data-i18n="ladder.1.p">Always on your first victory. +20 % damage, arrows that burn.</span></div></div>
+              </li>
+              <li class="step">
+                <span class="inst" data-i18n="ladder.2.inst">INSTANCE 2</span>
+                <b class="lv" data-i18n="ladder.2.lv">LV 39</b>
+                <div class="boss-art"><img src="media/art/kalderys-2.png" alt="Kalderys, bigger and angrier." data-i18n-alt="ladder.2.alt"></div>
+                <span class="tough" data-i18n="ladder.2.tough">Twice the health, hits 1.6 times harder.</span>
+                <div class="reward"><img src="media/art/item-kalderys_heart.png" alt=""><div><span class="pips">◆◆</span><b data-i18n="ladder.2.t">Tier 2</b><span data-i18n="ladder.2.p">+30 % damage, the burn 1.5 times stronger.</span></div></div>
+              </li>
+              <li class="step">
+                <span class="inst" data-i18n="ladder.3.inst">INSTANCE 3</span>
+                <b class="lv" data-i18n="ladder.3.lv">LV 41</b>
+                <div class="boss-art"><img src="media/art/kalderys-3.png" alt="Kalderys in his last, largest form." data-i18n-alt="ladder.3.alt"></div>
+                <span class="tough" data-i18n="ladder.3.tough">3.2 times the health, hits 2.25 times harder.</span>
+                <div class="reward"><img src="media/art/item-kalderys_heart.png" alt=""><div><span class="pips">◆◆◆</span><b data-i18n="ladder.3.t">Tier 3</b><span data-i18n="ladder.3.p">+40 % damage, the burn doubled.</span></div></div>
+              </li>
+            </ol>
+            <ul class="glow raid-facts">
+              <li data-i18n-html="ladder.f1"><b>No luck involved.</b> The first victory always gives you the Heart. No drop chance, no waiting.</li>
+              <li data-i18n-html="ladder.f2"><b>He doesn't scale to you.</b> Each instance has its own fixed strength. Arrive overpowered and he falls fast: that's your reward for farming.</li>
+              <li data-i18n-html="ladder.f3"><b>Your cycles feed it.</b> Dreaming a finished cycle again brings it back a step harder, and the gold and levels you earn there are what take you to the next instance.</li>
+              <li data-i18n-html="ladder.f4"><b>The same for every element.</b> In the full game, the Ice, Wind and Earth raids each bring their own ladder and their own jewel, and the Caldera gets more instances.</li>
+            </ul>
+          </div>
         </div>
 
         <ul class="roadmap">
@@ -556,7 +629,23 @@
       "raids.f1": "<b>Tres fases.</b> Entre una y otra el jefe muta: destella, se sacude, crece y vuelve más furioso.",
       "raids.f2": "<b>Guardias que vuelven.</b> Son cuatro, y cada vez que uno cae vuelve un poco más rápido.",
       "raids.f3": "<b>Una llave para cada cerradura.</b> Kalderys se esconde tras un escudo de llamas que solo apaga el frío de la Orden.",
-      "raids.f4": "<b>Una joya propia.</b> El Corazón de Kalderys: +20 % de daño y flechas que queman, en una ranura que nada más puede ocupar.",
+      "raids.f4": "<b>Una joya propia.</b> El Corazón de Kalderys: más daño y flechas que queman, en una ranura que nada más puede ocupar. Y crece.",
+      "tag.demo": "EN LA DEMO", "tag.full": "JUEGO COMPLETO",
+      "ladder.title": "Kalderys vuelve más fuerte",
+      "ladder.lead": "Véncelo y la Caldera abre una instancia más difícil. Vuelve a los ciclos, farmea, crece y regresa por él: cada instancia nueva que vences sube un tier el Corazón de Kalderys.",
+      "ladder.1.inst": "INSTANCIA 1", "ladder.1.lv": "NV 33", "ladder.1.alt": "Kalderys, la Llama que Sueña, en su primera forma.",
+      "ladder.1.tough": "Su fuerza de siempre. Para quien recién terminó el Ciclo II.",
+      "ladder.1.t": "Corazón de Kalderys · Tier 1", "ladder.1.p": "Siempre en tu primera victoria. +20 % de daño, flechas que queman.",
+      "ladder.2.inst": "INSTANCIA 2", "ladder.2.lv": "NV 39", "ladder.2.alt": "Kalderys, más grande y más furioso.",
+      "ladder.2.tough": "El doble de vida, pega 1,6 veces más fuerte.",
+      "ladder.2.t": "Tier 2", "ladder.2.p": "+30 % de daño, la quemadura 1,5 veces más fuerte.",
+      "ladder.3.inst": "INSTANCIA 3", "ladder.3.lv": "NV 41", "ladder.3.alt": "Kalderys en su última forma, la más grande.",
+      "ladder.3.tough": "3,2 veces la vida, pega 2,25 veces más fuerte.",
+      "ladder.3.t": "Tier 3", "ladder.3.p": "+40 % de daño, la quemadura al doble.",
+      "ladder.f1": "<b>Sin azar.</b> La primera victoria siempre te da el Corazón. Sin probabilidad de caída, sin esperar.",
+      "ladder.f2": "<b>No se acomoda a ti.</b> Cada instancia tiene su fuerza fija. Si llegas muy fuerte, cae rápido: es tu premio por farmear.",
+      "ladder.f3": "<b>Tus ciclos lo alimentan.</b> Soñar otra vez un ciclo terminado lo trae un escalón más duro, y el oro y los niveles que ganas ahí son los que te llevan a la siguiente instancia.",
+      "ladder.f4": "<b>Lo mismo para cada elemento.</b> En el juego completo, los raids de Hielo, Viento y Tierra traen su propia escalera y su propia joya, y la Caldera suma instancias.",
       "nav.ranking": "Ranking",
       "ranking.title": "Los mejores héroes",
       "ranking.lead": "Elige un nick al empezar la demo y tu cacería aparece aquí: primero las insignias, después la oleada más alta y después el nivel.",
