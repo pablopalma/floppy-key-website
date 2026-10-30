@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Figtree:wght@400;500;700;800&family=Gochi+Hand&family=VT323&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Figtree:wght@400;500;700;800&family=Gochi+Hand&family=VT323&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap">
   <link rel="stylesheet" href="styles.css">
   <script>
     // Night by default; the visitor's choice wins. Runs before the page draws, so it never flashes.
@@ -94,6 +94,19 @@
           </a>
         </li>
         <li>
+          <a class="card" href="#just-tap" style="--body: var(--beige)">
+            <span class="card-disk">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
+              <span class="card-label">JUST TAP</span>
+            </span>
+            <span class="card-meta">
+              <span class="tag tag-live" data-i18n="tag.live">Playable</span>
+              <span class="card-title">Just Tap</span>
+              <span class="card-genre" data-i18n="games.justtap.genre">Gentle incremental · about 30 min</span>
+            </span>
+          </a>
+        </li>
+        <li>
           <a class="card" href="#strike" style="--body: var(--coral)">
             <span class="card-disk">
               <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
@@ -131,8 +144,29 @@
       </div>
     </section>
 
+    <!-- The gentle one: paper, ink, and the colour coming back. -->
+    <section class="feature feature-flip" id="just-tap" aria-labelledby="just-tap-title">
+      <div class="crt crt-paper">
+        <img src="just-tap/media/colour.webp" width="1920" height="1080" loading="lazy" data-i18n-alt="justtap.alt" alt="Just Tap: the colour comes back to a grey world, spreading like wet watercolour around the line of ink.">
+      </div>
+      <div class="feature-copy">
+        <p class="eyebrow" data-i18n="justtap.eyebrow">Disk 03 · Free demo out now</p>
+        <h2 id="just-tap-title" class="title-paper">just tap<span data-i18n="justtap.tagline">If you had a bad day… just tap.</span></h2>
+        <p data-i18n="justtap.p1">A small, gentle incremental game about getting through a grey day, one tap at a time. A line of ink climbs through barriers, the world draws itself around you, and slowly the colour comes back.</p>
+        <ul class="facts">
+          <li><b>40</b> <span data-i18n="justtap.f1">barriers in the free demo, about 30 minutes</span></li>
+          <li><b>7</b> <span data-i18n="justtap.f2">upgrades in a tree that grows upward, like the line</span></li>
+          <li><b>1</b> <span data-i18n="justtap.f3">piece of music, and every tap is a note of it</span></li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://floppykey.itch.io/just-tap" target="_blank" rel="noopener" data-i18n="justtap.cta">Play free on itch.io</a>
+          <a class="btn btn-ghost" href="just-tap/index.html" data-i18n="justtap.more">See the game</a>
+        </div>
+      </div>
+    </section>
+
     <!-- Featured game. -->
-    <section class="feature feature-flip" id="strike" aria-labelledby="strike-title">
+    <section class="feature" id="strike" aria-labelledby="strike-title">
       <div class="crt">
         <img src="assets/strike-orgchart.png" width="1094" height="534" alt="STRIKE! in English: the company org chart, with the 'Reply: I quit' node bought and Floor 1, Reception, up next.">
       </div>

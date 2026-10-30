@@ -13,6 +13,13 @@
       "color": "var(--sun)",
       "page": "seal-quest/index.html",
       "url": "https://floppykey.itch.io/the-seal-quest-dreams-of-ormaz"
+    },
+    "just-tap": {
+      "name": "Just Tap",
+      "short": "JUST TAP",
+      "color": "var(--beige)",
+      "page": "just-tap/index.html",
+      "url": "https://floppykey.itch.io/just-tap"
     }
   }
 }
