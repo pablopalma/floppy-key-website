@@ -137,12 +137,17 @@
     footer { border-top: 1px solid var(--rule); padding: 24px var(--gutter) 40px; color: var(--dim); font-size: 17px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     footer a { color: var(--dim); }
   </style>
+  <style>
+    .status .ai { max-width: 60ch; margin: 28px auto 0; font-size: .85rem; opacity: .6; font-style: italic; }
+    .status .quote { margin: 0 auto 18px; }
+  </style>
 </head>
 <body>
   <header class="bar">
     <a class="back" href="../index.html" data-i18n="back">← Floppy Key</a>
     <nav aria-label="Just Tap">
       <a href="#trailer" data-i18n="nav.trailer">Trailer</a>
+      <a href="#music" data-i18n="nav.music">The music</a>
       <a href="#tree" data-i18n="nav.tree">The tree</a>
       <a href="#world" data-i18n="nav.world">The world</a>
       <a href="#chapters" data-i18n="nav.chapters">Chapters</a>
@@ -161,7 +166,7 @@
         <p class="eyebrow" data-i18n="hero.eyebrow">Floppy Key · Disk 03 · Free demo</p>
         <h1 class="logo" id="title">just tap</h1>
         <p class="tagline" data-i18n="hero.tagline">If you had a bad day… just tap.</p>
-        <p class="sub" data-i18n="hero.sub">A small, gentle incremental game about getting through a grey day, one tap at a time. A line of ink climbs, the world draws itself around you, and slowly the colour comes back.</p>
+        <p class="sub" data-i18n="hero.sub">A small, gentle incremental game about getting through a grey day, one tap at a time. Tap with the music, a line of ink climbs, the world draws itself around you, and slowly the colour comes back.</p>
         <div class="actions">
           <a class="btn" href="https://floppykey.itch.io/just-tap" target="_blank" rel="noopener" data-i18n="hero.cta">Play free on itch.io</a>
           <a class="btn ghost" href="#trailer" data-i18n="hero.cta2">Watch the trailer</a>
@@ -175,8 +180,8 @@
       <div class="wrap">
         <h2 id="trailer-title" data-i18n="trailer.title">The trailer</h2>
         <figure>
-          <video class="frame trailer" controls preload="none" playsinline poster="media/trailer-poster.jpg?v=7" width="1280" height="720" aria-label="Trailer of Just Tap">
-            <source src="media/trailer.mp4?v=7" type="video/mp4">
+          <video class="frame trailer" controls preload="none" playsinline poster="media/trailer-poster.jpg?v=8" width="1280" height="720" aria-label="Trailer of Just Tap">
+            <source src="media/trailer.mp4?v=8" type="video/mp4">
           </video>
         </figure>
       </div>
@@ -191,7 +196,7 @@
           <div class="panel">
             <span class="n">I</span>
             <h3 data-i18n="loop.1.t">Just tap</h3>
-            <p data-i18n="loop.1.p">Click, tap or press Space. Each tap pushes the line into the barrier above it, and each barrier you break pays you in light.</p>
+            <p data-i18n="loop.1.p">Click, tap, press Space or use a gamepad. Each tap pushes the line into the barrier above it, and each barrier you break pays you in light. Tap with the music and it's worth up to five times more.</p>
           </div>
           <div class="panel">
             <span class="n">II</span>
@@ -205,11 +210,29 @@
           </div>
         </div>
         <ul class="facts">
-          <li><b>40</b> <span data-i18n="fact.1">barriers in the free demo</span></li>
+          <li><b>45</b> <span data-i18n="fact.1">barriers in the free demo</span></li>
           <li><b>7</b> <span data-i18n="fact.2">upgrades in the tree</span></li>
-          <li><b>1</b> <span data-i18n="fact.3">piece of music, and every tap is a note of it</span></li>
+          <li><b>8</b> <span data-i18n="fact.3">songs of its own, and your taps play along</span></li>
           <li><b>EN · ES</b> <span data-i18n="fact.4">voice and subtitles</span></li>
         </ul>
+      </div>
+    </section>
+
+    <!-- Tap with the music -->
+    <section id="music" aria-labelledby="music-title">
+      <div class="wrap split">
+        <figure>
+          <video class="frame" autoplay muted loop playsinline preload="metadata" poster="media/loop-beat.webp" width="1280" height="720" aria-label="Notes of light reach the tip on the beat; the run's worth grows and gold rings bloom.">
+            <source src="media/loop-beat.mp4" type="video/mp4">
+          </video>
+          <figcaption class="cap" data-i18n="music.cap">Notes of light reach the tip on the beat. Every few beats in a row, gold rings bloom.</figcaption>
+        </figure>
+        <div>
+          <h2 id="music-title" data-i18n="music.title">Tap with the music</h2>
+          <p data-i18n="music.p1">You don't have to tap more: you can tap with the music. A tap on the beat is worth twice as much, and more with every beat in a row, up to five times. Notes of light climb the line to show you when, and if your hand gets tired, just hold.</p>
+          <p data-i18n="music.p2">Every part of the day has its own song: a gentle morning, a folk song with roots, a waltz in three, a starry night, and a theme for the dark that turns to major as you come out of it. Your taps play along, in the key of each song, each with its own colour.</p>
+          <p class="quote" data-i18n="music.quote">“Listen. There's music under everything.”<small>— the voice that keeps you company</small></p>
+        </div>
       </div>
     </section>
 
@@ -258,14 +281,14 @@
     <section aria-labelledby="star-title">
       <div class="wrap split">
         <figure>
-          <video class="frame" autoplay muted loop playsinline preload="metadata" poster="media/loop-star.webp" width="1280" height="720" aria-label="A star circuit: lights run a turning star, fill it with gold and burst.">
+          <video class="frame" autoplay muted loop playsinline preload="metadata" poster="media/loop-star.webp" width="1280" height="720" aria-label="A star at night: each light is an instrument and glows as it plays.">
             <source src="media/loop-star.mp4" type="video/mp4">
           </video>
         </figure>
         <div>
           <h2 id="star-title" data-i18n="star.title">Small lights. One shape.</h2>
           <p data-i18n="star.p1">At some barriers your light splits into many. Each one runs its own path of a turning star — a chord, an arc, a ray to the centre — and one tap pushes all of them at once.</p>
-          <p data-i18n="star.p2">What they run turns to gold. When every light reaches the centre, the star spins up, bursts, and stays behind in the background, painted.</p>
+          <p data-i18n="star.p2">And each light is an instrument. Tap on the beat and they play together like a tiny orchestra, each one glowing as it sings. What they run turns to gold, and when every light reaches the centre, the star bursts and stays behind, painted.</p>
         </div>
       </div>
     </section>
@@ -306,10 +329,10 @@
           </figure>
         </div>
         <ul class="roadmap">
-          <li><h3 data-i18n="full.forks.t">More than one thing at once</h3><p data-i18n="full.forks.p">In the green, your line splits into branches that move out of step and play as a trio. Every branch has to arrive before you go on.</p></li>
-          <li><h3 data-i18n="full.tide.t">The tide</h3><p data-i18n="full.tide.p">In the blue, the world breathes. Tap with the music, not against it.</p></li>
+          <li><h3 data-i18n="full.forks.t">More than one thing at once</h3><p data-i18n="full.forks.p">In the green, your line splits into branches that move out of step, each one a voice of the orchestra. Every branch has to arrive before you go on.</p></li>
+          <li><h3 data-i18n="full.tide.t">The tide</h3><p data-i18n="full.tide.p">In the blue, the world breathes, and the music breathes with it. Go with it, not against it.</p></li>
           <li><h3 data-i18n="full.night.t">The night</h3><p data-i18n="full.night.p">Everything goes dark and the line cracks. Get through before it breaks — and if it breaks, you come back stronger.</p></li>
-          <li><h3 data-i18n="full.city.t">The whole city</h3><p data-i18n="full.city.p">Ten structures, one tower, every colour. And at the end, who the voice really is.</p></li>
+          <li><h3 data-i18n="full.city.t">The whole city</h3><p data-i18n="full.city.p">Ten structures, one tower, every colour. Giant creatures waking along the way. And at the end, who the voice really is.</p></li>
         </ul>
       </div>
     </section>
@@ -318,11 +341,13 @@
     <section class="status tinted" aria-labelledby="status-title">
       <div class="wrap">
         <h2 id="status-title" data-i18n="status.title">Had a bad day? Just tap.</h2>
-        <p class="lead" data-i18n="status.lead">A free demo with the first 45 barriers of the day and the dark at the end, about half an hour, in your browser. Best with sound on. Made by one person in Argentina.</p>
+        <p class="quote" data-i18n="status.quote">“My soul feels warmer.”<small>— Scansylabs, <a href="https://www.youtube.com/watch?v=t2GSkboJzrA" target="_blank" rel="noopener">playing the demo</a></small></p>
+        <p class="lead" data-i18n="status.lead">A free demo with the first 45 barriers of the day and the dark at the end, about half an hour, in your browser or on Windows. Best with headphones. Gamepad supported. Made by one person in Argentina.</p>
         <div class="actions">
           <a class="btn" href="https://floppykey.itch.io/just-tap" target="_blank" rel="noopener" data-i18n="status.cta">Play free on itch.io</a>
           <a class="btn ghost" href="../devblog/index.html?game=just-tap" data-i18n="status.cta2">Read the devlog</a>
         </div>
+        <p class="ai" data-i18n="status.ai">The narrator's voice and the soundtrack were generated with AI (ElevenLabs) from my own scripts and direction. The design, the story, the art direction and the memories in it are mine.</p>
       </div>
     </section>
   </main>
@@ -336,18 +361,23 @@
     // English is in the HTML; these are the Spanish texts. The language is shared with the rest of the site.
     const ES = {
       "back": "← Floppy Key",
-      "nav.trailer": "Tráiler", "nav.tree": "El árbol", "nav.world": "El mundo", "nav.chapters": "Capítulos", "nav.devlog": "Devlog",
+      "nav.trailer": "Tráiler", "nav.music": "La música", "nav.tree": "El árbol", "nav.world": "El mundo", "nav.chapters": "Capítulos", "nav.devlog": "Devlog",
       "hero.eyebrow": "Floppy Key · Disquete 03 · Demo gratis",
       "hero.tagline": "Si tuviste un mal día… simplemente toca.",
-      "hero.sub": "Un juego incremental chico y amable sobre atravesar un día gris, un toque a la vez. Una línea de tinta sube, el mundo se dibuja alrededor y, de a poco, el color vuelve.",
+      "hero.sub": "Un juego incremental chico y amable sobre atravesar un día gris, un toque a la vez. Tocas con la música, una línea de tinta sube, el mundo se dibuja alrededor y, de a poco, el color vuelve.",
       "hero.cta": "Jugar gratis en itch.io", "hero.cta2": "Ver el tráiler", "hero.soon": "Demo gratis · en el navegador · unos 30 min",
       "trailer.title": "El tráiler",
       "loop.title": "Toca. Crece. Deja que vuelva el color.",
       "loop.lead": "Aquí nada te castiga. Algunas barreras empujan de vuelta; creces un poco y vuelves a intentar.",
-      "loop.1.t": "Simplemente toca", "loop.1.p": "Clic, toque o Espacio. Cada toque empuja la línea contra la barrera de arriba, y cada barrera que rompes te paga en luz.",
+      "loop.1.t": "Simplemente toca", "loop.1.p": "Clic, toque, Espacio o joystick. Cada toque empuja la línea contra la barrera de arriba, y cada barrera que rompes te paga en luz. Si tocas con la música, vale hasta cinco veces más.",
       "loop.2.t": "Haz crecer tu árbol", "loop.2.p": "Las barreras empiezan a curarse solas y tus dedos dejan de alcanzar. Gasta la luz en el árbol y vuelve más fuerte.",
       "loop.3.t": "Mira cómo vuelve", "loop.3.p": "Cada diez barreras se cierra una zona; cada dos zonas, un color vuelve al mundo y lo inunda como acuarela mojada.",
-      "fact.1": "barreras en la demo gratis", "fact.2": "mejoras en el árbol", "fact.3": "pieza musical, y cada toque es una nota", "fact.4": "voz y subtítulos",
+      "fact.1": "barreras en la demo gratis", "fact.2": "mejoras en el árbol", "fact.3": "canciones propias, y tus toques tocan con ellas", "fact.4": "voz y subtítulos",
+      "music.title": "Toca con la música",
+      "music.p1": "No hace falta tocar más: puedes tocar con la música. Un toque a tiempo vale el doble, y más con cada tiempo seguido, hasta cinco veces. Unas notas de luz suben por la línea para mostrarte cuándo, y si se te cansa la mano, solo mantén presionado.",
+      "music.p2": "Cada parte del día tiene su canción: una mañana suave, una canción con raíces, un vals en tres, una noche de estrellas y un tema para la oscuridad que pasa a mayor cuando sales de ella. Tus toques tocan con ella, en su tonalidad y cada una con su color.",
+      "music.quote": "“Escucha. Hay música debajo de todo.”<small>— la voz que te acompaña</small>",
+      "music.cap": "Las notas de luz llegan a la punta con el pulso. Cada tantos tiempos seguidos, se abren aros dorados.",
       "tree.title": "Tu árbol es tu build",
       "tree.p": "Cada barrera que rompes te da luz. Cómo la gastas decide cómo cae el próximo muro: tocar más fuerte, tocar con ritmo o dejar que la línea lata sola.",
       "tree.cap": "El árbol crece hacia arriba, como la línea. Se abren ramas nuevas a medida que subes.",
@@ -366,7 +396,7 @@
       "world.alt": "Un ave gigante de tinta pasa junto a la torre, con un arco y una torre dibujados a lo lejos.",
       "star.title": "Lucecitas. Una sola forma.",
       "star.p1": "En algunas barreras tu luz se divide en muchas. Cada una recorre su camino de una estrella que gira —una cuerda, un arco, un rayo al centro— y un toque las empuja a todas a la vez.",
-      "star.p2": "Lo que recorren se vuelve oro. Cuando todas llegan al centro, la estrella acelera, estalla y queda pintada en el fondo.",
+      "star.p2": "Y cada luz es un instrumento. Si tocas con el pulso, suenan juntas como una pequeña orquesta, y cada una brilla cuando canta. Lo que recorren se vuelve oro, y cuando todas llegan al centro, la estrella estalla y queda pintada en el fondo.",
       "chapters.title": "El color vuelve",
       "chapters.lead": "El mundo empieza en gris. Cada capítulo trae de vuelta un color, una emoción y una forma nueva de tocar.",
       "ch.grey": "Gris", "ch.grey.f": "entumecimiento", "ch.red": "Rojo", "ch.red.f": "enojo", "ch.green": "Verde", "ch.green.f": "crecer",
@@ -376,12 +406,14 @@
       "full.lead": "La demo es la mañana. El juego completo recorre el día entero, y la mañana siguiente.",
       "full.cap1": "La línea se divide: dos ramas, después tres, cada una un instrumento.",
       "full.cap2": "Y al final, todo lo que construiste.",
-      "full.forks.t": "Más de una cosa a la vez", "full.forks.p": "En el verde, tu línea se divide en ramas que avanzan a destiempo y suenan como un trío. Todas tienen que llegar para seguir.",
-      "full.tide.t": "La marea", "full.tide.p": "En el azul, el mundo respira. Toca con la música, no contra ella.",
+      "full.forks.t": "Más de una cosa a la vez", "full.forks.p": "En el verde, tu línea se divide en ramas que avanzan a destiempo, cada una una voz de la orquesta. Todas tienen que llegar para seguir.",
+      "full.tide.t": "La marea", "full.tide.p": "En el azul, el mundo respira, y la música respira con él. Ve con ella, no en contra.",
       "full.night.t": "La noche", "full.night.p": "Todo se oscurece y la línea se agrieta. Pasa antes de que se parta, y si se parte, vuelves más fuerte.",
-      "full.city.t": "La ciudad entera", "full.city.p": "Diez estructuras, una torre, todos los colores. Y al final, quién es de verdad la voz.",
+      "full.city.t": "La ciudad entera", "full.city.p": "Diez estructuras, una torre, todos los colores. Criaturas gigantes que despiertan en el camino. Y al final, quién es de verdad la voz.",
       "status.title": "¿Tuviste un mal día? Simplemente toca.",
-      "status.lead": "Una demo gratis con las primeras 45 barreras del día y la oscuridad al final, una media hora, en el navegador. Mejor con sonido. Hecho por una persona en Argentina.",
+      "status.quote": "“Mi alma se siente más cálida.”<small>— Scansylabs, <a href=\"https://www.youtube.com/watch?v=t2GSkboJzrA\" target=\"_blank\" rel=\"noopener\">jugando la demo</a></small>",
+      "status.lead": "Una demo gratis con las primeras 45 barreras del día y la oscuridad al final, una media hora, en el navegador o en Windows. Mejor con auriculares. Funciona con joystick. Hecho por una persona en Argentina.",
+      "status.ai": "La voz del narrador y la banda sonora se generaron con IA (ElevenLabs) a partir de mis guiones y mi dirección. El diseño, la historia, la dirección de arte y los recuerdos que cuenta son míos.",
       "status.cta": "Jugar gratis en itch.io", "status.cta2": "Leer el devlog",
       "foot": "Inserta el disquete. Gira la llave."
     };
