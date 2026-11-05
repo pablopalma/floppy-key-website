@@ -42,6 +42,7 @@ const ES = {
   "tsuyu.f1": "plantas y decoraciones, del musgo a la pagoda",
   "tsuyu.f2": "minutos dura un día, con linternas y luciérnagas de noche",
   "tsuyu.f3": "tonalidad para cada toque y la música: nada suena desafinado",
+  "tsuyu.f4": "estaciones: cerezos en flor, verano verde, arces rojos y nieve",
   "tsuyu.cta": "Jugar gratis en itch.io",
   "tsuyu.more": "Ver el juego",
   "tsuyu.alt": "Tsuyu: un jardín japonés sobre una isla flotante de noche, con linternas encendidas, una pagoda, un puente rojo y luciérnagas.",

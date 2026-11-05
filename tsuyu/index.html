@@ -126,6 +126,8 @@
     .pills { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 8px 0 0; }
     .pills li { background: var(--clay-2); border-radius: 999px; padding: 3px 14px; font-size: 16px; }
     .pills.plants li { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--leaf) 60%, transparent); }
+    .pills.seasons { flex-direction: column; align-items: flex-start; margin: 12px 0 16px; }
+    .pills.seasons li { border-radius: 14px; padding: 6px 14px; }
     .pills.decor li { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--coral-2) 60%, transparent); }
 
     /* Night section */
@@ -154,6 +156,7 @@
       <a href="#trailer" data-i18n="nav.trailer">Trailer</a>
       <a href="#play" data-i18n="nav.play">How it plays</a>
       <a href="#garden" data-i18n="nav.garden">The garden</a>
+      <a href="#seasons" data-i18n="nav.seasons">Seasons</a>
       <a href="#night" data-i18n="nav.night">Day &amp; night</a>
       <button class="chip" id="theme" type="button">☾ NIGHT</button>
       <button class="chip" id="lang" type="button" aria-label="Cambiar a español">ES</button>
@@ -183,8 +186,8 @@
     <section id="trailer" aria-labelledby="trailer-title">
       <div class="wrap card">
         <h2 id="trailer-title"><span class="drop"></span><span data-i18n="trailer.title">The trailer</span></h2>
-        <video class="frame trailer" controls preload="none" playsinline poster="media/trailer-poster.jpg" width="1280" height="720" aria-label="Trailer of Tsuyu">
-          <source src="media/trailer.mp4" type="video/mp4">
+        <video class="frame trailer" controls preload="none" playsinline poster="media/trailer-poster.jpg?v=3" width="1280" height="720" aria-label="Trailer of Tsuyu">
+          <source src="media/trailer.mp4?v=3" type="video/mp4">
         </video>
       </div>
     </section>
@@ -217,6 +220,7 @@
           <li><b>3×3 → 9×9</b><span data-i18n="fact.3">an island that grows</span></li>
           <li><b>10 min</b><span data-i18n="fact.4">a full day</span></li>
           <li><b>EN · ES</b><span data-i18n="fact.5">English and Spanish</span></li>
+          <li><b>4</b><span data-i18n="fact.7">seasons, with their own weather</span></li>
           <li><b>🎮</b><span data-i18n="fact.6">full controller support</span></li>
         </ul>
       </div>
@@ -272,6 +276,29 @@
       </div>
     </section>
 
+    <!-- The seasons -->
+    <section id="seasons" aria-labelledby="seasons-title">
+      <div class="wrap split">
+        <figure>
+          <video class="frame" autoplay muted loop playsinline preload="metadata" poster="media/loop-seasons.webp" width="1280" height="720" aria-label="The garden through the four seasons: cherry blossoms, green summer, red maples and snow.">
+            <source src="media/loop-seasons.mp4" type="video/mp4">
+          </video>
+          <figcaption class="cap" data-i18n="seasons.cap">A whole year in the garden, from blossoms to snow.</figcaption>
+        </figure>
+        <div class="card">
+          <h2 id="seasons-title" data-i18n="seasons.title">Through every season</h2>
+          <p data-i18n="seasons.p1">Every three days the garden turns to a new season, slowly blending from one to the next.</p>
+          <ul class="pills seasons">
+            <li data-i18n="s.spring">🌸 Spring: cherry blossoms and drifting petals</li>
+            <li data-i18n="s.summer">🌿 Summer: deep greens and more fireflies at night</li>
+            <li data-i18n="s.autumn">🍁 Autumn: red maples, golden grass and falling leaves</li>
+            <li data-i18n="s.winter">❄️ Winter: snow on the lanterns, roofs and treetops</li>
+          </ul>
+          <p data-i18n="seasons.p2">Time keeps passing while you're away, so you might close the game in autumn and come back to a snowy garden.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Day and night -->
     <section id="night" class="night" aria-labelledby="night-title">
       <div class="wrap split">
@@ -313,7 +340,7 @@
     // English is in the HTML; these are the Spanish texts. The language is shared with the rest of the site.
     const ES = {
       "back": "← Floppy Key",
-      "nav.trailer": "Tráiler", "nav.play": "Cómo se juega", "nav.garden": "El jardín", "nav.night": "Día y noche",
+      "nav.trailer": "Tráiler", "nav.play": "Cómo se juega", "nav.garden": "El jardín", "nav.night": "Día y noche", "nav.seasons": "Estaciones",
       "hero.eyebrow": "Floppy Key · Disquete 04 · Prototipo gratis",
       "hero.tagline": "Un pequeño jardín zen que crece contigo.",
       "hero.sub": "Una isla flotante y una sola plantita. Riégala, junta gotas de rocío y arma despacio tu propio jardín japonés, una piedra, una linterna y un cerezo a la vez.",
@@ -324,7 +351,15 @@
       "loop.1.t": "Riega una plantita", "loop.1.p": "Toca la plantita para regarla. Cuando crece, da rocío sola, y cada toque junta un poco más.",
       "loop.2.t": "Elige qué sigue", "loop.2.p": "Gasta el rocío en la tienda en plantas y decoraciones nuevas. Las plantas nuevas primero se riegan; después también dan rocío.",
       "loop.3.t": "Encuentra la armonía", "loop.3.p": "Las decoraciones suben la Armonía, que multiplica todo el rocío. Cada pieza distinta suma un poco más, así que conviene variar.",
-      "fact.1": "plantas", "fact.2": "decoraciones", "fact.3": "una isla que crece", "fact.4": "un día completo", "fact.5": "inglés y español", "fact.6": "se juega completo con joystick",
+      "fact.1": "plantas", "fact.2": "decoraciones", "fact.3": "una isla que crece", "fact.4": "un día completo", "fact.5": "inglés y español", "fact.6": "se juega completo con joystick", "fact.7": "estaciones, cada una con su clima",
+      "seasons.title": "En cada estación",
+      "seasons.p1": "Cada tres días el jardín pasa a una nueva estación, mezclándose de a poco con la siguiente.",
+      "s.spring": "🌸 Primavera: cerezos en flor y pétalos en el aire",
+      "s.summer": "🌿 Verano: verdes intensos y más luciérnagas de noche",
+      "s.autumn": "🍁 Otoño: arces rojos, pasto dorado y hojas que caen",
+      "s.winter": "❄️ Invierno: nieve sobre las linternas, los techos y las copas",
+      "seasons.p2": "El tiempo sigue pasando mientras no estás: podés cerrar el juego en otoño y volver a un jardín nevado.",
+      "seasons.cap": "Un año entero en el jardín, de las flores a la nieve.",
       "water.title": "Todo empieza con una plantita",
       "water.p1": "Todo arranca con un cojín de musgo en una isla de 3×3 que flota en el cielo. Tócalo y salpican gotitas alrededor. Sigue tocando y crece.",
       "water.p2": "Arrastra para girar la isla, y con Decorar mueves, giras o guardas lo que pusiste. Cuando te quedas sin lugar, la isla se agranda.",
