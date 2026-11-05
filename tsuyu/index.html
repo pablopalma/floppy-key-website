@@ -13,18 +13,40 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+  <script>
+    // Day by default; night only if the visitor chose it. Runs before the page draws.
+    try { if (localStorage.getItem("tsuyu-theme") === "night") document.documentElement.dataset.theme = "night"; } catch (e) {}
+  </script>
   <style>
     /* The game's own look: soft clay, violet ink, coral and the night sky. */
     :root {
       --clay: #fffaf1; --clay-2: #f3eadb; --ink: #3d3550; --soft: #6f6684; --rule: #e6dccb;
       --coral: #d9765b; --coral-2: #f0957a; --leaf: #7fbf7a; --sky: #8ccaf0; --sun: #f6c768;
       --night: #1f1b3a; --night-2: #2b2550; --lantern: #ffb562;
+      --veil: 255, 250, 241; --tile: url("media/seigaiha.png");
       --gutter: clamp(16px, 4vw, 40px);
     }
+    /* Night: the garden after dark. Same layout, the game's night palette. */
+    [data-theme="night"] {
+      --clay: #2b2550; --clay-2: #1f1b3a; --ink: #f3eadb; --soft: #b9b0d8; --rule: #3d3670;
+      --coral: #ff9a6e; --coral-2: #ff7a1f; --veil: 31, 27, 58; --tile: url("media/seigaiha-night.png");
+    }
+    [data-theme="night"] .btn { color: #1f1b3a; box-shadow: 0 4px 0 #c45a14; }
+    [data-theme="night"] .btn:hover { box-shadow: 0 2px 0 #c45a14; }
+    [data-theme="night"] .btn.ghost { color: var(--ink); box-shadow: 0 4px 0 #15122b; }
+    [data-theme="night"] .card { box-shadow: 0 10px 40px -18px rgba(255, 122, 31, .25); }
+    [data-theme="night"] .step .n { color: #1f1b3a; }
+    [data-theme="night"] .night { background: transparent; }
+    body, .bar, .card, .step, .pills li, .facts li, footer, .chip { transition: background-color .5s, color .5s; }
+
+    /* Fireflies: only at night, behind everything. */
+    #fireflies { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0; transition: opacity .8s; }
+    [data-theme="night"] #fireflies { opacity: 1; }
+    header, main, footer { position: relative; z-index: 1; }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-    body { margin: 0; background: var(--clay-2) url("media/seigaiha.png"); color: var(--ink);
+    body { margin: 0; background: var(--clay-2) var(--tile); color: var(--ink);
       font: 500 18px/1.65 "Zen Maru Gothic", "Hiragino Maru Gothic ProN", system-ui, sans-serif; }
     img, video { display: block; max-width: 100%; height: auto; }
     a { color: var(--coral); text-underline-offset: 3px; }
@@ -32,10 +54,10 @@
 
     /* Top bar */
     .bar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      padding: 10px var(--gutter); background: rgba(255, 250, 241, .92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule); }
+      padding: 10px var(--gutter); background: rgba(var(--veil), .92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule); }
     .bar a.back { color: var(--soft); text-decoration: none; font-size: 16px; }
     .bar a.back:hover { color: var(--ink); }
-    .bar nav { display: flex; gap: 20px; align-items: center; font-size: 16px; }
+    .bar nav { display: flex; gap: 14px 20px; align-items: center; font-size: 16px; }
     .bar nav a { color: var(--soft); text-decoration: none; }
     .bar nav a:hover { color: var(--ink); }
     .chip { font: 700 14px "Zen Maru Gothic", sans-serif; letter-spacing: 1px; color: var(--ink); background: var(--clay); border: 1.5px solid var(--ink);
@@ -47,8 +69,11 @@
     .hero { position: relative; min-height: min(92vh, 860px); display: grid; align-items: end; overflow: hidden; background: var(--night); }
     .hero video, .hero .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .hero::after { content: ""; position: absolute; inset: 0;
-      background: linear-gradient(90deg, rgba(255,250,241,.95) 0%, rgba(255,250,241,.78) 38%, rgba(255,250,241,0) 72%),
+      background: linear-gradient(90deg, rgba(var(--veil),.95) 0%, rgba(var(--veil),.78) 38%, rgba(var(--veil),0) 72%),
                   linear-gradient(180deg, transparent 55%, var(--clay-2) 100%); }
+    @media (max-width: 680px) {
+      .hero::after { background: linear-gradient(180deg, rgba(var(--veil),.25) 0%, rgba(var(--veil),.86) 38%, rgba(var(--veil),.94) 70%, var(--clay-2) 100%); }
+    }
     .hero-copy { position: relative; z-index: 1; padding: 0 var(--gutter) clamp(28px, 6vw, 72px); max-width: 1120px; margin: 0 auto; width: 100%; }
     .eyebrow { color: var(--soft); letter-spacing: 3px; font-size: 14px; text-transform: uppercase; margin: 0 0 8px; font-weight: 700; }
     .logo { margin: 0; display: flex; align-items: center; gap: .18em; font-weight: 900; font-size: clamp(64px, 12vw, 140px); line-height: 1; color: var(--ink); }
@@ -122,6 +147,7 @@
   </style>
 </head>
 <body>
+  <canvas id="fireflies" aria-hidden="true"></canvas>
   <header class="bar">
     <a class="back" href="../index.html" data-i18n="back">← Floppy Key</a>
     <nav aria-label="Tsuyu">
@@ -129,6 +155,7 @@
       <a href="#play" data-i18n="nav.play">How it plays</a>
       <a href="#garden" data-i18n="nav.garden">The garden</a>
       <a href="#night" data-i18n="nav.night">Day &amp; night</a>
+      <button class="chip" id="theme" type="button">☾ NIGHT</button>
       <button class="chip" id="lang" type="button" aria-label="Cambiar a español">ES</button>
     </nav>
   </header>
@@ -331,7 +358,26 @@
       chip.textContent = lang === "es" ? "EN" : "ES";
       chip.setAttribute("aria-label", lang === "es" ? "Switch to English" : "Cambiar a español");
       try { localStorage.setItem("lang", lang); } catch (e) { /* not remembered */ }
+      labelTheme();
     }
+
+    // Day and night. The button names the mode it switches to.
+    const themeButton = document.getElementById("theme");
+    const isNight = () => document.documentElement.dataset.theme === "night";
+    function labelTheme() {
+      const es = document.documentElement.lang === "es";
+      themeButton.textContent = isNight() ? (es ? "☀ DÍA" : "☀ DAY") : (es ? "☾ NOCHE" : "☾ NIGHT");
+      themeButton.setAttribute("aria-label", isNight()
+        ? (es ? "Cambiar a modo día" : "Switch to day mode")
+        : (es ? "Cambiar a modo noche" : "Switch to night mode"));
+    }
+    themeButton.addEventListener("click", () => {
+      if (isNight()) delete document.documentElement.dataset.theme;
+      else document.documentElement.dataset.theme = "night";
+      try { localStorage.setItem("tsuyu-theme", isNight() ? "night" : "day"); } catch (e) { /* not remembered */ }
+      labelTheme();
+      fireflies.toggle();
+    });
 
     let saved = null;
     try { saved = localStorage.getItem("lang"); } catch (e) { saved = null; }
@@ -339,6 +385,51 @@
     let lang = saved === "es" ? "es" : "en";
     apply(lang);
     document.getElementById("lang").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; apply(lang); });
+
+    // Fireflies: soft warm dots that drift and blink, like in the game at night.
+    const fireflies = (() => {
+      const cv = document.getElementById("fireflies");
+      const ctx = cv.getContext("2d");
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let flies = [], raf = 0, w = 0, h = 0, dpr = 1;
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = innerWidth; h = innerHeight;
+        cv.width = w * dpr; cv.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const n = Math.round(Math.min(60, Math.max(18, w * h / 26000)));
+        flies = Array.from({ length: n }, () => ({
+          x: Math.random() * w, y: Math.random() * h, r: 1.2 + Math.random() * 1.8,
+          a: Math.random() * Math.PI * 2, sp: .12 + Math.random() * .3,
+          ph: Math.random() * Math.PI * 2, bl: .6 + Math.random() * 1.1
+        }));
+      }
+      function draw(t) {
+        ctx.clearRect(0, 0, w, h);
+        for (const f of flies) {
+          if (!reduce) {
+            f.a += (Math.random() - .5) * .08;
+            f.x += Math.cos(f.a) * f.sp; f.y += Math.sin(f.a) * f.sp - .05;
+            if (f.x < -10) f.x = w + 10; if (f.x > w + 10) f.x = -10;
+            if (f.y < -10) f.y = h + 10; if (f.y > h + 10) f.y = -10;
+          }
+          const glow = reduce ? .7 : .35 + .65 * Math.max(0, Math.sin(t / 1000 * f.bl + f.ph));
+          const g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 6);
+          g.addColorStop(0, `rgba(255, 236, 160, ${glow})`);
+          g.addColorStop(.25, `rgba(255, 190, 90, ${glow * .55})`);
+          g.addColorStop(1, "rgba(255, 150, 60, 0)");
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(f.x, f.y, f.r * 6, 0, Math.PI * 2); ctx.fill();
+        }
+        if (!reduce) raf = requestAnimationFrame(draw);
+      }
+      function start() { cancelAnimationFrame(raf); resize(); raf = requestAnimationFrame(draw); }
+      function stop() { cancelAnimationFrame(raf); raf = 0; ctx.clearRect(0, 0, w, h); }
+      addEventListener("resize", () => { if (isNight()) start(); });
+      document.addEventListener("visibilitychange", () => { if (document.hidden) cancelAnimationFrame(raf); else if (isNight()) start(); });
+      return { toggle() { isNight() ? start() : stop(); } };
+    })();
+    if (isNight()) fireflies.toggle();
 
     // Videos only play when the visitor can see them, and never for those who asked for less motion.
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
