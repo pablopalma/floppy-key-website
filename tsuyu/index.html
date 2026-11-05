@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tsuyu · Floppy Key</title>
+  <meta name="description" content="Tsuyu is a tiny zen garden that grows with you. Water a little plant, collect morning dew and slowly build your own Japanese garden on a floating island.">
+  <meta property="og:title" content="Tsuyu">
+  <meta property="og:description" content="A tiny zen garden that grows with you. A free prototype by Floppy Key.">
+  <meta property="og:image" content="https://floppykey.com/tsuyu/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+  <style>
+    /* The game's own look: soft clay, violet ink, coral and the night sky. */
+    :root {
+      --clay: #fffaf1; --clay-2: #f3eadb; --ink: #3d3550; --soft: #6f6684; --rule: #e6dccb;
+      --coral: #d9765b; --coral-2: #f0957a; --leaf: #7fbf7a; --sky: #8ccaf0; --sun: #f6c768;
+      --night: #1f1b3a; --night-2: #2b2550; --lantern: #ffb562;
+      --gutter: clamp(16px, 4vw, 40px);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { margin: 0; background: var(--clay-2) url("media/seigaiha.png"); color: var(--ink);
+      font: 500 18px/1.65 "Zen Maru Gothic", "Hiragino Maru Gothic ProN", system-ui, sans-serif; }
+    img, video { display: block; max-width: 100%; height: auto; }
+    a { color: var(--coral); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+
+    /* Top bar */
+    .bar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 10px var(--gutter); background: rgba(255, 250, 241, .92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule); }
+    .bar a.back { color: var(--soft); text-decoration: none; font-size: 16px; }
+    .bar a.back:hover { color: var(--ink); }
+    .bar nav { display: flex; gap: 20px; align-items: center; font-size: 16px; }
+    .bar nav a { color: var(--soft); text-decoration: none; }
+    .bar nav a:hover { color: var(--ink); }
+    .chip { font: 700 14px "Zen Maru Gothic", sans-serif; letter-spacing: 1px; color: var(--ink); background: var(--clay); border: 1.5px solid var(--ink);
+      border-radius: 999px; padding: 3px 13px; cursor: pointer; }
+    .chip:hover { background: var(--ink); color: var(--clay); }
+    @media (max-width: 680px) { .bar nav a { display: none; } }
+
+    /* Hero: the day melting into night, in a loop */
+    .hero { position: relative; min-height: min(92vh, 860px); display: grid; align-items: end; overflow: hidden; background: var(--night); }
+    .hero video, .hero .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero::after { content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(255,250,241,.95) 0%, rgba(255,250,241,.78) 38%, rgba(255,250,241,0) 72%),
+                  linear-gradient(180deg, transparent 55%, var(--clay-2) 100%); }
+    .hero-copy { position: relative; z-index: 1; padding: 0 var(--gutter) clamp(28px, 6vw, 72px); max-width: 1120px; margin: 0 auto; width: 100%; }
+    .eyebrow { color: var(--soft); letter-spacing: 3px; font-size: 14px; text-transform: uppercase; margin: 0 0 8px; font-weight: 700; }
+    .logo { margin: 0; display: flex; align-items: center; gap: .18em; font-weight: 900; font-size: clamp(64px, 12vw, 140px); line-height: 1; color: var(--ink); }
+    .logo img { width: .9em; height: auto; }
+    .tagline { margin: 12px 0 8px; font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: var(--ink); max-width: 24ch; line-height: 1.3; }
+    .sub { margin: 0 0 24px; color: var(--soft); max-width: 50ch; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn { display: inline-block; font: 700 17px "Zen Maru Gothic", sans-serif; text-decoration: none; padding: 10px 24px;
+      border-radius: 999px; color: var(--clay); background: var(--coral-2); box-shadow: 0 4px 0 var(--coral); transition: transform .12s, box-shadow .12s; }
+    .btn:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--coral); }
+    .btn.ghost { background: var(--clay); color: var(--ink); box-shadow: 0 4px 0 var(--rule); }
+    .btn.ghost:hover { box-shadow: 0 2px 0 var(--rule); }
+    .soon { color: var(--soft); font-size: 15px; }
+
+    /* Sections */
+    main section { padding: clamp(52px, 8vw, 100px) var(--gutter); }
+    .wrap { max-width: 1120px; margin: 0 auto; }
+    .card { background: var(--clay); border-radius: 22px; padding: clamp(26px, 4vw, 48px); box-shadow: 0 10px 30px -18px rgba(61, 53, 80, .35); }
+    h2 { font-weight: 900; font-size: clamp(30px, 4.4vw, 46px); line-height: 1.15; margin: 0 0 12px; }
+    h3 { font-weight: 900; font-size: 21px; margin: 0 0 4px; }
+    .lead { color: var(--soft); margin: 0 0 30px; max-width: 60ch; font-size: 19px; }
+    p { margin: 0 0 14px; }
+    .frame { border-radius: 18px; box-shadow: 0 14px 34px -20px rgba(61, 53, 80, .55); background: var(--clay-2); }
+    .drop { display: inline-block; width: 14px; height: 14px; margin-right: 8px; background: var(--coral-2);
+      border-radius: 50% 50% 50% 0; transform: rotate(-45deg); vertical-align: 1px; }
+    h2 .drop { width: 18px; height: 18px; margin-right: 12px; }
+
+    /* The loop: three steps */
+    .loop { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
+    .step { background: var(--clay-2); border-radius: 18px; padding: 22px 24px; }
+    .step .n { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--leaf); color: var(--clay);
+      font-weight: 900; margin-bottom: 8px; }
+    .step p { color: var(--soft); margin: 0; }
+    .facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 0; padding: 0; list-style: none; }
+    .facts li { background: var(--clay-2); border-radius: 999px; padding: 5px 16px; color: var(--soft); font-size: 16px; }
+    .facts b { color: var(--coral); font-weight: 900; margin-right: 4px; }
+
+    /* Split rows */
+    .split { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(22px, 4vw, 52px); align-items: center; }
+    .split.flip { grid-template-columns: 1fr 1.3fr; }
+    .split.flip > :first-child { order: 2; }
+    @media (max-width: 820px) { .split, .split.flip { grid-template-columns: 1fr; } .split.flip > :first-child { order: 0; } }
+    figure { margin: 0; }
+    figcaption.cap { color: var(--soft); font-size: 15px; padding-top: 10px; }
+
+    /* What you can grow */
+    .items { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 8px; }
+    @media (max-width: 560px) { .items { grid-template-columns: 1fr; } }
+    .items h3 { color: var(--soft); font-size: 15px; letter-spacing: 2px; text-transform: uppercase; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 8px 0 0; }
+    .pills li { background: var(--clay-2); border-radius: 999px; padding: 3px 14px; font-size: 16px; }
+    .pills.plants li { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--leaf) 60%, transparent); }
+    .pills.decor li { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--coral-2) 60%, transparent); }
+
+    /* Night section */
+    .night { background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%); color: #f3eadb; }
+    .night .lead, .night p { color: #c9c0e4; }
+    .night h2 { color: #fffaf1; }
+    .night .frame { background: var(--night); box-shadow: 0 0 60px -10px rgba(255, 122, 31, .35); }
+    .night .cap { color: #a59cc8; }
+    .glow { color: var(--lantern); }
+
+    .trailer { width: 100%; background: #000; }
+    .status { text-align: center; }
+    .status .actions { justify-content: center; }
+    .status .lead { margin-left: auto; margin-right: auto; }
+    .status .ai { max-width: 60ch; margin: 26px auto 0; font-size: 14px; color: var(--soft); }
+
+    footer { border-top: 1px solid var(--rule); background: var(--clay); padding: 24px var(--gutter) 40px; color: var(--soft); font-size: 16px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    footer a { color: var(--soft); }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <a class="back" href="../index.html" data-i18n="back">← Floppy Key</a>
+    <nav aria-label="Tsuyu">
+      <a href="#trailer" data-i18n="nav.trailer">Trailer</a>
+      <a href="#play" data-i18n="nav.play">How it plays</a>
+      <a href="#garden" data-i18n="nav.garden">The garden</a>
+      <a href="#night" data-i18n="nav.night">Day &amp; night</a>
+      <button class="chip" id="lang" type="button" aria-label="Cambiar a español">ES</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="title" style="padding: 0;">
+      <img class="poster" src="media/loop-night.webp" alt="" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="metadata" poster="media/loop-night.webp" aria-hidden="true">
+        <source src="media/loop-night.mp4" type="video/mp4">
+      </video>
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Floppy Key · Disk 04 · Free prototype</p>
+        <h1 class="logo" id="title"><img src="media/kanji.webp" width="256" height="256" alt="露">Tsuyu</h1>
+        <p class="tagline" data-i18n="hero.tagline">A tiny zen garden that grows with you.</p>
+        <p class="sub" data-i18n="hero.sub">A floating island and a single little plant. Water it, collect drops of morning dew and slowly build your own Japanese garden, one stone, one lantern and one cherry tree at a time.</p>
+        <div class="actions">
+          <a class="btn" href="https://floppykey.itch.io/tsuyu" target="_blank" rel="noopener" data-i18n="hero.cta">Play free on itch.io</a>
+          <a class="btn ghost" href="#trailer" data-i18n="hero.cta2">Watch the trailer</a>
+          <span class="soon" data-i18n="hero.soon">Free prototype · in your browser or on Windows</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trailer: it only downloads when someone presses play. -->
+    <section id="trailer" aria-labelledby="trailer-title">
+      <div class="wrap card">
+        <h2 id="trailer-title"><span class="drop"></span><span data-i18n="trailer.title">The trailer</span></h2>
+        <video class="frame trailer" controls preload="none" playsinline poster="media/trailer-poster.jpg" width="1280" height="720" aria-label="Trailer of Tsuyu">
+          <source src="media/trailer.mp4" type="video/mp4">
+        </video>
+      </div>
+    </section>
+
+    <!-- The loop -->
+    <section id="play" aria-labelledby="loop-title">
+      <div class="wrap card">
+        <h2 id="loop-title"><span class="drop"></span><span data-i18n="loop.title">Water. Collect. Grow.</span></h2>
+        <p class="lead" data-i18n="loop.lead">No timers nagging you, no fail states, no rush. Just soft colours, gentle bells and a garden that keeps growing while you're away.</p>
+        <div class="loop">
+          <div class="step">
+            <span class="n">1</span>
+            <h3 data-i18n="loop.1.t">Water a tiny plant</h3>
+            <p data-i18n="loop.1.p">Tap the little plant to water it. Once it grows, it makes dew on its own, and every tap collects a little more.</p>
+          </div>
+          <div class="step">
+            <span class="n">2</span>
+            <h3 data-i18n="loop.2.t">Choose what comes next</h3>
+            <p data-i18n="loop.2.p">Spend your dew in the shop on new plants and decorations. New plants need watering first; then they make dew too.</p>
+          </div>
+          <div class="step">
+            <span class="n">3</span>
+            <h3 data-i18n="loop.3.t">Find the harmony</h3>
+            <p data-i18n="loop.3.p">Decorations raise Harmony, which multiplies all your dew. Every different piece adds a little more, so variety pays off.</p>
+          </div>
+        </div>
+        <ul class="facts">
+          <li><b>6</b><span data-i18n="fact.1">plants</span></li>
+          <li><b>9</b><span data-i18n="fact.2">decorations</span></li>
+          <li><b>3×3 → 9×9</b><span data-i18n="fact.3">an island that grows</span></li>
+          <li><b>5 min</b><span data-i18n="fact.4">a full day</span></li>
+          <li><b>EN · ES</b><span data-i18n="fact.5">English and Spanish</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Watering -->
+    <section aria-labelledby="water-title">
+      <div class="wrap split">
+        <figure>
+          <video class="frame" autoplay muted loop playsinline preload="metadata" poster="media/loop-water.webp" width="1280" height="720" aria-label="Tapping the little plant: drops of water splash and it grows.">
+            <source src="media/loop-water.mp4" type="video/mp4">
+          </video>
+          <figcaption class="cap" data-i18n="water.cap">A few taps and the first moss grows. From then on, it makes dew by itself.</figcaption>
+        </figure>
+        <div class="card">
+          <h2 id="water-title" data-i18n="water.title">It starts with one little plant</h2>
+          <p data-i18n="water.p1">Everything begins with a cushion of moss on a 3×3 island floating in the sky. Tap it and drops of water splash around it. Keep tapping and it grows.</p>
+          <p data-i18n="water.p2">Drag to turn the island, and use Decorate to move, rotate or store anything you've placed. When you run out of room, the island grows.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The garden -->
+    <section id="garden" aria-labelledby="garden-title">
+      <div class="wrap split flip">
+        <figure>
+          <video class="frame" autoplay muted loop playsinline preload="metadata" poster="media/loop-build.webp" width="1280" height="720" aria-label="The garden fills up piece by piece while the island turns.">
+            <source src="media/loop-build.mp4" type="video/mp4">
+          </video>
+          <figcaption class="cap" data-i18n="garden.cap">Piece by piece, the island becomes a garden.</figcaption>
+        </figure>
+        <div class="card">
+          <h2 id="garden-title" data-i18n="garden.title">Build your own Japanese garden</h2>
+          <p data-i18n="garden.p">Every plant and decoration is made of soft clay. Place them wherever you like and find the arrangement that feels right.</p>
+          <div class="items">
+            <div>
+              <h3 data-i18n="garden.plants">Plants</h3>
+              <ul class="pills plants">
+                <li data-i18n="p.moss">Moss</li><li data-i18n="p.bamboo">Bamboo</li><li data-i18n="p.azalea">Satsuki azalea</li>
+                <li data-i18n="p.pine">Bonsai pine</li><li data-i18n="p.maple">Japanese maple</li><li data-i18n="p.cherry">Cherry tree</li>
+              </ul>
+            </div>
+            <div>
+              <h3 data-i18n="garden.decor">Decorations</h3>
+              <ul class="pills decor">
+                <li data-i18n="d.gravel">Raked gravel</li><li data-i18n="d.stones">Stones</li><li data-i18n="d.path">Stepping path</li>
+                <li data-i18n="d.lantern">Tōrō lantern</li><li>Tsukubai</li><li data-i18n="d.pond">Koi pond</li>
+                <li data-i18n="d.bridge">Red bridge</li><li>Torii</li><li data-i18n="d.pagoda">Pagoda</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Day and night -->
+    <section id="night" class="night" aria-labelledby="night-title">
+      <div class="wrap split">
+        <figure>
+          <video class="frame" autoplay muted loop playsinline preload="metadata" poster="media/loop-lanterns.webp" width="1280" height="720" aria-label="The garden at night: lanterns glow orange and fireflies drift around them.">
+            <source src="media/loop-lanterns.mp4" type="video/mp4">
+          </video>
+          <figcaption class="cap" data-i18n="night.cap">At night the lanterns light up, and fireflies come out.</figcaption>
+        </figure>
+        <div>
+          <h2 id="night-title" data-i18n="night.title">Watch the day melt into night</h2>
+          <p data-i18n="night.p1">A full day passes every five minutes: a pink sunrise, a golden dusk, and nights full of stars and fireflies, with warm paper-lantern light spilling over the gravel.</p>
+          <p data-i18n="night.p2"><span class="glow">Lanterns double their Harmony at night</span>, so the garden is a little more generous after dark.</p>
+          <p data-i18n="night.p3">And every tap rings a soft note, a bell or a koto, in the same key as the music. Nothing ever sounds out of tune. Best with headphones.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status -->
+    <section class="status" aria-labelledby="status-title">
+      <div class="wrap card">
+        <h2 id="status-title" data-i18n="status.title">Tsuyu means “dew”.</h2>
+        <p class="lead" data-i18n="status.lead">A free early prototype: about five hours to unlock everything, in your browser or on Windows, in English and Spanish. Your garden is saved automatically and keeps growing while you're away. Made by one person in Argentina.</p>
+        <div class="actions">
+          <a class="btn" href="https://floppykey.itch.io/tsuyu" target="_blank" rel="noopener" data-i18n="status.cta">Play free on itch.io</a>
+          <a class="btn ghost" href="#trailer" data-i18n="status.cta2">Watch the trailer</a>
+        </div>
+        <p class="ai" data-i18n="status.ai">The music and sound effects were generated with AI (ElevenLabs) from my own direction. The design, the garden and everything in it are mine.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Floppy Key</span>
+    <a href="../index.html" data-i18n="foot">Insert disk. Turn key.</a>
+  </footer>
+
+  <script>
+    // English is in the HTML; these are the Spanish texts. The language is shared with the rest of the site.
+    const ES = {
+      "back": "← Floppy Key",
+      "nav.trailer": "Tráiler", "nav.play": "Cómo se juega", "nav.garden": "El jardín", "nav.night": "Día y noche",
+      "hero.eyebrow": "Floppy Key · Disquete 04 · Prototipo gratis",
+      "hero.tagline": "Un pequeño jardín zen que crece contigo.",
+      "hero.sub": "Una isla flotante y una sola plantita. Riégala, junta gotas de rocío y arma despacio tu propio jardín japonés, una piedra, una linterna y un cerezo a la vez.",
+      "hero.cta": "Jugar gratis en itch.io", "hero.cta2": "Ver el tráiler", "hero.soon": "Prototipo gratis · en el navegador o en Windows",
+      "trailer.title": "El tráiler",
+      "loop.title": "Riega. Junta. Haz crecer.",
+      "loop.lead": "Sin relojes que te apuren, sin forma de perder, sin prisa. Solo colores suaves, campanitas y un jardín que sigue creciendo mientras no estás.",
+      "loop.1.t": "Riega una plantita", "loop.1.p": "Toca la plantita para regarla. Cuando crece, da rocío sola, y cada toque junta un poco más.",
+      "loop.2.t": "Elige qué sigue", "loop.2.p": "Gasta el rocío en la tienda en plantas y decoraciones nuevas. Las plantas nuevas primero se riegan; después también dan rocío.",
+      "loop.3.t": "Encuentra la armonía", "loop.3.p": "Las decoraciones suben la Armonía, que multiplica todo el rocío. Cada pieza distinta suma un poco más, así que conviene variar.",
+      "fact.1": "plantas", "fact.2": "decoraciones", "fact.3": "una isla que crece", "fact.4": "un día completo", "fact.5": "inglés y español",
+      "water.title": "Todo empieza con una plantita",
+      "water.p1": "Todo arranca con un cojín de musgo en una isla de 3×3 que flota en el cielo. Tócalo y salpican gotitas alrededor. Sigue tocando y crece.",
+      "water.p2": "Arrastra para girar la isla, y con Decorar mueves, giras o guardas lo que pusiste. Cuando te quedas sin lugar, la isla se agranda.",
+      "water.cap": "Unos toques y crece el primer musgo. Desde ahí, da rocío solo.",
+      "garden.title": "Arma tu propio jardín japonés",
+      "garden.p": "Cada planta y cada decoración está hecha de arcilla suave. Ponlas donde quieras y busca el orden que te haga sentir bien.",
+      "garden.cap": "Pieza a pieza, la isla se vuelve un jardín.",
+      "garden.plants": "Plantas", "garden.decor": "Decoraciones",
+      "p.moss": "Musgo", "p.bamboo": "Bambú", "p.azalea": "Azalea satsuki", "p.pine": "Pino bonsái", "p.maple": "Arce japonés", "p.cherry": "Cerezo",
+      "d.gravel": "Grava rastrillada", "d.stones": "Piedras", "d.path": "Sendero", "d.lantern": "Linterna tōrō", "d.pond": "Estanque koi",
+      "d.bridge": "Puente rojo", "d.pagoda": "Pagoda",
+      "night.title": "Mira cómo el día se vuelve noche",
+      "night.p1": "Un día completo pasa cada cinco minutos: un amanecer rosado, un atardecer dorado y noches llenas de estrellas y luciérnagas, con la luz cálida de las linternas de papel sobre la grava.",
+      "night.p2": "<span class=\"glow\">De noche, las linternas duplican su Armonía</span>, así que el jardín es un poco más generoso cuando oscurece.",
+      "night.p3": "Y cada toque suena como una nota suave, una campana o un koto, en la misma tonalidad que la música. Nada suena desafinado. Mejor con auriculares.",
+      "night.cap": "De noche se encienden las linternas y salen las luciérnagas.",
+      "status.title": "Tsuyu significa “rocío”.",
+      "status.lead": "Un prototipo temprano y gratis: unas cinco horas para desbloquear todo, en el navegador o en Windows, en inglés y español. El jardín se guarda solo y sigue creciendo mientras no estás. Hecho por una persona en Argentina.",
+      "status.cta": "Jugar gratis en itch.io", "status.cta2": "Ver el tráiler",
+      "status.ai": "La música y los efectos de sonido se generaron con IA (ElevenLabs) a partir de mi dirección. El diseño, el jardín y todo lo que tiene son míos.",
+      "foot": "Inserta el disquete. Gira la llave."
+    };
+
+    const EN = {};
+    document.querySelectorAll("[data-i18n]").forEach(el => EN[el.dataset.i18n] = el.innerHTML);
+
+    function apply(lang) {
+      const t = lang === "es" ? ES : EN;
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(el => { const v = t[el.dataset.i18n]; if (v) el.innerHTML = v; });
+      const chip = document.getElementById("lang");
+      chip.textContent = lang === "es" ? "EN" : "ES";
+      chip.setAttribute("aria-label", lang === "es" ? "Switch to English" : "Cambiar a español");
+      try { localStorage.setItem("lang", lang); } catch (e) { /* not remembered */ }
+    }
+
+    let saved = null;
+    try { saved = localStorage.getItem("lang"); } catch (e) { saved = null; }
+    // English by default; Spanish only when the visitor chose it.
+    let lang = saved === "es" ? "es" : "en";
+    apply(lang);
+    document.getElementById("lang").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; apply(lang); });
+
+    // Videos only play when the visitor can see them, and never for those who asked for less motion.
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll("video[autoplay]").forEach(v => {
+      if (still) { v.removeAttribute("autoplay"); v.pause(); return; }
+      new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); }).observe(v);
+    });
+  </script>
+</body>
+</html>

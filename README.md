@@ -38,6 +38,10 @@ El apoyo hacia Steam (meta, Ko-fi y Wall of Noble Heroes) se quitó el 26 de oct
 ## Just Tap
 
 `just-tap/index.html` es la página del juego, con su propia estética (papel, tinta y Cormorant Garamond). Los medios de `just-tap/media/` salen del repositorio del juego (`D:\Proyectos Pablo\just-tap-godot`): las capturas y los loops, del tráiler (`tools/make_trailer.ps1`), y el loop de la portada (`loop-colour.mp4`), de `tools/hero_clip.tscn`, que graba el color volviendo sin subtítulos ni títulos. El enlace a itch.io (`https://floppykey.itch.io/just-tap`) funciona cuando la página de itch deja de ser borrador.
+## Tsuyu
+
+`tsuyu/index.html` es la página del juego, con su propia estética (arcilla crema, tinta violeta, coral y Zen Maru Gothic, sobre el patrón de olas seigaiha). Los medios de `tsuyu/media/` salen del repositorio del juego (`D:\Proyectos Pablo\tsuyu`): las capturas, de `marketing/screenshots/`, y los loops y el tráiler, de `marketing/tsuyu_trailer_1080p.mp4` (los loops se recortan arriba de los subtítulos). El enlace a itch.io (`https://floppykey.itch.io/tsuyu`) funciona cuando la página de itch deja de ser borrador.
+
 ## Antes de publicar
 
 - Cambiar `hola@floppykey.com` por el correo real (está en `index.html`).

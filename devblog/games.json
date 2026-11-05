@@ -20,6 +20,13 @@
       "color": "var(--beige)",
       "page": "just-tap/index.html",
       "url": "https://floppykey.itch.io/just-tap"
+    },
+    "tsuyu": {
+      "name": "Tsuyu",
+      "short": "TSUYU",
+      "color": "var(--sakura)",
+      "page": "tsuyu/index.html",
+      "url": "https://floppykey.itch.io/tsuyu"
     }
   }
 }

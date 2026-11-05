@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Figtree:wght@400;500;700;800&family=Gochi+Hand&family=VT323&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Figtree:wght@400;500;700;800&family=Gochi+Hand&family=VT323&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Zen+Maru+Gothic:wght@500;900&display=swap">
   <link rel="stylesheet" href="styles.css">
   <script>
     // Night by default; the visitor's choice wins. Runs before the page draws, so it never flashes.
@@ -81,6 +81,19 @@
 
       <ul class="box">
         <li>
+          <a class="card" href="#tsuyu" style="--body: var(--sakura)">
+            <span class="card-disk">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
+              <span class="card-label">TSUYU</span>
+            </span>
+            <span class="card-meta">
+              <span class="tag tag-live" data-i18n="tag.live">Playable</span>
+              <span class="card-title">Tsuyu</span>
+              <span class="card-genre" data-i18n="games.tsuyu.genre">Cozy idle · a tiny zen garden</span>
+            </span>
+          </a>
+        </li>
+        <li>
           <a class="card" href="#seal-quest" style="--body: var(--sun)">
             <span class="card-disk">
               <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#floppy"/></svg>
@@ -120,6 +133,27 @@
           </a>
         </li>
       </ul>
+    </section>
+
+    <!-- The cosy one: a zen garden of soft clay on a floating island. -->
+    <section class="feature feature-flip" id="tsuyu" aria-labelledby="tsuyu-title">
+      <div class="crt crt-sakura">
+        <img src="tsuyu/media/garden-night.webp" width="1920" height="1080" loading="lazy" data-i18n-alt="tsuyu.alt" alt="Tsuyu: a Japanese garden on a floating island at night, with glowing lanterns, a pagoda, a red bridge and fireflies.">
+      </div>
+      <div class="feature-copy">
+        <p class="eyebrow" data-i18n="tsuyu.eyebrow">Disk 04 · Free prototype out now</p>
+        <h2 id="tsuyu-title" class="title-sakura">露 Tsuyu<span data-i18n="tsuyu.tagline">A tiny zen garden that grows with you.</span></h2>
+        <p data-i18n="tsuyu.p1">A floating island and a single little plant. Water it, collect drops of morning dew and slowly build your own Japanese garden, one stone, one lantern and one cherry tree at a time.</p>
+        <ul class="facts">
+          <li><b>15</b> <span data-i18n="tsuyu.f1">plants and decorations, from moss to a pagoda</span></li>
+          <li><b>5</b> <span data-i18n="tsuyu.f2">minutes for a full day, with lanterns and fireflies at night</span></li>
+          <li><b>1</b> <span data-i18n="tsuyu.f3">key for every tap and the music, so nothing sounds out of tune</span></li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://floppykey.itch.io/tsuyu" target="_blank" rel="noopener" data-i18n="tsuyu.cta">Play free on itch.io</a>
+          <a class="btn btn-ghost" href="tsuyu/index.html" data-i18n="tsuyu.more">See the game</a>
+        </div>
+      </div>
     </section>
 
     <!-- The game in development. -->
